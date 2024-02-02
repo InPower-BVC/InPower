@@ -66,7 +66,7 @@ export default function Invite() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="phone">Phone Number:</label>
+              <label htmlFor="phone">Phone :</label>
               <input
                 type="tel"
                 id="phone"
