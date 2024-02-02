@@ -1,0 +1,36 @@
+.footer {
+    background-color: black; /* Set the background color to black */
+    color: white; /* Set the text color to white for better visibility */
+    padding: 2rem 0;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1200px;
+  }
+  
+  .footer-content {
+    flex: 1;
+    padding: 1rem;
+  }
+  
+  .footer-content h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-content a {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: white; /* Set the link color to white */
+    text-decoration: none;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    color: #777;
+  }

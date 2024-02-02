@@ -1,0 +1,35 @@
+/*Styles for main chatbot container*/
+.react-chatbot-kit-chat-container {
+    position: fixed !important; 
+    bottom: 80px !important; 
+    right: 20px !important; 
+    z-index: 9999 !important; 
+  }
+  
+  .react-chatbot-kit-chat-inner-container {
+    background-color: #fff;
+    border-radius: 3px;
+    border-radius: 5px;
+    height: auto !important;
+}
+  
+  /* Styling for chatbot messages */
+  .react-chatbot-kit-chat-bot-message {
+    background-color: #FDE9EA !important;
+    color: black !important;
+  }
+  .react-chatbot-kit-chat-bot-message-arrow{
+    border-right: 8px solid #FDE9EA !important;
+  }
+  
+  .learning-option-button {
+    padding: 0.5rem;
+    border-radius: 25px;
+    background: transparent;
+    border: 2px solid #7C0C24 !important;
+    margin: 3px;
+}
+  .react-chatbot-kit-chat-btn-send {
+    background-color: #7C0C24 !important;
+
+  }

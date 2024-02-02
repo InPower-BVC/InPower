@@ -1,0 +1,28 @@
+
+
+.about-us-container { 
+  margin: 0 auto; 
+  box-sizing: border-box;
+  font-family: 'Gilory-Medium'; 
+}
+
+.about-us-section {
+  /* 为第一段和第三段文本设置样式 */
+  padding: 20px;
+  background-color: #FDE9EA;
+}
+
+.about-us-section h2 {
+  margin-top: 0;  /* 为标题上边缘取消默认间距，使其与容器对齐 */
+  margin-bottom: 16px;  /* 设置标题与文本之间的间距 */
+}
+
+.about-us-section-bordered {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.about-us-section-bordered h2 {
+  margin-top: 0;  /* 同上，为标题上边缘取消默认间距 */
+  margin-bottom: 16px;  /* 设置标题与文本之间的间距 */
+}

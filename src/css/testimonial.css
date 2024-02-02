@@ -1,0 +1,55 @@
+/* testimonial.css */
+
+.testimonial-container {
+    background-color: #7C0C24;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Set to column */
+    align-items: center;
+    text-align: center; /* Center align the content */
+  }
+  
+  .testimonial-content {
+    margin: 20px 0; /* Add margin to give space between content and arrows */
+    color: white;
+    padding-left: 60px;
+    padding-right: 60px;
+    font-size: 22px;
+    font-family: 'Gilroy-Regular';
+
+  }
+  
+  .arrow-container {
+    display: flex;
+    justify-content: space-between; /* Distribute arrows on either side */
+    width: 100%;
+  }
+  
+  .arrow-button {
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .dots-container {
+    display: flex;
+    margin-top: 10px; /* Add margin to separate dots from content */
+    align-items: center; /* Align dots to center horizontally */
+    justify-content: center; /* Center align the dots */
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .active-dot {
+    background: white;
+  }
+  

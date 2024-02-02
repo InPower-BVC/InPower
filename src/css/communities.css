@@ -1,0 +1,56 @@
+.section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .grid {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+  }
+  
+  .largest {
+    width: 150px;
+    height: 150px;
+    animation: bubbleFadeIn 1s ease-in-out forwards;
+  }
+
+  .grid-h2 {
+    font-family: 'Gilroy-Medium';
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+    color: #333;
+    animation: bubbleFadeIn 1s ease-in-out forwards;
+  }
+  
+  .smaller {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 75px;
+    height: 75px;
+    animation: bubbleFadeIn 1.5s ease-in-out forwards;
+    margin-left: 10px; /* Add margin between the smaller circles */
+    margin-right: 10px; /* Add margin between the smaller circles */
+  }
+
+  .circle-text {
+  text-align: center;
+  font-size: 16px; /* Adjust the font size as needed */
+  margin-top: 20px; /* Add spacing between the circles and text */
+}
+  
+  /* Keyframes for the fade-in effect */
+  @keyframes bubbleFadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0); /* Start with no scale (hidden) */
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1); /* Fully visible and scaled up */
+    }
+  }
+
+  

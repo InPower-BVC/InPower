@@ -1,0 +1,136 @@
+
+
+
+.body {
+    font-family: "Gilroy-Medium";
+    background-color: #FDE9EA;
+    margin: 0;
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    
+}
+
+.form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin:0 auto; 
+}
+
+/* h1 {
+    text-align: center;
+    color: #333;
+    font-size:3.5vw;
+    color:#7C0C24;
+    padding:10px;
+} */
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    font-size:1vw;
+}
+/* adjust design for each input */
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="email"],
+.form-group input[type="tel"] ,
+.form-group textarea{
+    width:80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-family: "Gilroy-Medium";
+    
+    
+    
+}
+/*Border color becomes #7c0c24 when click on one of the input text area*/
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group textarea:focus { /*  */
+    border-color: #7C0C24;
+    outline: none;
+}
+/*.form-group input[type="radio"] {
+    
+    display: inline; 
+}
+
+*/
+
+
+.button-form {
+    background-color: #7C0C24;
+    color: #fff;
+    padding: 10px 20px;
+    border:  1px solid #7C0C24;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: "Gilroy-Medium";
+    transition: background-color 0.3s ease-in-out;
+    
+}
+/*button color changes with simple animation when click on it*/
+.button-form:hover {
+    background-color: #fff; 
+    color: black; 
+    border:  1px solid #7C0C24;
+}
+
+/* For tablet screens */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    
+    .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        font-size:2vw;
+    }
+    }
+/* For larger tablet */
+@media screen and (min-width: 1023px) and (max-width: 1520px) {
+    
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size:1.5vw;
+        }
+        }
+/* For phones or small screens. */
+@media screen and (max-width: 767px) {
+        .form {
+          flex-direction: column; /* Stack content vertically */
+          padding: 10px; /* Adjust padding for smaller screens */
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size:3vw;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"] ,
+        .form-group textarea
+                            {          
+            padding: 5px; /* Adjust padding for smaller screens */
+            margin-bottom: 5px;
+        }
+    }

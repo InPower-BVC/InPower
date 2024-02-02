@@ -1,0 +1,171 @@
+/* Importing fonts from Google Fonts for use in the stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+
+/* Styling for the heading section */
+.heading-section {
+    background-color: #FDE9EA;
+    padding: 1rem 0;
+    margin-bottom: 3rem; 
+    border-radius: 12px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for a comment section grid layout */
+.comment-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
+    margin: 3rem 0;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for comments, designed for center alignment and padding */
+.comments-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 2rem;
+    max-width: 80%;  
+    padding: 2rem;
+    margin: auto;  
+}
+
+/* Individual comment styling */
+.comment {
+    border-radius: 8px;
+    background-color: #FDE9EA;
+    transition: background-color 0.2s ease-in-out;
+    padding: 0.5rem;  
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Styling for the author's name in comments */
+.author-name {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Styling for the preview of comments */
+.comment-preview {
+    font-size: 1rem;
+}
+
+/* Hover effect for comments */
+.comment:hover {
+    background-color: #e0e0e0;
+}
+
+/* A wrapper for the entire page content */
+.page-wrapper {
+    width: 100%;
+    padding: 1rem; 
+}
+
+/* Main heading styling using Oswald font */
+h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+/* Strong tag styling */
+strong {
+    color: #444;
+}
+
+/* Modal styling for full-screen overlay */
+.modal {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Content inside the modal */
+.modal-content {
+    background-color: #fefefe;
+    padding: 2rem;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal-content:hover {
+    transform: scale(1.01);
+}
+
+/* Close button styling for the modal */
+.close-btn {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Hover effect for the close button */
+.close-btn:hover,
+.close-btn:focus {
+    color: #444;
+}
+
+.heading-section {
+    margin-bottom: 3rem; 
+}
+
+/* Main heading inside the heading section */
+.main-heading {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+}
+
+.main-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem; 
+}
+
+/* Sub heading inside the heading section */
+.sub-heading {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: normal;  
+}
+
+/* Responsive styling for screens up to 767px */
+@media screen and (max-width: 767px) {
+    .comments-container {
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* Responsive styling for screens between 768px and 1023px */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .comments-container {
+        grid-template-columns: 1fr;
+    }
+}
+

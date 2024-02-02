@@ -1,0 +1,111 @@
+/* Navbar styles */
+.navbar {
+  background-color: #FDE9EA;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky; /* Make the navbar sticky */
+  top: 0; /* Stick to the top */
+  z-index: 100; /* Ensure it's on top of other content */
+}
+
+.logo {
+  margin-left: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 20px; /* Move the hamburger to the right */
+  background-color: #FDE9EA;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0 15px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s ease-in-out;
+  font-family: 'Gilroy-Medium';
+}
+
+a:hover {
+  color: #7C0C24;
+}
+
+.join-button {
+  display: block; /* Display the join button by default */
+  padding: 10px 20px;
+  background-color: #7C0C24;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-right: 28px; 
+}
+
+.join-button:hover {
+  background-color: white; 
+  color: black; 
+  border: 1.0px solid #7C0C24;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+    margin-right: 0; /* Reset the margin for mobile layout */
+    margin-left: auto; /* Move the hamburger to the right */
+  }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0; /* Position the menu to the right */
+    width: 100%;
+    background-color:#FDE9EA;
+    z-index: 1;
+  }
+
+  .nav-list.open {
+    display: flex;
+  }
+
+  .nav-list.open li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .open .join-button {
+    display: block; /* Show the join button when menu is open */
+    margin: 10px 20px; /* Adjust margin as needed */
+  }
+}
