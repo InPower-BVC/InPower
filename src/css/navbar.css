@@ -1,24 +1,33 @@
 /* Navbar styles */
 .navbar {
-  background-color: #FDE9EA;
+  background-color: #ca4a51;
   padding: 15px 0;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   position: sticky; /* Make the navbar sticky */
-  top: 0; /* Stick to the top */
   z-index: 100; /* Ensure it's on top of other content */
 }
 
-.logo {
-  margin-left: 28px;
-  display: flex;
-  align-items: center;
+.quote {
+  display: block;
+  margin-top: 0px;
+  color: #fcf9f9;
+  font-size:50px;
+  font-weight:bolder;
 }
 
-.logo img {
-  height: 40px;
+.logo {
+  margin-left: -45em;
+  display: flex;
+  align-items: center;
+  font-size: 30px; /* Adjust the font size as needed */
+  color: aliceblue;
 }
+
+
+
 
 .hamburger {
   display: none;
@@ -49,29 +58,32 @@ li {
 
 a {
   text-decoration: none;
-  color: black;
+  color: rgb(255, 246, 246);
   transition: color 0.3s ease-in-out;
   font-family: 'Gilroy-Medium';
+  font-weight: bolder;
+  letter-spacing: 1px; /* Adjust the letter spacing as needed */
 }
+
 
 a:hover {
   color: #7C0C24;
 }
 
 .join-button {
-  display: block; /* Display the join button by default */
+  display: block; 
   padding: 10px 20px;
-  background-color: #7C0C24;
+  background-color: #a43b55;
   border: none;
   border-radius: 20px;
-  color: white;
+  color: rgb(34, 30, 30);
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  margin-right: 28px; 
+  margin-right: -100em; 
 }
 
 .join-button:hover {
-  background-color: white; 
+  background-color: rgb(180, 89, 89); 
   color: black; 
   border: 1.0px solid #7C0C24;
 }
@@ -97,6 +109,7 @@ a:hover {
 
   .nav-list.open {
     display: flex;
+    background-color: #a43b55;
   }
 
   .nav-list.open li {
