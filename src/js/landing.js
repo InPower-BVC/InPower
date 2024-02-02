@@ -22,7 +22,7 @@ function Landing() {
   return (
     <div className="container">
       <div className="magazine">
-      <h1>magazine</h1><br></br>
+     
 
       <h2 class="line">THE LATEST</h2>
       
