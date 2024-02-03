@@ -30,7 +30,6 @@
 
 
 .hamburger {
-  display: none;
   cursor: pointer;
   padding: 10px;
   margin-right: 20px; /* Move the hamburger to the right */
@@ -40,9 +39,16 @@
 .bar {
   width: 25px;
   height: 3px;
-  background-color: white;
+  background-color: rgb(194, 98, 98);
   margin: 4px 0;
   transition: 0.4s;
+}
+
+/* Media query to initially hide the hamburger menu on larger screens */
+@media only screen and (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
 }
 
 ul {

@@ -16,7 +16,7 @@ import hero2 from '../img/hero2.svg';
 import hero3 from '../img/hero3.svg';
 import main from '../img/main.jpg';
 
-const images = [hero1, hero2, hero3];
+
 
 function Landing() {
   return (
@@ -45,13 +45,13 @@ function Landing() {
           <img src={main} alt="Main Image" className="hero-img" />
           </div>
          </div>
-
-
          <div className="volumes">
         <h1>VOLUMES</h1>
-
-
          </div>
+    
+
+
+
     
      
     </div>

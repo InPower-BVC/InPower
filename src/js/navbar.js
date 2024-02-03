@@ -28,15 +28,13 @@ function Navbar() {
       </div>
       <ul className={`nav-list ${menuOpen ? 'open' : ''}`}>
         <li onClick={toggleMenu}><Link to="/">Home</Link></li>
-        <li onClick={toggleMenu}><Link to="/discussion/a">Career</Link></li>
-        <li onClick={toggleMenu}><Link to="/discussion/b">Wellbeing</Link></li>
-        <li onClick={toggleMenu}><Link to="/discussion/c">Lifestyle</Link></li>
+        <li onClick={toggleMenu}><Link to="/discussion/a">Magazine</Link></li>
+        <li onClick={toggleMenu}><Link to="/discussion/b">Forum</Link></li>
+        <li onClick={toggleMenu}><Link to="/discussion/c">Blog</Link></li>
         <li onClick={toggleMenu}><Link to="/volunteer">Volunteer Now</Link></li>
         <li onClick={toggleMenu}><Link to="/aboutus">About Us</Link></li>
       </ul>
       
-     
-
       <button className={`join-button ${menuOpen ? 'open' : ''}`}><Link to="/invite">Join</Link></button>
       <p className="quote">
         InPower
