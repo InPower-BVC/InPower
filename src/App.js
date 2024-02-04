@@ -7,6 +7,7 @@ import LinkList from './components/LinkList/LinkList.jsx';
 import CommentPageA from './js/commentpage_a.js';
 import CommentPageB from './js/commentpage_b.js';
 import CommentPageC from './js/commentpage_c.js';
+import Blog from './js/blog.js'
 import Landing from './js/landing.js';
 import Footer from './js/footer.js';
 import ChatBotIcon from './js/chatbot.js'
@@ -27,6 +28,7 @@ function App() {
           <Route path="/discussion/a" element={<CommentPageA />} />
           <Route path="/discussion/b" element={<CommentPageB />} />
           <Route path="/discussion/c" element={<CommentPageC />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/invite" element={<Invite />} />
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/aboutus" element={<AboutUs />} />

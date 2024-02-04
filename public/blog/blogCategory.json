@@ -1,0 +1,9 @@
+[
+    {"blogCategoryId":1,"blogCategoryName":"Beauty + Wellness","blogCategoryPath":"beauty-wellness"},
+    {"blogCategoryId":2,"blogCategoryName":"Mind + Soul","blogCategoryPath":"mind-soul"},
+    {"blogCategoryId":3,"blogCategoryName":"Entertaining","blogCategoryPath":"entertaining"},
+    {"blogCategoryId":4,"blogCategoryName":"Business","blogCategoryPath":"business"},
+    {"blogCategoryId":5,"blogCategoryName":"Life","blogCategoryPath":"life"},
+    {"blogCategoryId":6,"blogCategoryName":"Work","blogCategoryPath":"work"},
+    {"blogCategoryId":7,"blogCategoryName":"Travel","blogCategoryPath":"travel"}
+]
