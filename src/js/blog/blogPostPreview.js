@@ -19,13 +19,13 @@ const BlogPostPreview = ({ post }) => {
         <img src={`../img/blog/${post.profileImg}`} alt="Thumbnail" className="thumbnail" />
         </div>
         <div className="post-info">
-        <div className="blog-category">
-            <a href={`/${post.blogCategoryPath}`} className="category-link">{category}</a>
-        </div>
-        <div className="blog-topic">
-            <a href={`/blog/${post.blogPostId}`} className="topic-link">{post.topic}</a>
-        </div>
-        <div className="created-date">{formattedDate}</div>
+            <div className="blog-category">
+                <a href={`/${post.blogCategoryPath}`} className="category-link">{category}</a>
+            </div>
+            <div className="blog-topic">
+                <a href={`/blog/${post.blogPostId}`} className="topic-link">{post.topic}</a>
+            </div>
+            <div className="created-date">{formattedDate}</div>
         </div>
     </div>
   );

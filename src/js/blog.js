@@ -63,6 +63,7 @@ function Blog() {
             </div>
           </div>
           
+            {/*
           <div className="all-category-posts">
             {categories.map(category => {
                 const postsForCategory = posts.filter(post => post.blogCategoryId === category.blogCategoryId);
@@ -82,6 +83,7 @@ function Blog() {
             })}
             <div className="blog-post-list-spacer"></div>
             </div>
+            */}
         </>
     );
     
