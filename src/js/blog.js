@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/blog.css';
 import BlogMenuBar from './blog/blogMenuBar';
 import bannerImage from '../img/blog/img_blog_banner.jfif';
@@ -51,13 +52,13 @@ function Blog() {
             <div className="banner-overlay">
                 <div className="overlay-content">
                 <div className="blog-category">
-                    <a href="/blog-category" className="category-link">Lifestyle</a>
+                    <Link to="/blog-category" className="category-link">Lifestyle</Link>
                 </div>
                 <div className="blog-topic">
                     <h2>How alcohol is affecting your hormones and causing you depression</h2>
                 </div>
                 <div className="read-now">
-                    <a href="/blog-post" className="read-now-link">Read Now</a>
+                    <Link to="/blog-post" className="read-now-link">Read Now</Link>
                 </div>
                 </div>
             </div>
