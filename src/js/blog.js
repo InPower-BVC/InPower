@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../css/blog.css';
 import BlogMenuBar from './blog/blogMenuBar';
@@ -10,18 +11,19 @@ function Blog() {
     // State to store the list of blog categories
     const [categories, setCategories] = useState([]);
     const [posts, setPosts] = useState([]);
+    const { categoryPath } = useParams(); 
 
     useEffect(() => {
         const fetchCategoryData = async () => {
             try {
                 const response = await fetch('/blog/blogCategory.json');
                 if (!response.ok) {
-                    throw new Error('Failed to fetch data');
+                    throw new Error('Failed to fetch category data');
                 }
                 const data = await response.json();
                 setCategories(data);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching category data:', error);
             }
         };
         fetchCategoryData();
@@ -30,7 +32,7 @@ function Blog() {
             try {
                 const response = await fetch('/blog/blogPost.json');
                 if (!response.ok) {
-                    throw new Error('Failed to fetch data');
+                    throw new Error('Failed to fetch post data');
                 }
                 const data = await response.json();
                 setPosts(data);
@@ -38,56 +40,44 @@ function Blog() {
                 console.error('Error fetching data:', error);
             }
         };
+        fetchCategoryData();
         fetchPostData();
+        
     }, []);
-
+    const filteredPosts = posts.filter(post => post.blogCategoryPath === categoryPath);
     
     // JSX for rendering the component
     return (
         <>
-          <BlogMenuBar categories={categories} />
-          <div className="banner-container">
-            <div><img src={bannerImage} alt="Banner" className="banner-img" /></div>
-            <div className="featured-label">FEATURED</div>
-            <div className="banner-overlay">
-                <div className="overlay-content">
-                <div className="blog-category">
-                    <Link to="/blog-category" className="category-link">Lifestyle</Link>
-                </div>
-                <div className="blog-topic">
-                    <h2>How alcohol is affecting your hormones and causing you depression</h2>
-                </div>
-                <div className="read-now">
-                    <Link to="/blog-post" className="read-now-link">Read Now</Link>
-                </div>
+            <BlogMenuBar categories={categories} />
+            <div className="banner-container">
+                <div><img src={bannerImage} alt="Banner" className="banner-img" /></div>
+                <div className="featured-label">FEATURED</div>
+                <div className="banner-overlay">
+                    {/*
+                        Example of rendering specific content for the category "beauty-wellness"
+                    */}
+                    {categoryPath === 'beauty-wellness' && (
+                        <div className="overlay-content">
+                            <div className="blog-category">
+                                <Link to="/blog/beauty-wellness" className="category-link">Lifestyle</Link>
+                            </div>
+                            <div className="blog-topic">
+                                <h2>How alcohol is affecting your hormones and causing you depression</h2>
+                            </div>
+                            <div className="read-now">
+                                <Link to="/blog-post" className="read-now-link">Read Now</Link>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
-          </div>
-          
-            {/*
-          <div className="all-category-posts">
-            {categories.map(category => {
-                const postsForCategory = posts.filter(post => post.blogCategoryId === category.blogCategoryId);
-                if (postsForCategory.length > 0) {
-                return (
-                    <div key={category.blogCategoryId}>
-                    <div className="blog-post-list-spacer"></div>
-                    <div className="category-header">
-                      <h2>{category.blogCategoryName}</h2>
-                      <a href={`/category/${category.blogCategoryPath}`} className="view-more-link">View More</a>
-                    </div>
-                    <BlogPostListByCat posts={posts.filter(post => post.blogCategoryId === category.blogCategoryId)} />
-                    </div>
-                );
-                }
-                return null;
-            })}
-            <div className="blog-post-list-spacer"></div>
-            </div>
+            {/* 
+                Render the filtered posts
+                <BlogPostListByCat posts={filteredPosts} />
             */}
         </>
     );
-    
 }
 
 export default Blog;
