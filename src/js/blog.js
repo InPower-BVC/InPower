@@ -73,7 +73,7 @@ function Blog() {
                     <div className="blog-post-list-spacer"></div>
                     <div className="category-header">
                       <h2>{category.blogCategoryName}</h2>
-                      <a href={`/category/${category.blogCategoryPath}`} className="view-more-link">View More</a>
+                      <Link href={`/category/${category.blogCategoryPath}`} className="view-more-link">View More</Link>
                     </div>
                     <BlogPostListByCat posts={posts.filter(post => post.blogCategoryId === category.blogCategoryId)} />
                     </div>
