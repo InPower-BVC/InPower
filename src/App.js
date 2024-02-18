@@ -33,6 +33,7 @@ function App() {
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/submitted" element={<Submitted />} />
+          <Route path="/Blogger" element={<Blogger />} />
         </Routes>
         <Footer />
         <ChatBotIcon />
