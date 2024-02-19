@@ -7,7 +7,7 @@ const config = {
   user: 'inpoweradmin',
   password: 'Qwer1234',
   options: {
-    encrypt: true, // Use this if you're connecting to Azure SQL Database
+    encrypt: true, //connecting to Azure SQL Database 
     port: 1433
   },
 };
