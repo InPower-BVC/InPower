@@ -22,16 +22,35 @@ function BlogPostInput() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // To be done: Submission logic (Handle title, contect, image, e.g., send data to server)
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
+  try {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", image);
-    // To Be done! Send formData to server using fetch
-  };
+
+    // Send formData to server using fetch
+    const response = await fetch("http://localhost:5000/api/blog/posts", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to submit blog post");
+    }
+
+    // Clear form fields after successful submission
+    setTitle("");
+    setContent("");
+    setImage(null);
+
+  } catch (error) {
+    console.error("Error submitting blog post:", error);
+    // Handle error, show error message to the user, etc.
+  }
+};
 
   return (
     <div>

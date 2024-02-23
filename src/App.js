@@ -2,8 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./js/navbar.js";
 import "./App.css";
-import LearningOptions from "./components/LearningOptions/LearningOptions.jsx";
-import LinkList from "./components/LinkList/LinkList.jsx";
 import CommentPageA from "./js/commentpage_a.js";
 import CommentPageB from "./js/commentpage_b.js";
 import CommentPageC from "./js/commentpage_c.js";
@@ -33,7 +31,6 @@ function App() {
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/submitted" element={<Submitted />} />
-          <Route path="/Blogger" element={<Blogger />} />
         </Routes>
         <Footer />
         <ChatBotIcon />
