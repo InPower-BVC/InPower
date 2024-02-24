@@ -41,7 +41,6 @@ function Blog() {
         fetchPostData();
     }, []);
 
-    
     // JSX for rendering the component
     return (
         <>
@@ -52,13 +51,13 @@ function Blog() {
             <div className="banner-overlay">
                 <div className="overlay-content">
                 <div className="blog-category">
-                    <Link to="/blog-category" className="category-link">Lifestyle</Link>
+                    <Link to="/blog/lifestyle" className="category-link">Lifestyle</Link>
                 </div>
                 <div className="blog-topic">
                     <h2>How alcohol is affecting your hormones and causing you depression</h2>
                 </div>
                 <div className="read-now">
-                    <Link to="/blog-post" className="read-now-link">Read Now</Link>
+                    <Link to="/post/1" className="read-now-link">Read Now</Link>
                 </div>
                 </div>
             </div>
@@ -73,9 +72,9 @@ function Blog() {
                     <div className="blog-post-list-spacer"></div>
                     <div className="category-header">
                       <h2>{category.blogCategoryName}</h2>
-                      <Link href={`/category/${category.blogCategoryPath}`} className="view-more-link">View More</Link>
+                      <Link to={`/blog/${category.blogCategoryPath}`} className="view-more-link">View More</Link>
                     </div>
-                    <BlogPostListByCat posts={posts.filter(post => post.blogCategoryId === category.blogCategoryId)} />
+                    <BlogPostListByCat posts={postsForCategory} />
                     </div>
                 );
                 }

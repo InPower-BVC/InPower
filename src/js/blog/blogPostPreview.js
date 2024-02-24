@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../css/blog.css';
 
 const formatDate = (dateString) => {
@@ -20,10 +21,10 @@ const BlogPostPreview = ({ post }) => {
         </div>
         <div className="post-info">
             <div className="blog-category">
-                <a href={`/${post.blogCategoryPath}`} className="category-link">{category}</a>
+                <Link to={`/blog/${post.blogCategoryPath}`} className="category-link">{category}</Link>
             </div>
             <div className="blog-topic">
-                <a href={`/blog/${post.blogPostId}`} className="topic-link">{post.topic}</a>
+                <Link to={`/blog/post/${post.blogPostId}`} className="topic-link">{post.topic}</Link>
             </div>
             <div className="created-date">{formattedDate}</div>
         </div>
