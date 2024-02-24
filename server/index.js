@@ -1,4 +1,3 @@
-var express=require("express");
 var express = require("express");
 var multer = require("multer"); // For handling file uploads
 const cors = require("cors");
@@ -6,14 +5,22 @@ var fs = require("fs");
 var path = require("path");
 const db = require('./db'); // Adjust the path based on your project structure
 
+
+const bodyParser = require('body-parser');
 const app = express();
-var upload = multer({ dest: "uploads/" }); // Define upload directory
+
+// Configure Multer storage
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 
 // Middleware to parse JSON body
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
-// Use the 'db' connection pool in your routes or wherever needed
+
+// Testing API
 app.get('/persons', async (req, res) => {
     let connection;
     try {
@@ -36,59 +43,63 @@ app.get('/persons', async (req, res) => {
     }
   });
 
-  // Handle POST request to add a new blog post
-app.post("/api/blog/posts", upload.single("image"), async (req, res) => {
-  var { title, content } = req.body;
-  var image = req.file; // Uploaded image file
 
+//-----------new post for blog-----------
+// Get all blog posts
+app.get('/blogposts', async (req, res) => {
+  let connection;
   try {
-    // Check if title and content are provided
-    if (!title || !content || !image) {
-      return res
-        .status(400)
-        .json({ error: "Title, content, and image are required" });
-    }
+    // Connect to the database
+    connection = await db.connect();
 
-    // Rename the image file with a unique name
-    var imageName = `${Date.now()}-${image.originalname}`;
-    var imagePath = path.join(__dirname, "uploads", imageName);
+    // Execute the query
+    const result = await db.query`SELECT * FROM BlogPosts`;
 
-  // Move the uploaded image file to a specific directory
-fs.rename(image.path, imagePath, (err) => {
-  if (err) {
-    console.error("Error moving uploaded image:", err);
-    return res.status(500).json({ error: "Error moving uploaded image" });
-  }
-
-  // Insert the new blog post into the database
-  db.query(`INSERT INTO BlogPosts (title, content, imagePath) VALUES (?, ?, ?)`, [title, content, imageName], (dbErr, result) => {
-    if (dbErr) {
-      console.error("Error adding blog post to database:", dbErr);
-      return res.status(500).json({ error: "Error adding blog post to database" });
-    }
-
-    // Return the inserted post data
-    res.status(201).json({
-      message: "Blog post added successfully",
-      post: result.recordset[0],
-    });
-  });
-});
-
-
-    // Insert the new blog post into the database
-    const result = await db.query`INSERT INTO BlogPosts (title, content, imagePath) VALUES (${title}, ${content}, ${imageName})`;
-
-    // Return the inserted post data
-    res.status(201).json({
-      message: "Blog post added successfully",
-      post: result.recordset[0],
-    });
+    // Send the result as JSON response
+    res.json(result.recordset);
   } catch (error) {
-    console.error("Error adding blog post:", error);
+    console.error('Error:', error);
     res.status(500).json({ error: "Internal server error" });
+  } finally {
+    // Close the connection pool only if the connection was successfully established
+    if (connection) {
+      connection.close();
+    }
   }
 });
+
+
+// Add a new blog post
+app.post('/blogposts', upload.single('file'), async (req, res) => {
+  let connection;
+  try {
+    const { blogPostId, blogCategoryId, blogCategoryName, topic, content, createdDate } = req.body;
+
+    // Get the binary image data from the buffer
+    const binaryImageData = req.file.buffer;
+
+    // Connect to the database
+    connection = await db.connect();
+
+    // Execute the query to insert a new blog post with image data
+    await db.query`
+      INSERT INTO BlogPosts (blogPostId, blogCategoryId, blogCategoryName, topic, content, profileImg, createdDate)
+      VALUES (${blogPostId}, ${blogCategoryId}, ${blogCategoryName}, ${topic}, ${content}, ${binaryImageData}, ${createdDate});
+    `;
+
+    // Send a success response
+    res.status(201).json({ message: 'Blog post added successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    // Close the connection pool only if the connection was successfully established
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
 
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
