@@ -102,12 +102,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: auto;
     padding: 10px;
   }
   
   .scroll-container {
-    width: fit-content; /* Ensure container size is based on content */
+    transition: left 0.8s ease;
   }
   
   .blog-post-list {
@@ -121,6 +120,7 @@
     border: none;
     cursor: pointer;
     outline: none;
+    padding: 100px;
   }
   
   .scroll-button:hover {
