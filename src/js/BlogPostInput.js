@@ -22,35 +22,39 @@ function BlogPostInput() {
   };
 
   // Handle form submission
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("image", image);
+    try {
+      const formData = new FormData();
+      formData.append("blogPostId", /* value for blogPostId */);
+      formData.append("blogCategoryId", /* value for blogCategoryId */);
+      formData.append("blogCategoryName", /* value for blogCategoryName */);
+      formData.append("topic", title);
+      formData.append("content", content);
+      formData.append("createdDate", new Date().toISOString());
+      formData.append("file", image);
 
-    // Send formData to server using fetch
-    const response = await fetch("http://localhost:5000/api/blog/posts", {
-      method: "POST",
-      body: formData,
-    });
+      // Send formData to server using fetch
+      const response = await fetch("http://localhost:5000/blogposts", {
+        method: "POST",
+        body: formData,
+      });
 
-    if (!response.ok) {
-      throw new Error("Failed to submit blog post");
+      if (!response.ok) {
+        throw new Error("Failed to submit blog post");
+      }
+
+      // Clear form fields after successful submission
+      setTitle("");
+      setContent("");
+      setImage(null);
+
+    } catch (error) {
+      console.error("Error submitting blog post:", error);
+      // Handle error, show error message to the user, etc.
     }
-
-    // Clear form fields after successful submission
-    setTitle("");
-    setContent("");
-    setImage(null);
-
-  } catch (error) {
-    console.error("Error submitting blog post:", error);
-    // Handle error, show error message to the user, etc.
-  }
-};
+  };
 
   return (
     <div>
