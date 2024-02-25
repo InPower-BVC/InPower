@@ -100,6 +100,8 @@ app.post('/blogposts', upload.single('file'), async (req, res) => {
   }
 });
 
+
+
 //PUT API for modifying the blog post
 app.put('/blogposts/:blogPostId', upload.single('file'), async (req, res) => {
   let connection;
@@ -266,13 +268,32 @@ app.get('/latestblogposts/:categoryId', async (req, res) => {
 // Get all blog categories with at least one blog post
 app.get('/blogcategories', async (req, res) => {
   let connection;
+
   try {
     connection = await db.connect();
 
     // Use a subquery to filter categories with at least one associated blog post
     const result = await db.query`
-      SELECT * FROM BlogCategories
-      WHERE blogCategoryId IN (SELECT DISTINCT blogCategoryId FROM BlogPosts);
+      SELECT
+        bc.blogCategoryId,
+        bc.blogCategoryName,
+        bc.blogCategoryPath,
+        bp.blogPostId,
+        bp.topic,
+        bp.content,
+        bp.createdDate
+      FROM BlogCategories bc
+      LEFT JOIN (
+        SELECT
+          blogCategoryId,
+          blogPostId,
+          topic,
+          content,
+          createdDate,
+          ROW_NUMBER() OVER (PARTITION BY blogCategoryId ORDER BY createdDate DESC) AS row_num
+        FROM BlogPosts
+      ) bp ON bc.blogCategoryId = bp.blogCategoryId AND bp.row_num = 1
+      WHERE bc.blogCategoryId IN (SELECT DISTINCT blogCategoryId FROM BlogPosts);
     `;
 
     res.json(result.recordset);
@@ -285,6 +306,102 @@ app.get('/blogcategories', async (req, res) => {
     }
   }
 });
+
+
+//Get the latest “Featured” blog post by category id
+app.get('/latestblogposts/:categoryId', async (req, res) => {
+  const { categoryId } = req.params;
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Execute the query to get the latest 1 blog post for the specified category
+    const result = await db.query`
+      SELECT TOP 1 *
+      FROM BlogPosts
+      WHERE blogCategoryId = ${categoryId}
+      ORDER BY createdDate DESC;
+    `;
+
+    // Send the result as a JSON response
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    // Close the connection pool only if the connection was successfully established
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+//Get the full list of blog post by category id (sort in descending order by date)
+app.get('/blogcategories/:categoryId/blogposts', async (req, res) => {
+  let connection;
+
+  try {
+    const categoryId = req.params.categoryId;
+
+    connection = await db.connect();
+
+    const result = await db.query`
+      SELECT *
+      FROM BlogPosts
+      WHERE blogCategoryId = ${categoryId}
+      ORDER BY createdDate DESC;
+    `;
+
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+//GET API for 1 particular blog post by post id
+app.get('/blogposts/:postId', async (req, res) => {
+  let connection;
+
+  try {
+    const postId = req.params.postId;
+
+    connection = await db.connect();
+
+    const result = await db.query`
+      SELECT *
+      FROM BlogPosts
+      WHERE blogPostId = ${postId};
+    `;
+
+    // Check if a blog post with the given post id exists
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ error: 'Blog post not found' });
+    }
+
+    const blogPost = result.recordset[0];
+    res.json(blogPost);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
+
 
 // Add a new blog category
 app.post('/blogcategories', async (req, res) => {
