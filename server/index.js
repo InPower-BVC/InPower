@@ -46,6 +46,7 @@ app.get('/persons', async (req, res) => {
 
 //-----------new post for blog-----------
 // Get all blog posts
+
 app.get('/blogposts', async (req, res) => {
   let connection;
   try {
@@ -73,7 +74,7 @@ app.get('/blogposts', async (req, res) => {
 app.post('/blogposts', upload.single('file'), async (req, res) => {
   let connection;
   try {
-    const { blogPostId, blogCategoryId, blogCategoryName, topic, content, createdDate } = req.body;
+    const { blogCategoryId, blogCategoryName, topic, content, createdDate } = req.body;
 
     // Get the binary image data from the buffer
     const binaryImageData = req.file.buffer;
@@ -83,8 +84,8 @@ app.post('/blogposts', upload.single('file'), async (req, res) => {
 
     // Execute the query to insert a new blog post with image data
     await db.query`
-      INSERT INTO BlogPosts (blogPostId, blogCategoryId, blogCategoryName, topic, content, profileImg, createdDate)
-      VALUES (${blogPostId}, ${blogCategoryId}, ${blogCategoryName}, ${topic}, ${content}, ${binaryImageData}, ${createdDate});
+      INSERT INTO BlogPosts (blogCategoryId, blogCategoryName, topic, content, profileImg, createdDate)
+      VALUES (${blogCategoryId}, ${blogCategoryName}, ${topic}, ${content}, ${binaryImageData}, ${createdDate});
     `;
 
     // Send a success response
@@ -102,6 +103,10 @@ app.post('/blogposts', upload.single('file'), async (req, res) => {
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d449a885889808b5c400894547032152e609aab2
 //PUT API for modifying the blog post
 app.put('/blogposts/:blogPostId', upload.single('file'), async (req, res) => {
   let connection;
