@@ -46,7 +46,6 @@ app.get('/persons', async (req, res) => {
 
 //-----------new post for blog-----------
 // Get all blog posts
-
 app.get('/blogposts', async (req, res) => {
   let connection;
   try {
@@ -68,6 +67,33 @@ app.get('/blogposts', async (req, res) => {
     }
   }
 });
+
+// Get all blog posts by category name
+app.get('/blogpostsbycategory', async (req, res) => {
+  const { blogCategoryName } = req.query;
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Execute the query to get the blog posts filtered by category name
+    const result = await db.query`
+      SELECT * FROM BlogPosts WHERE blogCategoryName = ${blogCategoryName};
+    `;
+
+    // Send the result as JSON response
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: "Internal server error" });
+  } finally {
+    // Close the connection pool only if the connection was successfully established
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
 
 
 // Add a new blog post
