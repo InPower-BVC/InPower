@@ -16,6 +16,7 @@ import Volunteer from "./js/volunteer.js";
 import AboutUs from "./js/Aboutus.js";
 import Submitted from "./js/Submitted.js";
 import BlogPostInput from "./js/BlogPostInput.js";
+import BlogPostDelete from "./js/blogPostDelete.js";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/blog/category/:id" element={<BlogCategory />} />
           <Route path="/blog/viewPost/:id" element={<BlogViewPost />} />
           <Route path="/blog/post" element={<BlogPostInput />} />
+          <Route path="/blog/delete" element={<BlogPostDelete />} />
           <Route path="/invite" element={<Invite />} />
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/aboutus" element={<AboutUs />} />
