@@ -7,7 +7,7 @@
     position: absolute;
     top: 30px;
     left: 0px;
-    background-color: #ca4a51;
+    background-color: #E45E5E;
     color: white;
     font-weight: bold;
     padding: 10px 30px;
@@ -65,7 +65,7 @@
   
   .read-now-link {
     text-decoration: none;
-    color: #ca4a51;
+    color: #E45E5E;
     font-weight: bold;
   }
 
@@ -96,6 +96,35 @@
     background-color: #ddd;
   }
 
+  /* Style for active category */
+  .blog-menu-item.active-category {
+    color: #E45E5E;
+    font-weight: bold;
+  }
+
+  .category-header-2 {
+    color: #E45E5E;
+    font-size: 80px;
+    font-family: 'Abril Fatface', sans-serif;
+    text-align: left;
+    line-height: 108px;
+    padding: 0 100px;
+  }
+
+  .category-posts {
+      display: flex;
+      flex-wrap: wrap;
+      width: 80vw;
+      min-width: 250px;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .blog-post-preview {
+      box-sizing: border-box;
+      padding: 25px 30px;
+  }
 
   /* For the blog post list by category */
   .blog-post-list-container {
@@ -139,7 +168,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    padding: 0 200px;
+    padding: 0 100px;
   }
   
   .view-more-link {
@@ -199,3 +228,10 @@
     color: #666;
   }
   
+  /* For blog post content container */
+  .blog-post-container {
+    margin: auto;
+    width: 60vw;
+    min-width: 200px;
+    padding: 50px;
+  }
