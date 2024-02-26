@@ -5,7 +5,9 @@ import "./App.css";
 import CommentPageA from "./js/commentpage_a.js";
 import CommentPageB from "./js/commentpage_b.js";
 import CommentPageC from "./js/commentpage_c.js";
-import Blog from "./js/blog.js";
+import Blog from "./js/blog/blog.js";
+import BlogCategory from "./js/blog/blogCategory.js";
+import BlogViewPost from "./js/blog/blogViewPost.js";
 import Landing from "./js/landing.js";
 import Footer from "./js/footer.js";
 import ChatBotIcon from "./js/chatbot.js";
@@ -27,6 +29,8 @@ function App() {
           <Route path="/discussion/b" element={<CommentPageB />} />
           <Route path="/discussion/c" element={<CommentPageC />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/category/:id" element={<BlogCategory />} />
+          <Route path="/blog/viewPost/:id" element={<BlogViewPost />} />
           <Route path="/blog/post" element={<BlogPostInput />} />
           <Route path="/blog/delete" element={<BlogPostDelete />} />
           <Route path="/invite" element={<Invite />} />

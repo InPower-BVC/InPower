@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../css/blog.css';
-import BlogMenuBar from './blog/blogMenuBar';
-import bannerImage from '../img/blog/img_blog_banner.jfif';
-import BlogPostListByCat from './blog/blogPostListByCat';
+import '../../css/blog.css';
+import BlogMenuBar from './blogMenuBar';
+import bannerImage from '../../img/blog/img_blog_banner.jfif';
+import BlogPostListByCat from './blogPostListByCat';
 
 // Component for displaying blog
 function Blog() {
@@ -51,13 +51,13 @@ function Blog() {
             <div className="banner-overlay">
                 <div className="overlay-content">
                 <div className="blog-category">
-                    <Link to="/blog/lifestyle" className="category-link">Lifestyle</Link>
+                    <Link to="/blog/category/1" className="category-link">Lifestyle</Link>
                 </div>
                 <div className="blog-topic">
                     <h2>How alcohol is affecting your hormones and causing you depression</h2>
                 </div>
                 <div className="read-now">
-                    <Link to="/post/1" className="read-now-link">Read Now</Link>
+                    <Link to="/blog/viewPost/1" className="read-now-link">Read Now</Link>
                 </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@ function Blog() {
                     <div className="blog-post-list-spacer"></div>
                     <div className="category-header">
                       <h2>{category.blogCategoryName}</h2>
-                      <Link to={`/blog/${category.blogCategoryPath}`} className="view-more-link">View More</Link>
+                      <Link to={`/blog/category/${category.blogCategoryId}`} className="view-more-link">View More</Link>
                     </div>
                     <BlogPostListByCat posts={postsForCategory} />
                     </div>
