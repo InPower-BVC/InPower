@@ -17,6 +17,8 @@ import AboutUs from "./js/Aboutus.js";
 import Submitted from "./js/Submitted.js";
 import BlogPostInput from "./js/BlogPostInput.js";
 import BlogPostDelete from "./js/blogPostDelete.js";
+import Admin from "./js/admin-login.js";
+
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/submitted" element={<Submitted />} />
+          <Route path="/Admin" element={<Admin />} />
         </Routes>
         <Footer />
         <ChatBotIcon />
