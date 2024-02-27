@@ -165,10 +165,6 @@ app.post("/blogposts", upload.single("file"), async (req, res) => {
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d449a885889808b5c400894547032152e609aab2
 //PUT API for modifying the blog post
 app.put("/blogposts/:blogPostId", upload.single("file"), async (req, res) => {
   let connection;
