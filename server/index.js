@@ -9,6 +9,15 @@ const db = require('./db'); // Adjust the path based on your project structure
 const bodyParser = require('body-parser');
 const app = express();
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10; // You can adjust the number of salt rounds as needed
+
+
+
+
+
+
+
 // Configure Multer storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -18,6 +27,11 @@ const upload = multer({ storage: storage });
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
+
+
+
+
+
 
 
 // Testing API
@@ -103,10 +117,7 @@ app.post('/blogposts', upload.single('file'), async (req, res) => {
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> d449a885889808b5c400894547032152e609aab2
 //PUT API for modifying the blog post
 app.put('/blogposts/:blogPostId', upload.single('file'), async (req, res) => {
   let connection;
@@ -486,6 +497,73 @@ app.delete('/blogcategories/:id', async (req, res) => {
     }
   }
 });
+
+
+
+//GET API for all blog categories
+app.get('/blogcategories', async (req, res) => {
+  let connection;
+  try {
+    connection = await db.connect();
+
+    const result = await db.query`SELECT * FROM BlogCategories`;
+
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
+//POST API for Admin login
+app.post('/admin/login', async (req, res) => {
+  let connection;
+  try {
+    const { username, password } = req.body;
+
+    // Connect to the database
+    connection = await db.connect();
+
+    // Check if the username exists in the database
+    const userResult = await db.query`SELECT * FROM AdminCredentials WHERE username = ${username}`;
+    const user = userResult.recordset[0];
+
+    if (!user) {
+      console.log('User not found:', username);
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // Check if the provided password matches the stored hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      console.log('Incorrect password for user:', username);
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // You can include additional checks or data in the response if needed
+    return res.json({ message: 'Login successful' });
+  } catch (error) {
+    console.error('Error during login:', error);
+
+    // Return the detailed error message in the response for debugging
+    return res.status(500).json({ error: error.message });
+  } finally {
+    // Close the database connection in the finally block
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
 
 
 app.listen(5000, () => {
