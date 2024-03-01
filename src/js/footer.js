@@ -9,7 +9,7 @@ function Footer() {
       <div className='footer-container'>
         <div className='footer-content'>
           <h2>Contact Us</h2>
-          <p>Email: contact@example.com</p>
+          <p>Email:razan@weareinpower.com</p>
           <p>Phone: (123) 456-7890</p>
           <Link to='/Admin'>Admin</Link> 
         </div>
