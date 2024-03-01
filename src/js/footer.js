@@ -21,7 +21,7 @@ function Footer() {
           
         </div>
       </div>
-      <p className='footer-bottom'>© 2023 Your Company. All rights reserved.</p>
+      <p className='footer-bottom'>© 2024 Your Company. All rights reserved.</p>
     </footer>
   );
 }

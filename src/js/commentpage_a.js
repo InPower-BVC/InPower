@@ -1,9 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
 
-// Files
-import '../css/landing.css'; // Import the CSS file
 import TypewriterEffect from '../js/typewriter';
 import BubblyButton from '../js/BubblyButton.js';
 import magazine1 from "../../src/img/magazine1.jpeg"
@@ -27,12 +24,7 @@ function Landing() {
           <h1 className="typewriter">
             <TypewriterEffect text="THE THOUGHT, THE PLAN, THE ACTION: Razan Talebian   Women Funded Grants: InPower Start-Up " />
           </h1>
-          <p className="feature-content-p">Join our online groups and connect with quality members who have pledged to make a safe, healthy environment for everyone</p>
-          <Link to="/invite">
-            <div className="button-container">
-              <BubblyButton />
-            </div>
-          </Link>
+         
         </div>
         <div>
           <img src={main} alt="Main Image" className="hero-img" />
