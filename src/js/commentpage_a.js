@@ -27,10 +27,7 @@ function Landing() {
           <h1 className="typewriter">
             <TypewriterEffect text="THE THOUGHT, THE PLAN, THE ACTION: Razan Talebian   Women Funded Grants: InPower Start-Up " />
           </h1>
-          <p className="feature-content-p">Join our online groups and connect with quality members who have pledged to make a safe, healthy environment for everyone</p>
-          <Link to="/invite">
-            <div className="button-container">
-              <BubblyButton />
+        
             </div>
           </Link>
         </div>
