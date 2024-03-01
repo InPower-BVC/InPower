@@ -13,6 +13,7 @@
     max-width: 1400px; /* Increased maximum width */
     padding: 50px; /* Adding more padding to all sides */
     box-sizing: border-box; /* Including padding in width calculation */
+    
   }
   
   .hero-text-new {
@@ -25,8 +26,14 @@
   .hero-img-new {
     width: 80%; /* Increased width */
     height: auto; /* Maintain aspect ratio */
-    padding: 40px; /* Adding more padding to all sides */
+    padding: 0px; /* Adding more padding to all sides */
     box-sizing: border-box; /* Including padding in width calculation */
+    transition: box-shadow 0.3s ease; /* Add transition for a smooth effect */
+    overflow: hidden;
+  }
+  .hero-img-new:hover{
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.5), 10px 0 10px rgba(0, 0, 0, 0.5); 
+    border-radius: 16px;
   }
   
   .typewriter-new {

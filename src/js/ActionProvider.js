@@ -96,9 +96,9 @@ class ActionProvider {
   handleWhatAreWe = () => {
     const message = this.createChatBotMessage(
       <div>
-        We are a community that loves JavaScript and web development! You can learn, collaborate, and grow with us.
+        We are a community  that provides a safe and inclusive space exclusively designed for women and non-binary individuals to come together, support each other, and thrive.
         <br />
-        If you'd like to know more, you can visit our <button><a href="/aboutus">About Us</a></button> page.
+        If you'd like to know more, you can visit our <button><a href="/Aboutus">About Us</a></button> page.
       </div>
     );
     this.updateChatbotState(message);
