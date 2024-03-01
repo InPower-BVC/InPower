@@ -7,11 +7,11 @@ import magazine1 from "../../src/img/magazine1.jpeg"
 import magazine2 from "../../src/img/magazine2.jpeg"
 import magazine3 from "../../src/img/magazine3.jpg"
 import magazine4 from "../../src/img/magazine4.jpeg"
-
+import '../css/magazine.css'; // Import the CSS file
 
 import main from '../img/main.jpg';
 
-function Landing() {
+function magazine() {
   return (
     <div className="container">
       <div className="magazine">
@@ -64,4 +64,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default magazine;

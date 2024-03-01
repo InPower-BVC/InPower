@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../css/submitted.css';
-import '../css/landing.css';
+
 
 function Submitted() {
   return (
