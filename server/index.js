@@ -13,10 +13,6 @@ const saltRounds = 10; // You can adjust the number of salt rounds as needed
 
 
 
-
-
-
-
 // Configure Multer storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -304,7 +300,7 @@ app.get("/latestblogposts", async (req, res) => {
 });
 
 //GET API to list the latest 10 blog posts for each category (by category id)
-app.get("/latestblogposts/:categoryId", async (req, res) => {
+app.get("/latesttenblogposts/:categoryId", async (req, res) => {
   const { categoryId } = req.params;
 
   let connection;
@@ -536,6 +532,74 @@ app.delete("/blogcategories/:id", async (req, res) => {
     }
   }
 });
+
+//GET API to retrieve all blog categories
+app.get('/allblogcategories', async (req, res) => {
+  let connection;
+  try {
+    connection = await db.connect();
+
+    const result = await db.query`SELECT * FROM BlogCategories`;
+
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+//Admin Login API
+app.post('/admin/login', async (req, res) => {
+  let connection;
+  try {
+    const { username, password } = req.body;
+
+    console.log('Login attempt for username:', username); // Log the username attempting to log in
+
+    // Connect to the database
+    connection = await db.connect();
+
+    // Check if the username exists in the database
+    const userResult = await db.query`SELECT * FROM AdminCredentials WHERE username = ${username}`;
+    console.log(userResult)
+    const user = userResult.recordset[0];
+
+    if (!user) {
+      console.log('User not found:', username);
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // Check if the provided password matches the stored hashed password
+    // const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (password !== user.password) {
+      console.log('Incorrect password for user:', username);
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // You can include additional checks or data in the response if needed
+    console.log('Login successful for user:', username);
+    return res.json({ message: 'Login successful' });
+  } catch (error) {
+    console.error('Error during login:', error);
+
+    // Return the detailed error message in the response for debugging
+    return res.status(500).json({ error: error.message });
+  } finally {
+    // Close the database connection in the finally block
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
 
 
 app.listen(5000, () => {

@@ -118,7 +118,7 @@ function BlogPostDelete() {
   return (
     <div>
       <h2>Delete Blog Post</h2>
-      <form style={{ maxWidth: '600px', margin: '0 auto', padding: '20px', backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
+      <form style={{  width: '70%', margin: '0 auto', padding: '20px', backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="category" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Category:</label>
           <select id="category" onChange={handleCategoryChange} value={selectedCategory} required style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}>
@@ -138,9 +138,9 @@ function BlogPostDelete() {
           </select>
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-          <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
-          <textarea id="content" value={content} readOnly style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', height: '200px' }}></textarea>
-        </div>
+  <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
+  <div dangerouslySetInnerHTML={{ __html: content }} style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '200px', maxHeight: '400px', overflowY: 'auto', backgroundColor: '#f9f9f9', padding: '20px', lineHeight: '1.5' }}></div>
+</div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
         <label htmlFor="image" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Image:</label>
         {image && (
