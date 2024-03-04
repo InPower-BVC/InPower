@@ -13,10 +13,6 @@ const saltRounds = 10; // You can adjust the number of salt rounds as needed
 
 
 
-
-
-
-
 // Configure Multer storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -551,6 +547,47 @@ app.get('/allblogcategories', async (req, res) => {
   }
 });
 
+
+//Admin Login API (To be check)
+app.post('/admin/login', async (req, res) => {
+  let connection;
+  try {
+    const { username, password } = req.body;
+
+    // Connect to the database
+    connection = await db.connect();
+
+    // Check if the username exists in the database
+    const userResult = await db.query`SELECT * FROM AdminCredentials WHERE username = ${username}`;
+    const user = userResult.recordset[0];
+
+    if (!user) {
+      console.log('User not found:', username);
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // Check if the provided password matches the stored hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      console.log('Incorrect password for user:', username);
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // You can include additional checks or data in the response if needed
+    return res.json({ message: 'Login successful' });
+  } catch (error) {
+    console.error('Error during login:', error);
+
+    // Return the detailed error message in the response for debugging
+    return res.status(500).json({ error: error.message });
+  } finally {
+    // Close the database connection in the finally block
+    if (connection) {
+      connection.close();
+    }
+  }
+});
 
 
 
