@@ -142,7 +142,7 @@ function BlogPostInput() {
           <input
             type="file"
             id="image"
-            accept="image/*"
+            accept="image/png"
             onChange={handleImageUpload}
             required
             style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}

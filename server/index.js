@@ -120,10 +120,11 @@ app.get("/blogpostsbytopic", async (req, res) => {
       FROM BlogPosts
       WHERE topic = ${topic};
     `;
+    console.log(result.recordset[0])
     if(result.recordset[0].profileImg){
       result.recordset[0].profileImg = `data:image/png;base64,${result.recordset[0].profileImg.toString('base64')}`;
     }
-    console.log(result.recordset[0].profileImg)
+    
     // Send the result as a JSON response
     res.json(result.recordset[0]); // Assuming there's only one post per topic
   } catch (error) {

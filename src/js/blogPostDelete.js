@@ -138,9 +138,9 @@ function BlogPostDelete() {
           </select>
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-  <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
-  <div dangerouslySetInnerHTML={{ __html: content }} style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '200px', maxHeight: '400px', overflowY: 'auto', backgroundColor: '#f9f9f9', padding: '20px', lineHeight: '1.5' }}></div>
-</div>
+          <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
+          <div dangerouslySetInnerHTML={{ __html: content }} style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '200px', maxHeight: '400px', overflowY: 'auto', backgroundColor: '#f9f9f9', padding: '20px', lineHeight: '1.5' }}></div>
+        </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
         <label htmlFor="image" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Image:</label>
         {image && (
