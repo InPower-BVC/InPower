@@ -6,7 +6,6 @@ import bannerImage from '../../img/blog/img_blog_cat_banner.jfif';
 import BlogPostPreview from '../blog/blogPostPreview';
 
 function BlogCategory() {
-    // State to store the list of blog categories
     const { id } = useParams();
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState([]);

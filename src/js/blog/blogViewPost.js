@@ -6,7 +6,6 @@ import BlogMenuBar from './blogMenuBar';
 // Component for displaying blog
 function BlogViewPost() {
     const { id } = useParams();
-    // State to store the list of blog categories
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState(null);
     const [post, setPost] = useState(null);
