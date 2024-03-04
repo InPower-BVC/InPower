@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import '../css/admin.css';
-function Admin() {
+import axios from 'axios'; 
+
+function AdminLogin() {
+  const [message, setMessage] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,14 +15,24 @@ function Admin() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can add your logic to handle form submission, such as sending the data to a backend server for authentication
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Reset the form after submission
-    setUsername('');
-    setPassword('');
+    try {
+      // Make a POST request to the /admin/login endpoint with the username and password
+      const response = await axios.post('http://localhost:5000/admin/login', { username, password });
+
+      // If login is successful, you can redirect the user to a dashboard or perform other actions
+      console.log('Login successful:', response.data);
+      setMessage('Login successful');
+    } catch (error) {
+      // If there's an error, you can handle it here
+      console.error('Login failed:', error.response.data);
+      setMessage('Login failed');
+    } finally {
+      // Reset the form after submission
+      setUsername('');
+      setPassword('');
+    }
   };
 
   return (
@@ -47,10 +60,11 @@ function Admin() {
           />
         </div>
         <button type="submit" className="admin-button">Login</button>
-
       </form>
+      {/* Display message */}
+      {message && <p>{message}</p>}
     </div>
   );
 }
 
-export default Admin;
+export default AdminLogin;

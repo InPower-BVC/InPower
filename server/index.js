@@ -548,17 +548,20 @@ app.get('/allblogcategories', async (req, res) => {
 });
 
 
-//Admin Login API (To be check)
+//Admin Login API
 app.post('/admin/login', async (req, res) => {
   let connection;
   try {
     const { username, password } = req.body;
+
+    console.log('Login attempt for username:', username); // Log the username attempting to log in
 
     // Connect to the database
     connection = await db.connect();
 
     // Check if the username exists in the database
     const userResult = await db.query`SELECT * FROM AdminCredentials WHERE username = ${username}`;
+    console.log(userResult)
     const user = userResult.recordset[0];
 
     if (!user) {
@@ -567,14 +570,15 @@ app.post('/admin/login', async (req, res) => {
     }
 
     // Check if the provided password matches the stored hashed password
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    // const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (!passwordMatch) {
+    if (password !== user.password) {
       console.log('Incorrect password for user:', username);
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
     // You can include additional checks or data in the response if needed
+    console.log('Login successful for user:', username);
     return res.json({ message: 'Login successful' });
   } catch (error) {
     console.error('Error during login:', error);
@@ -588,6 +592,8 @@ app.post('/admin/login', async (req, res) => {
     }
   }
 });
+
+
 
 
 
