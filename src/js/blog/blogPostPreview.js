@@ -17,7 +17,7 @@ const BlogPostPreview = ({ post }) => {
   return (
     <div className="blog-post-preview">
         <div className="thumbnail-container">
-        <img src={`../../img/blog/${post.profileImg}`} alt="Thumbnail" className="thumbnail" />
+        <img src={`../../img/blog/${post.profileImgPath}`} alt="Thumbnail" className="thumbnail" />
         </div>
         <div className="post-info">
             <div className="blog-category">

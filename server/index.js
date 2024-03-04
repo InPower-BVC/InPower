@@ -59,7 +59,17 @@ app.get("/blogposts", async (req, res) => {
     connection = await db.connect();
 
     // Execute the query
-    const result = await db.query`SELECT * FROM BlogPosts`;
+    const result = await db.query
+      `SELECT 
+        blogPostId,
+        blogCategoryId,
+        blogCategoryName,
+        topic,
+        content,
+        createdDate,
+        blogCategoryPath,
+        profileImgPath
+      FROM BlogPosts`;
 
     // Send the result as JSON response
     res.json(result.recordset);
@@ -68,7 +78,7 @@ app.get("/blogposts", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   } finally {
     // Close the connection pool only if the connection was successfully established
-    if (connection) {
+    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
       connection.close();
     }
   }
@@ -332,26 +342,13 @@ app.get("/blogcategories", async (req, res) => {
 
     // Use a subquery to filter categories with at least one associated blog post
     const result = await db.query`
-      SELECT
+      SELECT DISTINCT
         bc.blogCategoryId,
         bc.blogCategoryName,
-        bc.blogCategoryPath,
-        bp.blogPostId,
-        bp.topic,
-        bp.content,
-        bp.createdDate
+        bc.blogCategoryPath
       FROM BlogCategories bc
-      LEFT JOIN (
-        SELECT
-          blogCategoryId,
-          blogPostId,
-          topic,
-          content,
-          createdDate,
-          ROW_NUMBER() OVER (PARTITION BY blogCategoryId ORDER BY createdDate DESC) AS row_num
-        FROM BlogPosts
-      ) bp ON bc.blogCategoryId = bp.blogCategoryId AND bp.row_num = 1
-      WHERE bc.blogCategoryId IN (SELECT DISTINCT blogCategoryId FROM BlogPosts);
+      LEFT JOIN BlogPosts bp ON bc.blogCategoryId = bp.blogCategoryId
+      WHERE bp.blogCategoryId IS NOT NULL;
     `;
 
     res.json(result.recordset);
@@ -359,7 +356,7 @@ app.get("/blogcategories", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   } finally {
-    if (connection) {
+    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
       connection.close();
     }
   }
@@ -432,7 +429,15 @@ app.get("/blogposts/:postId", async (req, res) => {
     connection = await db.connect();
 
     const result = await db.query`
-      SELECT *
+      SELECT 
+        blogPostId,
+        blogCategoryId,
+        blogCategoryName,
+        topic,
+        content,
+        createdDate,
+        blogCategoryPath,
+        profileImgPath
       FROM BlogPosts
       WHERE blogPostId = ${postId};
     `;
@@ -448,7 +453,7 @@ app.get("/blogposts/:postId", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   } finally {
-    if (connection) {
+    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
       connection.close();
     }
   }
