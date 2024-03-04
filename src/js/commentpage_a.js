@@ -1,73 +1,67 @@
-import React, { useState } from 'react';
-import '../css/commentpage_a.css';
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import React from 'react';
 
-// Component for displaying and managing comments
-function CommentPageA() {
-        // State to store the list of comments
-    const [comments, setComments] = useState([
-        // Sample comments are stored in an array of objects having various attributes
-        { id: 1, author: 'Om', preview: 'This is a...', fullText: 'This is a rough design of the comments page which will be updated multiple times. It might span multiple lines and have more details.' },
-        
-        { id: 2, author: 'Khokhar', preview: 'This is also...', fullText: 'This is also a rough design of the comments page which will be updated multiple times. It might have even more details and span multiple paragraphs.' },
-        
-        { id: 3, author: 'Janhvi', preview: 'Recently, I have...', fullText: 'Recently, I have noticed that there have been significant improvements to the design and layout. It is becoming more user-friendly, which is always a plus. Great job team!' },
-        
-        { id: 4, author: 'Tiwari', preview: 'Has anyone else...', fullText: 'Has anyone else experienced glitches in the new update? While I love the added features, sometimes it lags on my device. Any solutions?' },
-        
-        { id: 5, author: 'Razan', preview: 'Loved the new...', fullText: 'Loved the new color scheme introduced in the latest version. It feels fresh and modern. I am looking forward to seeing more updates like this!' },
-    ]);
-    
-    // Helper function to trim and shorten the text
-    const trimText = (text, length) => {
-        // If the text is shorter than the specified length, return it as-is
-        if (text.length <= length) {
-            return text;
-        }
-        // Otherwise, trim the text to the specified length and append '...'
-        return text.substr(0, length) + '...';
-    };    
-    
-    // State to manage the visibility of the modal
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    // State to store the currently selected comment for the modal
-    const [selectedComment, setSelectedComment] = useState(null);
+import TypewriterEffect from '../js/typewriter';
+import BubblyButton from '../js/BubblyButton.js';
+import magazine1 from "../../src/img/magazine1.jpeg"
+import magazine2 from "../../src/img/magazine2.jpeg"
+import magazine3 from "../../src/img/magazine3.jpg"
+import magazine4 from "../../src/img/magazine4.jpeg"
+import '../css/magazine.css'; // Import the CSS file
 
-    // Function to open the modal and set the selected comment
-    const openModal = (comment) => {
-        setIsModalOpen(true);
-        setSelectedComment(comment);
-    }
+import main from '../img/main.jpg';
 
-    // JSX for rendering the component
-    return (
-        <>
-            <div className="heading-section">
-                <h1 className="main-heading">Welcome to InPower</h1>
-                <h2 className="sub-heading">Let's see what's trending and join the conversation on InPower</h2>
-            </div>
-            
-            <div className="comments-container">
-                {comments.map(comment => (
-                    <div key={comment.id} className="comment" onClick={() => openModal(comment)}>
-                        <strong className="author-name">{comment.author}</strong>
-                        <div className="comment-preview">{trimText(comment.fullText, 150)}</div>
-                    </div>
-                ))}
-            </div>
-    
-            {isModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close-btn" onClick={() => setIsModalOpen(false)}>&times;</span>
-                        <h2>{selectedComment.author}</h2>
-                        <p>{selectedComment.fullText}</p>
-                    </div>
-                </div>
-            )}
-        </>
-    );
-    
+function magazine() {
+  return (
+    <div className="container">
+      <div className="magazine">
+        <h1>magazine</h1><br></br>
+        <h2 className="line">THE LATEST</h2>
+      </div>
+
+      <div className="hero-content">
+        <div className="hero-text">
+          <h1 className="typewriter">
+            <TypewriterEffect text="THE THOUGHT, THE PLAN, THE ACTION: Razan Talebian   Women Funded Grants: InPower Start-Up " />
+          </h1>
+         
+        </div>
+        <div>
+          <img src={main} alt="Main Image" className="hero-img" />
+        </div>
+      </div>
+
+      <div style={{justifyContent: "center"}} className="volumes">
+        <h1>VOLUMES</h1>
+        
+
+        <div style={{margin: "38px 6px 40px 6px", width: "100%", justifyContent: "space-evenly", padding:"18px 26px 22px 26px"}} className="volume-card">
+          <div style={{marginLeft: "55px"}} className='volume-1'>
+            <img style={{width:"340px" ,height: "430px",  boxShadow: "0.5px 2px 1.5px 1.8px"}} src={magazine1}/>
+            <h2>Volume 1: Title 1</h2>
+            <p style={{fontFamily: 'sans-serif', fontWeight: 'bold'}}>EMBRACING ONE'S DISTINCTIVENESS AND AUTHENTICITY</p>
+          </div>
+          <div style={{marginRight: "180px"}} className='volume-2'>
+          <img style={{width:"340px" ,height: "430px",  boxShadow: "0.5px 2px 1.5px 1.8px"}} src={magazine2}/>
+            <h2>Volume 2: Title 2</h2>
+            <p style={{fontFamily: 'sans-serif', fontWeight: 'bold'}}>EMBODYING INDIVIDUALITY AND AUTHENTICITY</p>
+          </div>
+
+          <div style={{marginLeft: "55px"}}className='volume-3'>
+          <img style={{width:"340px" ,height: "430px", boxShadow: "0.5px 2px 1.5px 1.8px"}} src={magazine3}/>
+            <h2>Volume 2: Title 2</h2>
+            <p style={{fontFamily: 'sans-serif', fontWeight: 'bold'}}>EMBRACING INDIVIDUALITY & AUTHENTICITY</p>
+          </div>
+
+          <div style={{marginRight: "180px"}} className='volume-4'>
+          <img style={{width:"340px" ,height: "430px", boxShadow: "0.5px 2px 1.5px 1.8px"}} src={magazine4}/>
+            <h2>Volume 2: Title 2</h2>
+            <p style={{fontFamily: 'sans-serif', fontWeight: 'bold'}}>FOSTERING INDIVIDUALITY AND GENUINENESS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-// Exporting the CommentPageA component for use in other parts of the application
-export default CommentPageA;
+export default magazine;

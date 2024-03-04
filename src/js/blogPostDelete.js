@@ -61,7 +61,6 @@ function BlogPostDelete() {
     const topic = e.target.value;
     console.log('Selected Topic:', topic);
     setSelectedTopic(topic);
-    setSelectedPost('');
     // Fetch post based on the selected topic
     fetchPostByTopic(topic);
   };
@@ -72,7 +71,7 @@ function BlogPostDelete() {
       .then(data => {
         console.log('Fetched post:', data);
         setContent(data.content);
-        
+        setSelectedPost(data.blogPostId);
         // Convert image data to a Blob URL
         if (data.profileImg) {
           // const blob = new Blob([data.profileImg], { type: 'image/jpeg' }); // Assuming the image type is JPEG
@@ -93,6 +92,7 @@ function BlogPostDelete() {
   };
 
   const handleDelete = () => {
+    console.log(selectedPost)
     if (selectedPost) {
       // Send a DELETE request to the server to delete the selected post
       fetch(`http://localhost:5000/blogposts/${selectedPost}`, { method: 'DELETE' })

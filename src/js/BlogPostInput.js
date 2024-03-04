@@ -6,6 +6,7 @@ function BlogPostInput() {
   const [topic, setTopic] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Fetch blog categories
   useEffect(() => {
@@ -53,6 +54,7 @@ function BlogPostInput() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const formData = new FormData();
@@ -82,6 +84,8 @@ function BlogPostInput() {
     } catch (error) {
       console.error("Error submitting blog post:", error);
       // Handle error, show error message to the user, etc.
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -112,14 +116,14 @@ function BlogPostInput() {
           />
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-            <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
-            <textarea
+          <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
+          <textarea
             id="content"
             value={content}
             onChange={handleContentChange}
             required
             style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', height: '200px' }} // Adjust the height here
-             ></textarea>
+          ></textarea>
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="image" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Upload Image:</label>
@@ -137,10 +141,13 @@ function BlogPostInput() {
             <img src={URL.createObjectURL(image)} alt="Uploaded" style={{ maxWidth: '100%' }} />
           </div>
         )}
+        {/* Loading spinner */}
+        {loading && <div className="spinner"></div>}
         <button type="submit" style={{ backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px 20px', cursor: 'pointer' }}>Submit</button>
       </form>
     </div>
   );
+  
   
   
 }

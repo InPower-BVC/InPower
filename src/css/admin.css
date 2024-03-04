@@ -1,0 +1,64 @@
+/* admin.css */
+
+/* Form container */
+form {
+  width: 400px;
+  margin: 40px auto; /* Added margin */
+  padding: 40px;
+  border: 4px solid #9d3e3e;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+/* Form header */
+h2 {
+  text-align: center;
+}
+
+/* Form fields */
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+/* Submit button */
+.admin-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-button:hover {
+  background-color: #0056b3;
+  animation: pulse 0.5s infinite alternate; /* Added animation */
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+/* Form validation error */
+input:invalid {
+  border-color: #ff0000;
+}

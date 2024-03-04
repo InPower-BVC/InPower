@@ -8,6 +8,15 @@ const db = require("./db"); // Adjust the path based on your project structure
 const bodyParser = require("body-parser");
 const app = express();
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10; // You can adjust the number of salt rounds as needed
+
+
+
+
+
+
+
 // Configure Multer storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -16,6 +25,7 @@ const upload = multer({ storage: storage });
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
+
 
 // Testing API
 app.get("/persons", async (req, res) => {
@@ -152,6 +162,8 @@ app.post("/blogposts", upload.single("file"), async (req, res) => {
     }
   }
 });
+
+
 
 //PUT API for modifying the blog post
 app.put("/blogposts/:blogPostId", upload.single("file"), async (req, res) => {
@@ -519,6 +531,7 @@ app.delete("/blogcategories/:id", async (req, res) => {
     }
   }
 });
+
 
 app.listen(5000, () => {
   console.log("Server is running on port 5000");

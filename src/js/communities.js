@@ -6,7 +6,7 @@ import '../css/communities.css';
 import cb1 from '../img/cb1.svg';
 import cs1 from '../img/cs1.svg';
 import cs1_1 from '../img/cs1_1.svg';
-import cb2 from '../img/cb2.svg';
+import cb2 from '../img/cb2.svg';     
 import cs2 from '../img/cs2.svg';
 import cs2_1 from '../img/cs2_1.svg';
 import cb3 from '../img/cb3.svg';
