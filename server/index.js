@@ -294,7 +294,7 @@ app.get("/latestblogposts", async (req, res) => {
 });
 
 //GET API to list the latest 10 blog posts for each category (by category id)
-app.get("/latestblogposts/:categoryId", async (req, res) => {
+app.get("/latesttenblogposts/:categoryId", async (req, res) => {
   const { categoryId } = req.params;
 
   let connection;
@@ -531,6 +531,27 @@ app.delete("/blogcategories/:id", async (req, res) => {
     }
   }
 });
+
+//GET API to retrieve all blog categories
+app.get('/allblogcategories', async (req, res) => {
+  let connection;
+  try {
+    connection = await db.connect();
+
+    const result = await db.query`SELECT * FROM BlogCategories`;
+
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
 
 
 app.listen(5000, () => {
