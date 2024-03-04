@@ -6,16 +6,19 @@ import bannerImage from '../../img/blog/img_blog_cat_banner.jfif';
 import BlogPostPreview from '../blog/blogPostPreview';
 
 function BlogCategory() {
-    // State to store the list of blog categories
     const { id } = useParams();
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState([]);
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
+        const domain = window.location.hostname;
+
         const fetchCategoryData = async () => {
             try {
-                const response = await fetch('/blog/blogCategory.json');
+                // For sample data
+                //const response = await fetch('/blog/blogCategory.json');
+                const response = await fetch(`http://${domain}:5000/blogcategories`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch category data');
                 }
@@ -31,7 +34,9 @@ function BlogCategory() {
         
         const fetchPostData = async () => {
             try {
-                const response = await fetch('/blog/blogPost.json');
+                // For sample data
+                //const response = await fetch('/blog/blogPost.json');
+                const response = await fetch(`http://${domain}:5000/blogposts`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch post data');
                 }
@@ -63,7 +68,7 @@ function BlogCategory() {
             <div className="blog-category">
                 <Link to="/blog/category/1" className="category-link">Lifestyle</Link>
             </div>
-            <div className="blog-topic">
+            <div className="blog-featured-topic">
                 <h2>How alcohol is affecting your hormones and causing you depression</h2>
             </div>
             <div className="read-now">

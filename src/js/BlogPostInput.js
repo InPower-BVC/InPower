@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
+
 
 function BlogPostInput() {
   const [blogCategories, setBlogCategories] = useState([]);
@@ -7,7 +10,15 @@ function BlogPostInput() {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  // const modules = {
+  //   toolbar: [
+  //     ['bold', 'italic', 'underline','strike', 'blockquote'],
+  //     [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+  //     ['link', 'image'],
+  //     ['clean']
+  //     [{ 'align': ['center'] }]
+  //   ],
+  // }
   // Fetch blog categories
   useEffect(() => {
     fetchBlogCategories();
@@ -15,7 +26,7 @@ function BlogPostInput() {
 
   const fetchBlogCategories = async () => {
     try {
-      const response = await fetch("http://localhost:5000/blogcategories");
+      const response = await fetch("http://localhost:5000/allblogcategories");
       if (!response.ok) {
         throw new Error("Failed to fetch blog categories");
       }
@@ -92,7 +103,7 @@ function BlogPostInput() {
   return (
     <div>
       <h2>Create New Blog Post</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: '0 auto', padding: '20px', backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
+      <form onSubmit={handleSubmit} style={{ width: '70%', margin: '0 auto', padding: '20px', backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="category" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Category:</label>
           <select id="category" onChange={handleCategorySelect} required style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}>
@@ -117,20 +128,21 @@ function BlogPostInput() {
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
-          <textarea
-            id="content"
+
+         <ReactQuill
+            theme='snow'
             value={content}
-            onChange={handleContentChange}
-            required
-            style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', height: '200px' }} // Adjust the height here
-          ></textarea>
+            onChange={setContent}
+            style={{minHeight: '300px'}}
+            // modules={modules}
+          />
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="image" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Upload Image:</label>
           <input
             type="file"
             id="image"
-            accept="image/*"
+            accept="image/png"
             onChange={handleImageUpload}
             required
             style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}

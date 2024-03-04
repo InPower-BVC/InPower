@@ -13,10 +13,6 @@ const saltRounds = 10; // You can adjust the number of salt rounds as needed
 
 
 
-
-
-
-
 // Configure Multer storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -59,7 +55,17 @@ app.get("/blogposts", async (req, res) => {
     connection = await db.connect();
 
     // Execute the query
-    const result = await db.query`SELECT * FROM BlogPosts`;
+    const result = await db.query
+      `SELECT 
+        blogPostId,
+        blogCategoryId,
+        blogCategoryName,
+        topic,
+        content,
+        createdDate,
+        blogCategoryPath,
+        profileImgPath
+      FROM BlogPosts`;
 
     // Send the result as JSON response
     res.json(result.recordset);
@@ -68,7 +74,7 @@ app.get("/blogposts", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   } finally {
     // Close the connection pool only if the connection was successfully established
-    if (connection) {
+    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
       connection.close();
     }
   }
@@ -114,10 +120,11 @@ app.get("/blogpostsbytopic", async (req, res) => {
       FROM BlogPosts
       WHERE topic = ${topic};
     `;
+    console.log(result.recordset[0])
     if(result.recordset[0].profileImg){
       result.recordset[0].profileImg = `data:image/png;base64,${result.recordset[0].profileImg.toString('base64')}`;
     }
-    console.log(result.recordset[0].profileImg)
+    
     // Send the result as a JSON response
     res.json(result.recordset[0]); // Assuming there's only one post per topic
   } catch (error) {
@@ -294,7 +301,7 @@ app.get("/latestblogposts", async (req, res) => {
 });
 
 //GET API to list the latest 10 blog posts for each category (by category id)
-app.get("/latestblogposts/:categoryId", async (req, res) => {
+app.get("/latesttenblogposts/:categoryId", async (req, res) => {
   const { categoryId } = req.params;
 
   let connection;
@@ -332,26 +339,13 @@ app.get("/blogcategories", async (req, res) => {
 
     // Use a subquery to filter categories with at least one associated blog post
     const result = await db.query`
-      SELECT
+      SELECT DISTINCT
         bc.blogCategoryId,
         bc.blogCategoryName,
-        bc.blogCategoryPath,
-        bp.blogPostId,
-        bp.topic,
-        bp.content,
-        bp.createdDate
+        bc.blogCategoryPath
       FROM BlogCategories bc
-      LEFT JOIN (
-        SELECT
-          blogCategoryId,
-          blogPostId,
-          topic,
-          content,
-          createdDate,
-          ROW_NUMBER() OVER (PARTITION BY blogCategoryId ORDER BY createdDate DESC) AS row_num
-        FROM BlogPosts
-      ) bp ON bc.blogCategoryId = bp.blogCategoryId AND bp.row_num = 1
-      WHERE bc.blogCategoryId IN (SELECT DISTINCT blogCategoryId FROM BlogPosts);
+      LEFT JOIN BlogPosts bp ON bc.blogCategoryId = bp.blogCategoryId
+      WHERE bp.blogCategoryId IS NOT NULL;
     `;
 
     res.json(result.recordset);
@@ -359,7 +353,7 @@ app.get("/blogcategories", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   } finally {
-    if (connection) {
+    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
       connection.close();
     }
   }
@@ -432,7 +426,15 @@ app.get("/blogposts/:postId", async (req, res) => {
     connection = await db.connect();
 
     const result = await db.query`
-      SELECT *
+      SELECT 
+        blogPostId,
+        blogCategoryId,
+        blogCategoryName,
+        topic,
+        content,
+        createdDate,
+        blogCategoryPath,
+        profileImgPath
       FROM BlogPosts
       WHERE blogPostId = ${postId};
     `;
@@ -448,7 +450,7 @@ app.get("/blogposts/:postId", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   } finally {
-    if (connection) {
+    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
       connection.close();
     }
   }
@@ -531,6 +533,74 @@ app.delete("/blogcategories/:id", async (req, res) => {
     }
   }
 });
+
+//GET API to retrieve all blog categories
+app.get('/allblogcategories', async (req, res) => {
+  let connection;
+  try {
+    connection = await db.connect();
+
+    const result = await db.query`SELECT * FROM BlogCategories`;
+
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+//Admin Login API
+app.post('/admin/login', async (req, res) => {
+  let connection;
+  try {
+    const { username, password } = req.body;
+
+    console.log('Login attempt for username:', username); // Log the username attempting to log in
+
+    // Connect to the database
+    connection = await db.connect();
+
+    // Check if the username exists in the database
+    const userResult = await db.query`SELECT * FROM AdminCredentials WHERE username = ${username}`;
+    console.log(userResult)
+    const user = userResult.recordset[0];
+
+    if (!user) {
+      console.log('User not found:', username);
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // Check if the provided password matches the stored hashed password
+    // const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (password !== user.password) {
+      console.log('Incorrect password for user:', username);
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // You can include additional checks or data in the response if needed
+    console.log('Login successful for user:', username);
+    return res.json({ message: 'Login successful' });
+  } catch (error) {
+    console.error('Error during login:', error);
+
+    // Return the detailed error message in the response for debugging
+    return res.status(500).json({ error: error.message });
+  } finally {
+    // Close the database connection in the finally block
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
 
 
 app.listen(5000, () => {

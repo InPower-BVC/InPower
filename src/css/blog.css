@@ -1,3 +1,17 @@
+  @font-face {
+    font-family: Gilroy-Regular;
+    src: url('../fonts/Gilroy-Medium.ttf');
+  } 
+
+  @font-face {
+    font-family: AbrilFatface-Regular;
+    src: url('../fonts/AbrilFatface-Regular.ttf');
+  } 
+  
+  * {
+    font-family: Gilroy-Regular;
+  }
+  
   /* For the blog landing page */
   .banner-container {
     position: relative;
@@ -48,11 +62,11 @@
     color: #333;
   }
   
-  .blog-topic {
+  .blog-featured-topic {
     margin-top: 10px;
   }
   
-  .blog-topic h2 {
+  .blog-featured-topic h2 {
     font-size: 35px;
     font-weight: bold;
     margin: 0;
@@ -82,7 +96,7 @@
   .blog-menu-item {
     color: #333;
     text-decoration: none;
-    font-family: 'Abril Fatface', sans-serif;
+    font-family: AbrilFatface-Regular;
     font-size: 35px;
     font-weight: 400;
     line-height: 47px;
@@ -105,7 +119,7 @@
   .category-header-2 {
     color: #E45E5E;
     font-size: 80px;
-    font-family: 'Abril Fatface', sans-serif;
+    font-family: AbrilFatface-Regular;
     text-align: left;
     line-height: 108px;
     padding: 0 100px;
@@ -216,6 +230,7 @@
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
+    font-family: AbrilFatface-Regular;
   }
   
   .topic-link {
@@ -234,4 +249,25 @@
     width: 60vw;
     min-width: 200px;
     padding: 50px;
+  }
+
+  .blog-post-header {
+    text-align: left;
+  }
+
+  .blog-post-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  .blog-post-content {
+    text-align: justify;
+    line-height: 200%;
+    font-size: x-large;
+  }
+
+  .blog-post-spacer {
+    padding: 10px;
   }
