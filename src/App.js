@@ -18,7 +18,7 @@ import Submitted from "./js/Submitted.js";
 import BlogPostInput from "./js/BlogPostInput.js";
 import BlogPostDelete from "./js/blogPostDelete.js";
 import Admin from "./js/admin-login.js";
-import magazineInformation from "./js/MagazineInformation.js"
+import MagazineInformation from "./js/MagazineInformation.js"
 
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/submitted" element={<Submitted />} />
           <Route path="/Admin" element={<Admin />} />
-          <Route path="/magazineinfo" element={<magazineInformation />} />
+          <Route path="/MagazineInformation" element={<MagazineInformation />} />
         </Routes>
         <Footer />
         <ChatBotIcon />

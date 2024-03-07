@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ReactQuill from "react-quill"
-import 'react-quill/dist/quill.snow.css'
+// import ReactQuill from "react-quill"
+// import 'react-quill/dist/quill.snow.css'
 
 
 function BlogPostInput() {
@@ -128,14 +128,14 @@ function BlogPostInput() {
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
-
+{/* 
          <ReactQuill
             theme='snow'
             value={content}
             onChange={setContent}
             style={{minHeight: '300px'}}
             // modules={modules}
-          />
+          /> */}
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="image" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Upload Image:</label>
