@@ -17,8 +17,10 @@ import AboutUs from "./js/Aboutus.js";
 import Submitted from "./js/Submitted.js";
 import BlogPostInput from "./js/BlogPostInput.js";
 import BlogPostDelete from "./js/blogPostDelete.js";
+import ContentManagement from "./js/contentManagement.js";
 import Admin from "./js/admin-login.js";
 import MagazineInformation from "./js/MagazineInformation.js"
+
 
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
           <Route path="/blog/viewPost/:id" element={<BlogViewPost />} />
           <Route path="/blog/post" element={<BlogPostInput />} />
           <Route path="/blog/delete" element={<BlogPostDelete />} />
+          <Route path="/contentManagement" element={<ContentManagement />} />
           <Route path="/invite" element={<Invite />} />
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/aboutus" element={<AboutUs />} />

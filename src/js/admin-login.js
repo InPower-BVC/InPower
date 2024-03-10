@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/admin.css';
 import axios from 'axios'; 
 
@@ -62,7 +63,7 @@ function AdminLogin() {
         <button type="submit" className="admin-button">Login</button>
       </form>
       {/* Display message */}
-      {message && <p>{message}</p>}
+      {message && <p>{message} <Link to="/contentManagement">Go to Content Management</Link></p>}
     </div>
   );
 }
