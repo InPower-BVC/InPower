@@ -8,10 +8,8 @@ const db = require("./db"); // Adjust the path based on your project structure
 const bodyParser = require("body-parser");
 const app = express();
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10; // You can adjust the number of salt rounds as needed
-
-
 
 // Configure Multer storage
 const storage = multer.memoryStorage();
@@ -21,7 +19,6 @@ const upload = multer({ storage: storage });
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
-
 
 // Testing API
 app.get("/persons", async (req, res) => {
@@ -55,8 +52,7 @@ app.get("/blogposts", async (req, res) => {
     connection = await db.connect();
 
     // Execute the query
-    const result = await db.query
-      `SELECT 
+    const result = await db.query`SELECT 
         blogPostId,
         blogCategoryId,
         blogCategoryName,
@@ -74,7 +70,12 @@ app.get("/blogposts", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   } finally {
     // Close the connection pool only if the connection was successfully established
-    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
+    if (
+      connection &&
+      connection._connecting === false &&
+      connection._pool &&
+      connection._pool._pendingRequests.length === 0
+    ) {
       connection.close();
     }
   }
@@ -120,11 +121,13 @@ app.get("/blogpostsbytopic", async (req, res) => {
       FROM BlogPosts
       WHERE topic = ${topic};
     `;
-    console.log(result.recordset[0])
-    if(result.recordset[0].profileImg){
-      result.recordset[0].profileImg = `data:image/png;base64,${result.recordset[0].profileImg.toString('base64')}`;
+    console.log(result.recordset[0]);
+    if (result.recordset[0].profileImg) {
+      result.recordset[0].profileImg = `data:image/png;base64,${result.recordset[0].profileImg.toString(
+        "base64"
+      )}`;
     }
-    
+
     // Send the result as a JSON response
     res.json(result.recordset[0]); // Assuming there's only one post per topic
   } catch (error) {
@@ -169,8 +172,6 @@ app.post("/blogposts", upload.single("file"), async (req, res) => {
     }
   }
 });
-
-
 
 //PUT API for modifying the blog post
 app.put("/blogposts/:blogPostId", upload.single("file"), async (req, res) => {
@@ -353,7 +354,12 @@ app.get("/blogcategories", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   } finally {
-    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
+    if (
+      connection &&
+      connection._connecting === false &&
+      connection._pool &&
+      connection._pool._pendingRequests.length === 0
+    ) {
       connection.close();
     }
   }
@@ -450,7 +456,12 @@ app.get("/blogposts/:postId", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   } finally {
-    if (connection && connection._connecting === false && connection._pool && connection._pool._pendingRequests.length === 0) {
+    if (
+      connection &&
+      connection._connecting === false &&
+      connection._pool &&
+      connection._pool._pendingRequests.length === 0
+    ) {
       connection.close();
     }
   }
@@ -535,7 +546,7 @@ app.delete("/blogcategories/:id", async (req, res) => {
 });
 
 //GET API to retrieve all blog categories
-app.get('/allblogcategories', async (req, res) => {
+app.get("/allblogcategories", async (req, res) => {
   let connection;
   try {
     connection = await db.connect();
@@ -544,8 +555,8 @@ app.get('/allblogcategories', async (req, res) => {
 
     res.json(result.recordset);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
   } finally {
     if (connection) {
       connection.close();
@@ -553,41 +564,43 @@ app.get('/allblogcategories', async (req, res) => {
   }
 });
 
-
 //Admin Login API
-app.post('/admin/login', async (req, res) => {
+app.post("/admin/login", async (req, res) => {
   let connection;
   try {
     const { username, password } = req.body;
 
-    console.log('Login attempt for username:', username); // Log the username attempting to log in
+    console.log("Login attempt for username:", username); // Log the username attempting to log in
 
     // Connect to the database
     connection = await db.connect();
 
     // Check if the username exists in the database
-    const userResult = await db.query`SELECT * FROM AdminCredentials WHERE username = ${username}`;
-    console.log(userResult)
+    const userResult =
+      await db.query`SELECT * FROM AdminCredentials WHERE username = ${username}`;
+    console.log(userResult);
     const user = userResult.recordset[0];
 
     if (!user) {
-      console.log('User not found:', username);
-      return res.status(401).json({ message: 'Invalid username or password' });
+      console.log("User not found:", username);
+      return res
+        .status(401)
+        .json({ result: false, message: "Invalid username or password" });
     }
 
     // Check if the provided password matches the stored hashed password
     // const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (password !== user.password) {
-      console.log('Incorrect password for user:', username);
-      return res.status(401).json({ message: 'Invalid username or password' });
+      console.log("Incorrect password for user:", username);
+      return res.status(401).json({ message: "Invalid username or password" });
     }
 
     // You can include additional checks or data in the response if needed
-    console.log('Login successful for user:', username);
-    return res.json({ message: 'Login successful' });
+    console.log("Login successful for user:", username);
+    return res.json({ result: true, message: "Login successful" });
   } catch (error) {
-    console.error('Error during login:', error);
+    console.error("Error during login:", error);
 
     // Return the detailed error message in the response for debugging
     return res.status(500).json({ error: error.message });
@@ -598,10 +611,6 @@ app.post('/admin/login', async (req, res) => {
     }
   }
 });
-
-
-
-
 
 app.listen(5000, () => {
   console.log("Server is running on port 5000");

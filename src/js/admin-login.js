@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate  } from 'react-router-dom';
 import '../css/admin.css';
 import axios from 'axios'; 
 
-function AdminLogin() {
+function AdminLogin({ history }) {
   const [message, setMessage] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate= useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -22,12 +23,17 @@ function AdminLogin() {
       // Make a POST request to the /admin/login endpoint with the username and password
       const response = await axios.post('http://localhost:5000/admin/login', { username, password });
 
-      // If login is successful, you can redirect the user to a dashboard or perform other actions
-      console.log('Login successful:', response.data);
-      setMessage('Login successful');
+      // If login is successful, update message state
+      console.log('Login successful:', response.data.result);
+      if(response.data.result){
+        setMessage('Login successful');
+      }
+      
+      // Redirect to contentManagement.js
+      navigate('/contentManagement');
     } catch (error) {
-      // If there's an error, you can handle it here
-      console.error('Login failed:', error.response.data);
+      // If there's an error, update message state
+      console.error('Login failed:', error.data.response.message);
       setMessage('Login failed');
     } finally {
       // Reset the form after submission
