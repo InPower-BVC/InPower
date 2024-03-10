@@ -1,0 +1,80 @@
+/* MagazineInformation.css */
+*{
+    margin:0;
+    padding:0;
+}
+
+.magazine-container {
+    margin: 80px auto;
+    margin-bottom: 60px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background: linear-gradient(to right, #ca4a51, #ff6b6b);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: rgb(255, 246, 246); /* Headline color */
+    padding: 20px;
+  }
+  
+  .card-header h2 {
+    margin: 0;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-footer {
+    background: linear-gradient(to right, #ca4a51, #ff6b6b);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: white;
+    padding: 20px;
+  }
+  
+  .pagination {
+    margin: 0;
+  }
+  
+  .pagination li {
+    list-style: none;
+    display: inline;
+    margin: 0 5px;
+  }
+  
+  .pagination li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .pagination li.active a {
+    font-weight: bold;
+  }
+  
+  .styled-paragraph {
+    letter-spacing: 1px;
+    line-height: 1.6;
+   padding: 0px 40px 0px 40px;
+  }
+  
+  .styled-letter {
+    color: #ca4a51;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  
+  
+.card-img-top{
+    width: 43%;
+    height:18%;
+    margin: 40px 0px 12px 0px;
+}
