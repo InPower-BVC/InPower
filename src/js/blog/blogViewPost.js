@@ -9,7 +9,6 @@ function BlogViewPost() {
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState(null);
     const [post, setPost] = useState(null);
-    const [postContent, setPostContent] = useState('');
 
     useEffect(() => {
         const domain = window.location.hostname;
@@ -82,7 +81,7 @@ function BlogViewPost() {
                 <div className="blog-post-spacer"></div>
                 <div><img className="blog-post-image" src={`../../img/blog/${post.profileImgPath}`} alt="Post" /></div>
                 <div className="blog-post-spacer"></div>
-                <p className="blog-post-content">{post.content}</p>
+                <p className="blog-post-content" dangerouslySetInnerHTML={{ __html: post.content }}>{/*post.content*/}</p>
             </div>
         </>
     );
