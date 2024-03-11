@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import '../../css/blog.css';
 import BlogMenuBar from '../blog/blogMenuBar';
-import bannerImage from '../../img/blog/img_blog_cat_banner.jfif';
+//import bannerImage from '../../img/blog/img_blog_cat_banner.jfif';
 import BlogPostPreview from '../blog/blogPostPreview';
 
 function BlogCategory() {
@@ -10,6 +10,7 @@ function BlogCategory() {
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState([]);
     const [posts, setPosts] = useState([]);
+    const [featuredPost, setFeaturedPost] = useState(null);
 
     useEffect(() => {
         const domain = window.location.hostname;
@@ -48,7 +49,26 @@ function BlogCategory() {
             }
         };
         fetchPostData();
+
+        const fetchFeaturedPostData = async() => {
+            try {
+                const response = await fetch(`http://${domain}:5000/latestfeaturedblogpost/${parseInt(id)}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch featured post data');
+                }
+                const data = await response.json();
+                setFeaturedPost(data);
+            } catch (error) {
+                console.error('Error fetching featured post data:', error);
+            }
+        }
+        fetchFeaturedPostData();
     }, [id, categories]);
+
+    // Render the component only when post and category are available
+    if (!posts || !category || !featuredPost) {
+        return null;
+    }
 
     const renderPostPreviews = () => {
         return posts.map(post => (
@@ -62,17 +82,17 @@ function BlogCategory() {
     <div>
         <BlogMenuBar categories={categories} activeCategoryId={parseInt(id)} />
         <div className="banner-container">
-        <div><img src={bannerImage} alt="Banner" className="banner-img" /></div>
+        <div><img src={`../../img/blog/${featuredPost.profileImgPath}`/*bannerImage*/} alt="Banner" className="banner-img" /></div>
         <div className="banner-overlay">
             <div className="overlay-content">
             <div className="blog-category">
-                <Link to="/blog/category/1" className="category-link">Lifestyle</Link>
+                <Link to={`/blog/category/${featuredPost.blogCategoryId}`} className="category-link">{category.blogCategoryName}</Link>
             </div>
             <div className="blog-featured-topic">
-                <h2>How alcohol is affecting your hormones and causing you depression</h2>
+                <h2>{featuredPost.topic}</h2>
             </div>
             <div className="read-now">
-                <Link to="/viewPost/1" className="read-now-link">Read Now</Link>
+                <Link to={`/blog/viewPost/${featuredPost.blogPostId}`} className="read-now-link">Read Now</Link>
             </div>
             </div>
         </div>

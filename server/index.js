@@ -365,8 +365,41 @@ app.get("/blogcategories", async (req, res) => {
   }
 });
 
+//Get the latest “Featured” blog post
+app.get("/latestfeaturedblogpost", async (req, res) => {
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Execute the query to get the latest 1 blog post
+    const result = await db.query`
+      SELECT TOP 1 *
+      FROM BlogPosts
+      WHERE isFeatured = 'true'
+      ORDER BY createdDate DESC;
+    `;
+
+    // Send the result as a JSON response
+    res.json(result.recordset[0]);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  } finally {
+    // Close the connection pool only if the connection was successfully established
+    if (
+      connection &&
+      connection._connecting === false &&
+      connection._pool &&
+      connection._pool._pendingRequests.length === 0
+      ) {
+      connection.close();
+    }
+  }
+});
+
 //Get the latest “Featured” blog post by category id
-app.get("/latestblogposts/:categoryId", async (req, res) => {
+app.get("/latestfeaturedblogpost/:categoryId", async (req, res) => {
   const { categoryId } = req.params;
 
   let connection;
@@ -379,17 +412,23 @@ app.get("/latestblogposts/:categoryId", async (req, res) => {
       SELECT TOP 1 *
       FROM BlogPosts
       WHERE blogCategoryId = ${categoryId}
+      AND isFeatured = 'true'
       ORDER BY createdDate DESC;
     `;
 
     // Send the result as a JSON response
-    res.json(result.recordset);
+    res.json(result.recordset[0]);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   } finally {
     // Close the connection pool only if the connection was successfully established
-    if (connection) {
+    if (
+      connection &&
+      connection._connecting === false &&
+      connection._pool &&
+      connection._pool._pendingRequests.length === 0
+      ) {
       connection.close();
     }
   }
