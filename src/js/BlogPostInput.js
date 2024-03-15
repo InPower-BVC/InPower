@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import ReactQuill from "react-quill"
-// import 'react-quill/dist/quill.snow.css'
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
 
 
 function BlogPostInput() {
@@ -10,16 +10,7 @@ function BlogPostInput() {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const modules = {
-  //   toolbar: [
-  //     ['bold', 'italic', 'underline','strike', 'blockquote'],
-  //     [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-  //     ['link', 'image'],
-  //     ['clean']
-  //     [{ 'align': ['center'] }]
-  //   ],
-  // }
-  // Fetch blog categories
+
   useEffect(() => {
     fetchBlogCategories();
   }, []);
@@ -52,9 +43,9 @@ function BlogPostInput() {
   };
 
   // Handle content input change
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
+  //const handleContentChange = (e) => {
+  //  setContent(e.target.value);
+  //};
 
   // Handle image upload
   const handleImageUpload = (e) => {
@@ -100,6 +91,10 @@ function BlogPostInput() {
     }
   };
 
+  useEffect(()=>{
+    console.log(content)
+  },[content])
+
   return (
     <div>
       <h2>Create New Blog Post</h2>
@@ -128,14 +123,15 @@ function BlogPostInput() {
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
-{/* 
-         <ReactQuill
-            theme='snow'
-            value={content}
-            onChange={setContent}
-            style={{minHeight: '300px'}}
-            // modules={modules}
-          /> */}
+
+          <ReactQuill
+          theme='snow'
+          value={content}
+          onChange={setContent}
+          required
+          style={{ flex: '1', borderRadius: '4px', minHeight: '150px',height:"100%" }} // Adjust the height here
+          />
+
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="image" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Upload Image:</label>

@@ -19,7 +19,7 @@ import MagazineInformation from './js/MagazineInformation';
 import Footer from './js/footer';
 import Navbar from './js/navbar';
 import ChatBotIcon from './js/chatbot';
-
+import "./App.css"
 function App() {
   return (
     <Router>
