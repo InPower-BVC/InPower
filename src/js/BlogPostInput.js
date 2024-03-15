@@ -9,6 +9,7 @@ function BlogPostInput() {
   const [topic, setTopic] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
+  const [isFeatured, setIsFeatured] = useState(false); // State for the tick box
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -53,43 +54,58 @@ function BlogPostInput() {
     setImage(file);
   };
 
+  // Handle checkbox change for featured option
+const handleIsFeaturedChange = (e) => {
+  setIsFeatured(e.target.checked);
+};
+
+
   // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const formData = new FormData();
-      formData.append("blogCategoryId", selectedCategory.blogCategoryId);
-      formData.append("blogCategoryName", selectedCategory.blogCategoryName);
-      formData.append("topic", topic);
-      formData.append("content", content);
-      formData.append("createdDate", new Date().toISOString());
-      formData.append("file", image);
+  try {
+    const formData = new FormData();
+    formData.append("blogCategoryId", selectedCategory.blogCategoryId);
+    formData.append("blogCategoryName", selectedCategory.blogCategoryName);
+    formData.append("topic", topic);
+    formData.append("content", content);
+    formData.append("createdDate", new Date().toISOString());
+    formData.append("file", image);
 
-      // Send formData to server using fetch
-      const response = await fetch("http://localhost:5000/blogposts", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit blog post");
-      }
-
-      // Clear form fields after successful submission
-      setSelectedCategory(null);
-      setTopic("");
-      setContent("");
-      setImage(null);
-
-    } catch (error) {
-      console.error("Error submitting blog post:", error);
-      // Handle error, show error message to the user, etc.
-    } finally {
-      setLoading(false); 
+    // Append isFeatured to formData only if it's true
+    if (isFeatured) {
+      formData.append("isFeatured", "True");
     }
-  };
+
+    // Send formData to server using fetch
+    const response = await fetch("http://localhost:5000/blogposts", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to submit blog post");
+    }
+
+    // Reset the form after successful submission
+    e.target.reset();
+
+    // Reset state variables
+    setSelectedCategory(null);
+    setTopic("");
+    setContent("");
+    setImage(null);
+    setIsFeatured(false); 
+
+  } catch (error) {
+    console.error("Error submitting blog post:", error);
+    // Handle error, show error message to the user, etc.
+  } finally {
+    setLoading(false); 
+  }
+};
 
   useEffect(()=>{
     console.log(content)
@@ -143,6 +159,17 @@ function BlogPostInput() {
             required
             style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
           />
+        </div>
+        <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
+          <label htmlFor="isFeatured" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Feature:</label>
+          <input
+            type="checkbox"
+            id="isFeatured"
+            checked={isFeatured}
+            onChange={handleIsFeaturedChange}
+            style={{ marginRight: '10px' }}
+          />
+          <label htmlFor="isFeatured"> Yes / No </label>
         </div>
         {/* Loading spinner */}
         {loading && <div className="spinner"></div>}
