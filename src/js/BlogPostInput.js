@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import ReactQuill from "react-quill"
-import 'react-quill/dist/quill.snow.css'
-
+import { Link } from "react-router-dom";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 
 function BlogPostInput() {
   const [blogCategories, setBlogCategories] = useState([]);
@@ -43,9 +43,9 @@ function BlogPostInput() {
   };
 
   // Handle content input change
-  //const handleContentChange = (e) => {
-  //  setContent(e.target.value);
-  //};
+  const handleContentChange = (value) => {
+    setContent(value);
+  };
 
   // Handle image upload
   const handleImageUpload = (e) => {
@@ -93,7 +93,7 @@ function BlogPostInput() {
 
   useEffect(()=>{
     console.log(content)
-  },[content])
+  },[content]);
 
   return (
     <div>
@@ -125,11 +125,11 @@ function BlogPostInput() {
           <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
 
           <ReactQuill
-          theme='snow'
-          value={content}
-          onChange={setContent}
-          required
-          style={{ flex: '1', borderRadius: '4px', minHeight: '150px',height:"100%" }} // Adjust the height here
+            theme='snow'
+            value={content}
+            onChange={handleContentChange}
+            required
+            style={{ flex: '1', borderRadius: '4px', minHeight: '150px', height: "100%" }} // Adjust the height here
           />
 
         </div>
@@ -144,20 +144,17 @@ function BlogPostInput() {
             style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
           />
         </div>
-        {image && (
-          <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-            <img src={URL.createObjectURL(image)} alt="Uploaded" style={{ maxWidth: '100%' }} />
-          </div>
-        )}
         {/* Loading spinner */}
         {loading && <div className="spinner"></div>}
-        <button type="submit" style={{ backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px 20px', cursor: 'pointer' }}>Submit</button>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <button type="submit" style={{ backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px 20px', cursor: 'pointer' }}>Submit</button>
+          <Link to="/contentManagement">
+            <button style={{ backgroundColor: '#6c757d', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px 20px', cursor: 'pointer' }}>Return</button>
+          </Link>
+        </div>
       </form>
     </div>
   );
-  
-  
-  
 }
 
 export default BlogPostInput;

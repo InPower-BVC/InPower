@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 function BlogPostDelete() {
   const [categories, setCategories] = useState([]);
@@ -8,18 +9,6 @@ function BlogPostDelete() {
   const [posts, setPosts] = useState([]);
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
-
-  const convertBufferToBase64 = (buffer) => {
-    if (!buffer || buffer.length === 0) return '';
-
-    // Convert buffer to base64 string
-    let binary = '';
-    const bytes = new Uint8Array(buffer);
-    for (let i = 0; i < bytes.byteLength; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return `data:image/jpeg;base64,${window.btoa(binary)}`;
-  };
 
   useEffect(() => {
     fetchCategories();
@@ -82,14 +71,6 @@ function BlogPostDelete() {
       })
       .catch(error => console.error('Error fetching post:', error));
   };
-  
-  
-
-  const handlePostChange = (e) => {
-    const postId = e.target.value;
-    console.log('Selected Post:', postId);
-    setSelectedPost(postId);
-  };
 
   const handleDelete = () => {
     console.log(selectedPost)
@@ -139,22 +120,24 @@ function BlogPostDelete() {
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label htmlFor="content" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Content:</label>
-          <div dangerouslySetInnerHTML={{ __html: content }} style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '200px', maxHeight: '400px', overflowY: 'auto', backgroundColor: '#f9f9f9', padding: '20px', lineHeight: '1.5' }}></div>
+          <div dangerouslySetInnerHTML={{ __html: content }} style={{ flex: '1', border: '1px solid #ccc', borderRadius: '4px', minHeight: '200px', maxHeight: '400px', overflowY: 'auto', backgroundColor: '#f9f9f9', padding: '20px', lineHeight: '1.5' }}></div>
         </div>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-        <label htmlFor="image" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Image:</label>
-        {image && (
-        <img src={image} alt="Image" style={{ maxWidth: '100px', marginRight: '20px' }} />
+          <label htmlFor="image" style={{ flex: '0 0 120px', fontWeight: 'bold', marginRight: '20px' }}>Image:</label>
+          {image && (
+           <img src={image} alt="" style={{ maxWidth: '100px', marginRight: '20px' }} />
           )}
-       {!image && <span>No image available</span>}
-</div>
-
-        <button type="button" onClick={handleDelete} style={{ backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px 20px', cursor: 'pointer', marginLeft: '120px' }}>Delete Post</button>
+          {!image && <span>No image available</span>}
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <button type="button" onClick={handleDelete} style={{ backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px 20px', cursor: 'pointer' }}>Delete Post</button>
+          <Link to="/contentManagement">
+            <button style={{ backgroundColor: '#6c757d', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px 20px', cursor: 'pointer' }}>Return</button>
+          </Link>
+        </div>
       </form>
     </div>
   );
-  
-  
 }
 
 export default BlogPostDelete;
