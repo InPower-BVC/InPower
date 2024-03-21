@@ -98,7 +98,7 @@ function Blog() {
                     <div className="blog-post-list-spacer"></div>
                     <div className="category-header">
                       <h2>{category.blogCategoryName}</h2>
-                      <Link to={`/blog/category/${category.blogCategoryId}`} className="view-more-link">View More</Link>
+                      <Link to={`/blog/category/${category.blogCategoryId}`} className="view-more-link">view more</Link>
                     </div>
                     <BlogPostListByCat posts={postsForCategory} />
                     </div>

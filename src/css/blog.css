@@ -1,6 +1,16 @@
   @font-face {
-    font-family: Gilroy-Regular;
+    font-family: Gilroy-Medium;
     src: url('../fonts/Gilroy-Medium.ttf');
+  } 
+
+  @font-face {
+    font-family: Gilroy-Bold;
+    src: url('../fonts/Gilroy-Bold.ttf');
+  } 
+
+  @font-face {
+    font-family: Gilroy-Light;
+    src: url('../fonts/Gilroy-Light.ttf');
   } 
 
   @font-face {
@@ -9,7 +19,7 @@
   } 
   
   * {
-    font-family: Gilroy-Regular;
+    font-family: Gilroy-Medium;
   }
   
   /* For the blog landing page */
@@ -21,11 +31,18 @@
     position: absolute;
     top: 30px;
     left: 0px;
+    width: 219px;
+    height: 50px;
     background-color: #E45E5E;
     color: white;
     font-weight: bold;
-    padding: 10px 30px;
+    padding: 10px 43px;
     border-radius: 4px;
+    font-family: AbrilFatface-Regular;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 33px;
+    opacity: 0.95;
   }
   
   .banner-img {
@@ -41,7 +58,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 50%;
-    max-width: 600px;
+    max-width: 830px;
     /*height: 40%;
     max-height: 600px;*/
     background-color: rgba(255, 255, 255, 0.8);
@@ -49,7 +66,7 @@
   }
   
   .overlay-content {
-    padding: 20px;
+    padding: 20px 40px;
   }
   
   .blog-category {
@@ -60,6 +77,11 @@
   .category-link {
     text-decoration: underline;
     color: #333;
+    font-family: Gilroy-Medium;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0px;
   }
   
   .blog-featured-topic {
@@ -67,10 +89,12 @@
   }
   
   .blog-featured-topic h2 {
-    font-size: 35px;
-    font-weight: bold;
     margin: 0;
     text-align: left;
+    font-family: AbrilFatface-Regular;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 54px;
   }
   
   .read-now {
@@ -81,6 +105,10 @@
     text-decoration: none;
     color: #E45E5E;
     font-weight: bold;
+    font-family: AbrilFatface-Regular;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 33px;
   }
 
 
@@ -90,7 +118,7 @@
     justify-content: center;
     gap: 20px;
     background-color: #f0f0f0;
-    padding: 10px;
+    padding: 50px;
   }
   
   .blog-menu-item {
@@ -154,7 +182,7 @@
   
   .blog-post-list {
     display: flex;
-    gap: 100px;
+    gap: 25px;
   }
   
   .scroll-button {
@@ -184,10 +212,21 @@
     margin-bottom: 10px;
     padding: 0 100px;
   }
+
+  .category-header h2 {
+    font-family: Gilroy-Bold;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 50px;
+  }
   
   .view-more-link {
     color: #333;
     text-decoration: none;
+    font-family: Gilroy-Bold;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
   }
   
   .view-more-link:hover {
@@ -204,8 +243,8 @@
   }
   
   .thumbnail-container {
-    width: 250px;
-    height: 300px;
+    width: 400px;
+    height: 532px;
     overflow: hidden;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -216,31 +255,43 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .blog-post-preview-spacer {
+    padding: 20px;
+  }
   
   .post-info {
     text-align: left;
-    width: 250px;
+    width: 400px;
   }
   
-  .blog-category {
+  /*.blog-category {
     font-size: 14px;
-  }
+  }*/
   
   .blog-topic {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
     font-family: AbrilFatface-Regular;
+    padding: 5px 0;
   }
   
   .topic-link {
     text-decoration: none;
     color: #333;
+    font-family: AbrilFatface-Regular;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 31px;
   }
   
   .created-date {
-    font-size: 12px;
     color: #666;
+    font-family: Gilroy-Light;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
   }
   
   /* For blog post content container */
@@ -253,6 +304,10 @@
 
   .blog-post-header {
     text-align: left;
+    font-family: AbrilFatface-Regular;
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 54px;
   }
 
   .blog-post-image {
