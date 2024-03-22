@@ -40,7 +40,7 @@ function Navbar() {
 </button>
 
 
-      <button className={`join-button ${menuOpen ? 'open' : ''}`}><Link to="/invite">Join</Link></button>
+      
       
       
 
