@@ -19,13 +19,12 @@
 }
 
 .logo {
-  margin-left: -45em;
+  margin-left: 0em;
   display: flex;
   align-items: center;
-  font-size: 30px; /* Adjust the font size as needed */
+  font-size: 51px;
   color: aliceblue;
 }
-
 
 
 
@@ -85,7 +84,8 @@ a:hover {
   color: rgb(34, 30, 30);
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  margin-right: -100em; 
+  margin-right: -1310px; 
+  margin-top:-29px;
 }
 
 .join-button:hover {
