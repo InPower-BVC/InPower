@@ -19,6 +19,7 @@ const BlogPostPreview = ({ post }) => {
         <div className="thumbnail-container">
         <img src={`../../img/blog/${post.profileImgPath}`} alt="Thumbnail" className="thumbnail" />
         </div>
+        <div className="blog-post-preview-spacer"></div>
         <div className="post-info">
             <div className="blog-category">
                 <Link to={`/blog/category/${post.blogCategoryId}`} className="category-link">{category}</Link>

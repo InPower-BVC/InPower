@@ -9,10 +9,11 @@ import logo1 from "../img/logo1.png";
 import logo2 from "../img/logo2.png";
 import logo3 from "../img/logo3.png";
 import logo4 from "../img/logo4.png";
+import image1 from "../img/landing2.jpeg";
 function Landing() {
    return (
     <div className="container-new">
-
+      <div className='first_head'>
       <div className="hero-content-new">
          <div className="hero-text-new">
            <h1 className="typewriter-new">
@@ -29,12 +30,14 @@ function Landing() {
            <img src={main} alt="Main Image" className="hero-img-new" />
          </div>
        </div>
+       </div>
        <div className='summary'>
         <h2>At InPower, we believe in the transformative power of connection, healing, and empowerment. Our platform provides a safe and inclusive space exclusively designed for women and nonbinary individuals to come together, support each other, and thrive.</h2>
       
       </div>
 
       <div className='features'>
+      <img src={image1} alt="Image1" className="custom-image" />
         <h2>What We Offer:</h2> 
 
         <div class="grid-container">
@@ -43,6 +46,7 @@ function Landing() {
 
          
           <div class="content">
+
           <img src={logo1} alt="logo 1" className="circle-img" />
           <h3>Community Support</h3>
           Connect with like-minded individuals who understand and support you on your journey. Share your experiences, stories, and struggles in a supportive and nonjudgmental environment.

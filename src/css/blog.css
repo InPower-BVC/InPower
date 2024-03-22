@@ -1,6 +1,16 @@
   @font-face {
-    font-family: Gilroy-Regular;
+    font-family: Gilroy-Medium;
     src: url('../fonts/Gilroy-Medium.ttf');
+  } 
+
+  @font-face {
+    font-family: Gilroy-Bold;
+    src: url('../fonts/Gilroy-Bold.ttf');
+  } 
+
+  @font-face {
+    font-family: Gilroy-Light;
+    src: url('../fonts/Gilroy-Light.ttf');
   } 
 
   @font-face {
@@ -9,7 +19,7 @@
   } 
   
   * {
-    font-family: Gilroy-Regular;
+    font-family: Gilroy-Medium;
   }
   
   /* For the blog landing page */
@@ -21,11 +31,18 @@
     position: absolute;
     top: 30px;
     left: 0px;
+    width: 219px;
+    height: 50px;
     background-color: #E45E5E;
     color: white;
     font-weight: bold;
-    padding: 10px 30px;
+    padding: 10px 43px;
     border-radius: 4px;
+    font-family: AbrilFatface-Regular;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 33px;
+    opacity: 0.95;
   }
   
   .banner-img {
@@ -41,15 +58,13 @@
     left: 50%;
     transform: translateX(-50%);
     width: 50%;
-    max-width: 600px;
-    /*height: 40%;
-    max-height: 600px;*/
+    max-width: 830px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px 10px 0 0;
   }
   
   .overlay-content {
-    padding: 20px;
+    padding: 20px 40px;
   }
   
   .blog-category {
@@ -60,6 +75,11 @@
   .category-link {
     text-decoration: underline;
     color: #333;
+    font-family: Gilroy-Medium;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0px;
   }
   
   .blog-featured-topic {
@@ -67,10 +87,12 @@
   }
   
   .blog-featured-topic h2 {
-    font-size: 35px;
-    font-weight: bold;
     margin: 0;
     text-align: left;
+    font-family: AbrilFatface-Regular;
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 54px;
   }
   
   .read-now {
@@ -81,16 +103,21 @@
     text-decoration: none;
     color: #E45E5E;
     font-weight: bold;
+    font-family: AbrilFatface-Regular;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 33px;
   }
 
 
   /* For the blog menu bar */
   .blog-menu-bar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     background-color: #f0f0f0;
-    padding: 10px;
+    padding: 50px 0;
   }
   
   .blog-menu-item {
@@ -101,9 +128,13 @@
     font-weight: 400;
     line-height: 47px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: center;
     padding: 8px 12px;
     border-radius: 4px;
+    flex: 1 0 auto;
+    max-width: 200px;
+    margin-top: auto;
+    margin-bottom: auto;
   }
   
   .blog-menu-item:hover {
@@ -128,7 +159,7 @@
   .category-posts {
       display: flex;
       flex-wrap: wrap;
-      width: 80vw;
+      width: 90vw;
       min-width: 250px;
       margin: auto;
       align-items: center;
@@ -154,7 +185,7 @@
   
   .blog-post-list {
     display: flex;
-    gap: 100px;
+    gap: 25px;
   }
   
   .scroll-button {
@@ -184,10 +215,21 @@
     margin-bottom: 10px;
     padding: 0 100px;
   }
+
+  .category-header h2 {
+    font-family: Gilroy-Bold;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 50px;
+  }
   
   .view-more-link {
     color: #333;
     text-decoration: none;
+    font-family: Gilroy-Bold;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
   }
   
   .view-more-link:hover {
@@ -204,8 +246,9 @@
   }
   
   .thumbnail-container {
-    width: 250px;
-    height: 300px;
+    width: 400px;
+    height: 532px;
+    max-width: 90vw;
     overflow: hidden;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -216,14 +259,15 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .blog-post-preview-spacer {
+    padding: 20px;
+  }
   
   .post-info {
     text-align: left;
-    width: 250px;
-  }
-  
-  .blog-category {
-    font-size: 14px;
+    width: 400px;
+    max-width: 90vw;
   }
   
   .blog-topic {
@@ -231,16 +275,24 @@
     font-weight: bold;
     margin-bottom: 5px;
     font-family: AbrilFatface-Regular;
+    padding: 5px 0;
   }
   
   .topic-link {
     text-decoration: none;
     color: #333;
+    font-family: AbrilFatface-Regular;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 31px;
   }
   
   .created-date {
-    font-size: 12px;
     color: #666;
+    font-family: Gilroy-Light;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
   }
   
   /* For blog post content container */
@@ -253,6 +305,10 @@
 
   .blog-post-header {
     text-align: left;
+    font-family: AbrilFatface-Regular;
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 54px;
   }
 
   .blog-post-image {
@@ -271,3 +327,113 @@
   .blog-post-spacer {
     padding: 10px;
   }
+
+/* Styles for medium screens (e.g., tablets) */
+@media only screen and (max-width: 1500px) {
+  /* Adjust styles for medium screens */
+  .banner-img {
+    height: 60vh;
+  }
+  .banner-overlay {
+    width: 70%;
+  }
+  .category-header {
+    padding: 0 40px;
+  }
+  .category-header h2 {
+    font-size: 35px;
+    line-height: 35px;
+  }
+  .view-more-link {
+    font-size: 30px;
+    line-height: 30px;
+  }
+  .thumbnail-container {
+    width: 300px;
+    height: 399px;
+  }
+  .post-info {
+    width: 300px;
+  }
+  .category-header-2 {
+    font-size: 45px;
+    line-height: 45px;
+    padding: 0 40px;
+  }
+  .category-posts {
+      width: 100vw;
+  }
+  .blog-post-container {
+    width: 90vw;
+    min-width: 200px;
+    padding: 50px;
+  }
+  .blog-post-header {
+    font-size: 35px;
+    line-height: 45px;
+  }
+  .blog-post-content {
+    text-align: justify;
+    line-height: 150%;
+    font-size: x-large;
+  }
+}
+
+/* Styles for small screens (e.g., mobile phones) */
+@media only screen and (max-width: 450px) {
+  /* Adjust styles for small screens */
+  .blog-menu-bar {
+    gap: 0;
+  }
+  .blog-menu-item {
+    flex-basis: 100vw;
+    max-width: none;
+    font-size: 25px;
+    line-height: 25px;
+  }
+  .banner-img {
+    height: 60vh;
+  }
+  .banner-overlay {
+    width: 90%;
+  }
+  .blog-featured-topic h2 {
+    font-size: 25px;
+    line-height: 30px;
+  }
+  .read-now-link {
+    font-size: 15px;
+    line-height: 15px;
+  }
+  .category-header {
+    padding: 0 20px;
+  }
+  .category-header h2 {
+    font-size: 30px;
+    line-height: 30px;
+    max-width: 100px;
+  }
+  .view-more-link {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  .category-header-2 {
+    font-size: 35px;
+    line-height: 35px;
+    padding: 0 20px;
+  }
+  .blog-post-container {
+    width: 100vw;
+    min-width: 200px;
+    padding: 30px;
+  }
+  .blog-post-header {
+    font-size: 25px;
+    line-height: 35px;
+  }
+  .blog-post-content {
+    text-align: justify;
+    line-height: 150%;
+    font-size: large;
+  }
+}
