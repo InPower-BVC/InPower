@@ -14,10 +14,8 @@ function Navbar() {
   return (
     <nav className={`navbar ${menuOpen ? 'open' : ''}`}>
       <nav className={`navbar ${menuOpen ? 'open' : ''}`}>
-  <div className="logo">
-    
-    InPower
-  </div>
+
+  
 </nav>
 
       <div className="hamburger" onClick={toggleMenu}>
@@ -33,11 +31,23 @@ function Navbar() {
         <li onClick={toggleMenu}><Link to="/blog">Blog</Link></li>
         <li onClick={toggleMenu}><Link to="/volunteer">Volunteer Now</Link></li>
         <li onClick={toggleMenu}><Link to="/aboutus">About Us</Link></li>
+
       </ul>
+
       
       <button className={`join-button ${menuOpen ? 'open' : ''}`}>
   <Link to="/invite" style={{ color: '#7C0C24' }}>Join</Link>
 </button>
+
+
+      <button className={`join-button ${menuOpen ? 'open' : ''}`}><Link to="/invite">Join</Link></button>
+      
+      
+
+      <div className="logo">
+    
+    InPower
+  </div>
 
 
     {/* 

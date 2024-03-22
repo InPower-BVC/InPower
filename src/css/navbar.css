@@ -19,13 +19,12 @@
 }
 
 .logo {
-  margin-left: -45em;
+  margin-left: 0em;
   display: flex;
   align-items: center;
-  font-size: 30px; /* Adjust the font size as needed */
+  font-size: 51px;
   color: aliceblue;
 }
-
 
 
 
@@ -82,7 +81,13 @@ a:hover {
   border: none;
   border-radius: 20px;
   cursor: pointer;
+
   margin-right: -80rem; /* Adjust margin for spacing */
+
+  transition: background-color 0.3s ease-in-out;
+  margin-right: -1310px; 
+  margin-top:-29px;
+
 }
 
 /* Media query for responsiveness */
