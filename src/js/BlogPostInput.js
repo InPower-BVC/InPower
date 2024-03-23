@@ -57,7 +57,8 @@ const handleIsFeaturedChange = (e) => {
   // Handle image upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    const fileName = `${Date.now()}_${file.name}`; // Adding timestamp prefix to filename
+    //const fileName = `${Date.now()}_${file.name}`; // Adding timestamp prefix to filename
+    const fileName = `${Date.now()}`;
     setImage({ file, fileName })
     console.log("File name:", fileName); 
   };
@@ -82,12 +83,14 @@ const handleSubmit = async (e) => {
     // Append the image file to the form data
     if (image) {
       formData.append("profileImgFile", image.file); // Append file
-      formData.append("profileImgFileName", image.fileName); // Append file name
+      //formData.append("profileImgFileName", image.fileName); // Append file name
     }
 
     // Append isFeatured to formData only if it's true
     if (isFeatured) {
       formData.append("isFeatured", "True");
+    }else{
+      formData.append("isFeatured", "False");
     }
 
     // Send formData to server using fetch
@@ -99,6 +102,9 @@ const handleSubmit = async (e) => {
     if (!response.ok) {
       throw new Error("Failed to submit blog post");
     }
+
+    
+    alert('Post created successfully.');
 
     // Reset the form after successful submission
     e.target.reset();
