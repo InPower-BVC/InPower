@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link,useNavigate  } from 'react-router-dom';
 import '../css/admin.css';
 import axios from 'axios'; 
+import backendBaseURL from './blog/blogConfig';
 
 function AdminLogin({ history }) {
   const [message, setMessage] = useState('');
@@ -21,7 +22,7 @@ function AdminLogin({ history }) {
     event.preventDefault();
     try {
       // Make a POST request to the /admin/login endpoint with the username and password
-      const response = await axios.post('http://localhost:5000/admin/login', { username, password });
+      const response = await axios.post(`${backendBaseURL}/admin/login`, { username, password });
 
       // If login is successful, update message state
       console.log('Login successful:', response.data.result);

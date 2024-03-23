@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import backendBaseURL from "./blog/blogConfig";
 
 function BlogPostInput() {
   const [blogCategories, setBlogCategories] = useState([]);
@@ -18,7 +19,7 @@ function BlogPostInput() {
 
   const fetchBlogCategories = async () => {
     try {
-      const response = await fetch("http://localhost:5000/allblogcategories");
+      const response = await fetch(`${backendBaseURL}/allblogcategories`);
       if (!response.ok) {
         throw new Error("Failed to fetch blog categories");
       }
@@ -90,7 +91,7 @@ const handleSubmit = async (e) => {
     }
 
     // Send formData to server using fetch
-    const response = await fetch("http://localhost:5000/blogposts", {
+    const response = await fetch(`${backendBaseURL}/blogposts`, {
       method: "POST",
       body: formData,
     });
