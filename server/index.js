@@ -1,24 +1,39 @@
 var express = require("express");
 var multer = require("multer"); // For handling file uploads
 const cors = require("cors");
-var fs = require("fs");
-var path = require("path");
+// var fs = require("fs");
+// var path = require("path");
 const db = require("./db"); // Adjust the path based on your project structure
 
 const bodyParser = require("body-parser");
 const app = express();
 
-const bcrypt = require("bcrypt");
 const saltRounds = 10; // You can adjust the number of salt rounds as needed
+
+// Middleware to parse JSON body and enable CORS
+app.use(express.json());
+app.use(cors());
+// app.use(bodyParser.json());
 
 // Configure Multer storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Middleware to parse JSON body
-app.use(express.json());
-app.use(cors());
-app.use(bodyParser.json());
+// Multer configuration for Blogimage upload
+const Blogimagestorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, 'uploads')); // Save files in the "uploads" folder within the server directory
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '_' + file.originalname);
+  }
+});
+
+// Middleware for handling blog image uploads
+const uploadBlogImage = multer({ storage: Blogimagestorage }).single('profileImgFile');
+
+// Log the root directory
+console.log("__dirname:", __dirname);
 
 // Testing API
 app.get("/persons", async (req, res) => {
@@ -63,23 +78,16 @@ app.get("/blogposts", async (req, res) => {
         profileImgPath
       FROM BlogPosts`;
 
-    // Send the result as JSON response
-    res.json(result.recordset);
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal server error" });
-  } finally {
-    // Close the connection pool only if the connection was successfully established
-    if (
-      connection &&
-      connection._connecting === false &&
-      connection._pool &&
-      connection._pool._pendingRequests.length === 0
-    ) {
-      connection.close();
-    }
-  }
-});
+     // Send the result as JSON response
+     res.json(result.recordset);
+    
+     // Close the connection
+     connection.close();
+   } catch (error) {
+     console.error("Error:", error);
+     res.status(500).json({ error: "Internal server error" });
+   }
+ });
 
 // Get all blog posts by category name
 app.get("/blogpostsbycategory", async (req, res) => {
@@ -141,23 +149,33 @@ app.get("/blogpostsbytopic", async (req, res) => {
   }
 });
 
-// Add a new blog post
-app.post("/blogposts", upload.single("file"), async (req, res) => {
+app.post("/blogposts", upload.single("profileImgFile"), async (req, res) => {
   let connection;
   try {
-    const { blogCategoryId, blogCategoryName, topic, content, createdDate } =
-      req.body;
+    const { blogCategoryId, blogCategoryName, topic, content, createdDate } = req.body;
+    const profileImgFile = req.file; // Get the file object
+    const profileImgFileName = req.body.profileImgFileName; // Get the file name
+    console.log("profileImgFile:", profileImgFile);
+    console.log("profileImgFileName:", profileImgFileName);
 
-    // Get the binary image data from the buffer
-    const binaryImageData = req.file.buffer;
+    // Validate required fields
+    if (!blogCategoryId || !blogCategoryName || !topic || !content || !createdDate || !profileImgFile || !profileImgFileName) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    console.log("Profile image file:", profileImgFile);
+    console.log("profileImgFileName:", profileImgFileName);
+    // Construct the path where the image file will be saved
+    const imagePath = profileImgFileName ? `/uploads/${profileImgFileName}` : null;
+    console.log("Image path:", imagePath);
 
     // Connect to the database
     connection = await db.connect();
 
     // Execute the query to insert a new blog post with image data
     await db.query`
-      INSERT INTO BlogPosts (blogCategoryId, blogCategoryName, topic, content, profileImg, createdDate)
-      VALUES (${blogCategoryId}, ${blogCategoryName}, ${topic}, ${content}, ${binaryImageData}, ${createdDate});
+      INSERT INTO BlogPosts (blogCategoryId, blogCategoryName, topic, content, profileImgPath, createdDate)
+      VALUES (${blogCategoryId}, ${blogCategoryName}, ${topic}, ${content}, ${imagePath}, ${createdDate});
     `;
 
     // Send a success response
@@ -172,6 +190,9 @@ app.post("/blogposts", upload.single("file"), async (req, res) => {
     }
   }
 });
+
+
+
 
 //PUT API for modifying the blog post
 app.put("/blogposts/:blogPostId", upload.single("file"), async (req, res) => {

@@ -4,6 +4,7 @@ import '../../css/blog.css';
 import BlogMenuBar from '../blog/blogMenuBar';
 //import bannerImage from '../../img/blog/img_blog_cat_banner.jfif';
 import BlogPostPreview from '../blog/blogPostPreview';
+import backendBaseURL from './blogConfig';
 
 function BlogCategory() {
     const { id } = useParams();
@@ -13,13 +14,11 @@ function BlogCategory() {
     const [featuredPost, setFeaturedPost] = useState(null);
 
     useEffect(() => {
-        const domain = window.location.hostname;
-
         const fetchCategoryData = async () => {
             try {
                 // For sample data
                 //const response = await fetch('/blog/blogCategory.json');
-                const response = await fetch(`http://${domain}:5000/blogcategories`);
+                const response = await fetch(`${backendBaseURL}/blogcategories`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch category data');
                 }
@@ -37,7 +36,7 @@ function BlogCategory() {
             try {
                 // For sample data
                 //const response = await fetch('/blog/blogPost.json');
-                const response = await fetch(`http://${domain}:5000/blogposts`);
+                const response = await fetch(`${backendBaseURL}/blogposts`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch post data');
                 }
@@ -52,7 +51,7 @@ function BlogCategory() {
 
         const fetchFeaturedPostData = async() => {
             try {
-                const response = await fetch(`http://${domain}:5000/latestfeaturedblogpost/${parseInt(id)}`);
+                const response = await fetch(`${backendBaseURL}/latestfeaturedblogpost/${parseInt(id)}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch featured post data');
                 }
