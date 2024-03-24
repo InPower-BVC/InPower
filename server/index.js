@@ -723,7 +723,7 @@ app.get("/magazine/:volumeNumber", async (req, res) => {
 
 
 //POST Magazine by Volume
-app.post("/magazine", upload.fields([{ name: 'coverpage', maxCount: 1 }, { name: 'contentpages', maxCount: 10 }]), async (req, res) => {
+app.post("/magazine/:volumeNumber", upload.fields([{ name: 'coverpage', maxCount: 1 }, { name: 'contentpages', maxCount: 10 }]), async (req, res) => {
   const { volumeNumber, description } = req.body;
 
   // Get cover page URL from the uploaded file
@@ -859,7 +859,7 @@ app.delete("/magazine/:volumeNumber", async (req, res) => {
 
 
 //GET Magazine content by page Number
-app.get("/magazine/page/:pageNumber", async (req, res) => {
+app.get("/magazine/:volumeNumber/:pageNumber", async (req, res) => {
   const { pageNumber } = req.params;
 
   let connection;
@@ -904,7 +904,7 @@ app.get("/magazine/page/:pageNumber", async (req, res) => {
 
 
 //POST Magazine content by page Number to specific volume
-app.post("/magazine/:volumeNumber/page", upload.single("page"), async (req, res) => {
+app.post("/magazine/:volumeNumber/:pageNumber", upload.single("page"), async (req, res) => {
   const { volumeNumber } = req.params;
   const { pageType } = req.body; // Assuming you have a field to specify page type (e.g., "cover" or "content")
 
@@ -949,7 +949,7 @@ app.post("/magazine/:volumeNumber/page", upload.single("page"), async (req, res)
 
 
 //PUT Magazine content by page Number
-app.put("/magazine/:volumeNumber/page/:pageNumber", upload.single("page"), async (req, res) => {
+app.put("/magazine/:volumeNumber/:pageNumber", upload.single("page"), async (req, res) => {
   const { volumeNumber, pageNumber } = req.params;
   const { pageType } = req.body; // Assuming you have a field to specify page type (e.g., "cover" or "content")
 
@@ -995,7 +995,7 @@ app.put("/magazine/:volumeNumber/page/:pageNumber", upload.single("page"), async
 
 
 //DELETE Magazine content by page Number
-app.delete("/magazine/:volumeNumber/page/:pageNumber", async (req, res) => {
+app.delete("/magazine/:volumeNumber/:pageNumber", async (req, res) => {
   const { volumeNumber, pageNumber } = req.params;
 
   let connection;
