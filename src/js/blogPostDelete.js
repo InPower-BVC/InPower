@@ -63,9 +63,9 @@ function BlogPostDelete() {
         setContent(data.content);
         setSelectedPost(data.blogPostId);
         // Convert image data to a Blob URL
-        if (data.profileImg) {
+        if (data.profileImgPath) {
           // const blob = new Blob([data.profileImg], { type: 'image/jpeg' }); // Assuming the image type is JPEG
-          setImage(data.profileImg);
+          setImage(`../../img/blog/${data.profileImgPath}`);
         } else {
           setImage(null); // Set to null if no image data is available
         }

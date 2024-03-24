@@ -1,5 +1,6 @@
 var express = require("express");
 var multer = require("multer"); // For handling file uploads
+const path = require('path');
 const cors = require("cors");
 // var fs = require("fs");
 // var path = require("path");
@@ -16,7 +17,15 @@ app.use(cors());
 // app.use(bodyParser.json());
 
 // Configure Multer storage
-const storage = multer.memoryStorage();
+//const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../public/img/blog'); // Destination folder
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+  }
+});
 const upload = multer({ storage: storage });
 
 // Multer configuration for Blogimage upload
@@ -152,9 +161,10 @@ app.get("/blogpostsbytopic", async (req, res) => {
 app.post("/blogposts", upload.single("profileImgFile"), async (req, res) => {
   let connection;
   try {
-    const { blogCategoryId, blogCategoryName, topic, content, createdDate } = req.body;
+    const { blogCategoryId, blogCategoryName, topic, content, createdDate, isFeatured } = req.body;
     const profileImgFile = req.file; // Get the file object
-    const profileImgFileName = req.body.profileImgFileName; // Get the file name
+    //const profileImgFileName = req.body.profileImgFileName; // Get the file name
+    const profileImgFileName = profileImgFile.filename;
     console.log("profileImgFile:", profileImgFile);
     console.log("profileImgFileName:", profileImgFileName);
 
@@ -166,7 +176,8 @@ app.post("/blogposts", upload.single("profileImgFile"), async (req, res) => {
     console.log("Profile image file:", profileImgFile);
     console.log("profileImgFileName:", profileImgFileName);
     // Construct the path where the image file will be saved
-    const imagePath = profileImgFileName ? `/uploads/${profileImgFileName}` : null;
+    //const imagePath = profileImgFileName ? `/uploads/${profileImgFileName}` : null;
+    const imagePath = profileImgFileName ? `${profileImgFileName}` : null;
     console.log("Image path:", imagePath);
 
     // Connect to the database
@@ -174,8 +185,8 @@ app.post("/blogposts", upload.single("profileImgFile"), async (req, res) => {
 
     // Execute the query to insert a new blog post with image data
     await db.query`
-      INSERT INTO BlogPosts (blogCategoryId, blogCategoryName, topic, content, profileImgPath, createdDate)
-      VALUES (${blogCategoryId}, ${blogCategoryName}, ${topic}, ${content}, ${imagePath}, ${createdDate});
+      INSERT INTO BlogPosts (blogCategoryId, blogCategoryName, topic, content, profileImgPath, createdDate, isFeatured)
+      VALUES (${blogCategoryId}, ${blogCategoryName}, ${topic}, ${content}, ${imagePath}, ${createdDate}, ${isFeatured});
     `;
 
     // Send a success response
@@ -185,7 +196,12 @@ app.post("/blogposts", upload.single("profileImgFile"), async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   } finally {
     // Close the connection pool only if the connection was successfully established
-    if (connection) {
+    if (
+      connection &&
+      connection._connecting === false &&
+      connection._pool &&
+      connection._pool._pendingRequests.length === 0
+      ) {
       connection.close();
     }
   }
@@ -269,18 +285,6 @@ app.delete("/blogposts/:blogPostId", async (req, res) => {
 
     // Delete the blog post
     await db.query`DELETE FROM BlogPosts WHERE blogPostId = ${blogPostId};`;
-
-    // Check if there are any remaining blog posts in the same category
-    const remainingPostsResult = await db.query`
-      SELECT COUNT(*) AS postCount
-      FROM BlogPosts
-      WHERE blogCategoryId = ${blogCategoryId};
-    `;
-
-    if (remainingPostsResult.recordset[0].postCount === 0) {
-      // No remaining blog posts in the category, delete the category
-      await db.query`DELETE FROM BlogCategories WHERE blogCategoryId = ${blogCategoryId};`;
-    }
 
     // Send a success response
     res.status(200).json({ message: "Blog post deleted successfully" });
@@ -666,7 +670,12 @@ app.post("/admin/login", async (req, res) => {
     return res.status(500).json({ error: error.message });
   } finally {
     // Close the database connection in the finally block
-    if (connection) {
+    if (
+      connection &&
+      connection._connecting === false &&
+      connection._pool &&
+      connection._pool._pendingRequests.length === 0
+      ) {
       connection.close();
     }
   }
