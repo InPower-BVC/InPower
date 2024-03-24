@@ -10,6 +10,15 @@
   z-index: 100; /* Ensure it's on top of other content */
 }
 
+
+
+.logo img {
+  width: 50px; /* Set the width of the logo */
+  height: auto; /* Maintain aspect ratio */
+  margin-left: -400px;
+}
+
+
 .quote {
   display: block;
   margin-top: 0px;
