@@ -165,18 +165,17 @@ app.post("/blogposts", upload.single("profileImgFile"), async (req, res) => {
     const profileImgFile = req.file; // Get the file object
     //const profileImgFileName = req.body.profileImgFileName; // Get the file name
     const profileImgFileName = profileImgFile.filename;
-    console.log("profileImgFile:", profileImgFile);
-    console.log("profileImgFileName:", profileImgFileName);
+    //console.log("profileImgFile:", profileImgFile);
+    //console.log("profileImgFileName:", profileImgFileName);
 
     // Validate required fields
     if (!blogCategoryId || !blogCategoryName || !topic || !content || !createdDate || !profileImgFile || !profileImgFileName) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    console.log("Profile image file:", profileImgFile);
-    console.log("profileImgFileName:", profileImgFileName);
+    //console.log("Profile image file:", profileImgFile);
+    //console.log("profileImgFileName:", profileImgFileName);
     // Construct the path where the image file will be saved
-    //const imagePath = profileImgFileName ? `/uploads/${profileImgFileName}` : null;
     const imagePath = profileImgFileName ? `${profileImgFileName}` : null;
     console.log("Image path:", imagePath);
 
@@ -642,7 +641,7 @@ app.post("/admin/login", async (req, res) => {
     // Check if the username exists in the database
     const userResult =
       await db.query`SELECT * FROM AdminCredentials WHERE username = ${username}`;
-    console.log(userResult);
+    //console.log(userResult);
     const user = userResult.recordset[0];
 
     if (!user) {

@@ -39,7 +39,7 @@
     padding: 80px; /* Adding more padding to all sides */
     box-sizing:border-box; /* Including padding in width calculation */
     font-size: larger;
-    margin-top: -100px;
+    margin-top: -130px;
     
   }
   
@@ -87,7 +87,7 @@
    margin-top: -80px; /* Add margin to top */
    background-color: #df646a;
    font-family:'Gilroy-Medium',  sans-serif;
-
+  
    
 }
 .custom-image {
@@ -118,8 +118,9 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columns */
   grid-template-rows: repeat(2, 1fr); /* 2 rows */
-  grid-gap: 40px;
-  padding: 20px;
+  grid-gap: 20px;
+  padding: 5px;
+  margin-top: -90px;
   justify-content: center; /* Center the grid items horizontally */
 }
 
