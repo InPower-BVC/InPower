@@ -30,11 +30,11 @@ function Navbar() {
         <img src={logo} alt="Logo" />
       </div>
         <li onClick={toggleMenu}><Link to="/">Home</Link></li>
-        {/*<li onClick={toggleMenu}><Link to="/discussion/a">Magazine</Link></li>*/}
+        <li onClick={toggleMenu}><Link to="/discussion/a">Magazine</Link></li>
        
         <li onClick={toggleMenu}><Link to="/blog">Blog</Link></li>
-        {/*<li onClick={toggleMenu}><Link to="/volunteer">Volunteer Now</Link></li>*/}
-        {/*<li onClick={toggleMenu}><Link to="/aboutus">About Us</Link></li>*/}
+        <li onClick={toggleMenu}><Link to="/volunteer">Volunteer Now</Link></li>
+        <li onClick={toggleMenu}><Link to="/aboutus">About Us</Link></li>
 
       </ul>
 
