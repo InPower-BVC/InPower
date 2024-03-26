@@ -30,33 +30,29 @@
 }
 
   
-  .hero-content-new {
-    display: flex;
-    flex-direction: row; /* Ensure text is on the left and image is on the right */
-    align-items: center;
-    width: 100%; /* Ensuring full width */
-    max-width: 1400px; /* Increased maximum width */
-    padding: 50px; /* Adding more padding to all sides */
-    box-sizing: border-box; /* Including padding in width calculation */
-     
-  }
+.hero-content-new {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  padding: 50px;
+  box-sizing: border-box;
+}
   
   .hero-text-new {
-    flex: 1; /* Takes up remaining space */
-    padding: 80px; /* Adding more padding to all sides */
-    box-sizing:border-box; /* Including padding in width calculation */
+    flex: 1 1;
+    padding: 30px;
+    box-sizing: border-box;
     font-size: larger;
-    margin-top: -130px;
-    
-  }
+}
   
-  .hero-img-new {
-    width: 80%; /* Increased width */
-    height: auto; /* Maintain aspect ratio */
-    padding: 0px;
-   ;
-  }
- 
+.hero-img-new {
+  width: 80%;
+  height: auto;
+  padding: 0px;
+}
   
   .typewriter-new {
     font-size: 3.5rem; /* Increased font size */
@@ -106,8 +102,8 @@
     font-size: 30px;
     font-weight: 400;
     font-family:Give You Glory,  sans-serif;
-   padding: 10px;
-   margin: 70px;
+   padding: 6px;
+   margin: 20px;
    color: white;
 }
 .features {
@@ -143,10 +139,10 @@
   border-radius: 50%;
 }
 
-.content {
-  padding: 10px; /* Add some padding around the content */
-  text-align:left;
-  margin: 50px;
+content {
+  padding: 10px;
+  text-align: left;
+  margin: 12px 50px;
 }
 
 @media screen and (max-width: 768px) {
