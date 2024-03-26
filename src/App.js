@@ -16,6 +16,9 @@ import Volunteer from './js/volunteer';
 import AboutUs from './js/Aboutus';
 import Submitted from './js/Submitted';
 import MagazineInformation from './js/MagazineInformation';
+import MagazineInformation1 from './js/MagazineInformation1';
+import MagazineInformation2 from './js/MagazineInformation2';
+import MagazineInformation3 from './js/MagazineInformation3';
 import Footer from './js/footer';
 import Navbar from './js/navbar';
 import ChatBotIcon from './js/chatbot';
@@ -41,6 +44,9 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/submitted" element={<Submitted />} />
         <Route path="/MagazineInformation" element={<MagazineInformation />} />
+        <Route path="/MagazineInformation1" element={<MagazineInformation1 />} />
+        <Route path="/MagazineInformation2" element={<MagazineInformation2 />} />
+        <Route path="/MagazineInformation3" element={<MagazineInformation3 />} />
       </Routes>
       <Footer />
       <ChatBotIcon />
