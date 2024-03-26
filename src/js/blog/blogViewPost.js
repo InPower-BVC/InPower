@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams  } from 'react-router-dom';
 import '../../css/blog.css';
 import BlogMenuBar from './blogMenuBar';
+import backendBaseURL from './blogConfig';
 
 // Component for displaying blog
 function BlogViewPost() {
@@ -11,13 +12,11 @@ function BlogViewPost() {
     const [post, setPost] = useState(null);
 
     useEffect(() => {
-        const domain = window.location.hostname;
-
         const fetchCategoryData = async () => {
             try {
                 // For sample data
                 //const response = await fetch('/blog/blogCategory.json');
-                const response = await fetch(`http://${domain}:5000/blogcategories`);
+                const response = await fetch(`${backendBaseURL}/blogcategories`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch category data');
                 }
@@ -33,7 +32,7 @@ function BlogViewPost() {
             try {
                 // For sample data
                 //const response = await fetch('/blog/blogPost.json');
-                const response = await fetch(`http://${domain}:5000/blogposts/${id}`);
+                const response = await fetch(`${backendBaseURL}/blogposts/${id}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch post data');
                 }

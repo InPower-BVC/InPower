@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import backendBaseURL from "./blog/blogConfig";
 
 function BlogPostInput() {
   const [blogCategories, setBlogCategories] = useState([]);
@@ -18,7 +19,7 @@ function BlogPostInput() {
 
   const fetchBlogCategories = async () => {
     try {
-      const response = await fetch("http://localhost:5000/allblogcategories");
+      const response = await fetch(`${backendBaseURL}/allblogcategories`);
       if (!response.ok) {
         throw new Error("Failed to fetch blog categories");
       }
@@ -48,17 +49,23 @@ function BlogPostInput() {
     setContent(value);
   };
 
-  // Handle image upload
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-  };
-
   // Handle checkbox change for featured option
 const handleIsFeaturedChange = (e) => {
   setIsFeatured(e.target.checked);
 };
 
+  // Handle image upload
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    //const fileName = `${Date.now()}_${file.name}`; // Adding timestamp prefix to filename
+    const fileName = `${Date.now()}`;
+    setImage({ file, fileName })
+    console.log("File name:", fileName); 
+  };
+
+  useEffect(() => {
+    console.log("Image state:", image);
+  }, [image]);
 
   // Handle form submission
 const handleSubmit = async (e) => {
@@ -72,15 +79,22 @@ const handleSubmit = async (e) => {
     formData.append("topic", topic);
     formData.append("content", content);
     formData.append("createdDate", new Date().toISOString());
-    formData.append("file", image);
+
+    // Append the image file to the form data
+    if (image) {
+      formData.append("profileImgFile", image.file); // Append file
+      //formData.append("profileImgFileName", image.fileName); // Append file name
+    }
 
     // Append isFeatured to formData only if it's true
     if (isFeatured) {
       formData.append("isFeatured", "True");
+    }else{
+      formData.append("isFeatured", "False");
     }
 
     // Send formData to server using fetch
-    const response = await fetch("http://localhost:5000/blogposts", {
+    const response = await fetch(`${backendBaseURL}/blogposts`, {
       method: "POST",
       body: formData,
     });
@@ -88,6 +102,9 @@ const handleSubmit = async (e) => {
     if (!response.ok) {
       throw new Error("Failed to submit blog post");
     }
+
+    
+    alert('Post created successfully.');
 
     // Reset the form after successful submission
     e.target.reset();
@@ -98,6 +115,8 @@ const handleSubmit = async (e) => {
     setContent("");
     setImage(null);
     setIsFeatured(false); 
+
+    console.log("Blog post submitted successfully");
 
   } catch (error) {
     console.error("Error submitting blog post:", error);
@@ -154,7 +173,7 @@ const handleSubmit = async (e) => {
           <input
             type="file"
             id="image"
-            accept="image/png"
+            // accept="image/png"
             onChange={handleImageUpload}
             required
             style={{ flex: '1', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}

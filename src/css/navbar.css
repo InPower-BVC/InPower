@@ -10,6 +10,15 @@
   z-index: 100; /* Ensure it's on top of other content */
 }
 
+
+
+.logo img {
+  width: 50px; /* Set the width of the logo */
+  height: auto; /* Maintain aspect ratio */
+  margin-left: -400px;
+}
+
+
 .quote {
   display: block;
   margin-top: 0px;
@@ -74,25 +83,34 @@ a {
 a:hover {
   color: #7C0C24;
 }
-
 .join-button {
   display: block; 
   padding: 10px 20px;
-  background-color: #a43b55;
+  background-color: #fbfbfb;
   border: none;
   border-radius: 20px;
-  color: rgb(34, 30, 30);
   cursor: pointer;
+
+  margin-right: -80rem; /* Adjust margin for spacing */
+
   transition: background-color 0.3s ease-in-out;
   margin-right: -1310px; 
   margin-top:-29px;
+
 }
 
-.join-button:hover {
-  background-color: rgb(180, 89, 89); 
-  color: black; 
-  border: 1.0px solid #7C0C24;
+/* Media query for responsiveness */
+@media only screen and (max-width: 767px) {
+  .join-button {
+    margin-right: 0; /* Remove right margin on smaller screens */
+    margin-top: 10px; /* Add top margin for spacing */
+    width: 20%; /* Make button full width */
+  }
 }
+
+
+
+
 
 /* Media Queries for Responsiveness */
 @media screen and (max-width: 768px) {

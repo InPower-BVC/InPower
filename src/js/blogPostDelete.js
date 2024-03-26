@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import backendBaseURL from "./blog/blogConfig";
 
 function BlogPostDelete() {
   const [categories, setCategories] = useState([]);
@@ -16,7 +17,7 @@ function BlogPostDelete() {
 
   const fetchCategories = () => {
     // Fetch all categories from the server
-    fetch('http://localhost:5000/blogcategories')
+    fetch(`${backendBaseURL}/blogcategories`)
       .then(response => response.json())
       .then(data => {
         setCategories(data);
@@ -37,7 +38,7 @@ function BlogPostDelete() {
   };
 
   const fetchTopicsByCategory = (categoryName) => {
-    fetch(`http://localhost:5000/blogpostsbycategory?blogCategoryName=${encodeURIComponent(categoryName)}`)
+    fetch(`${backendBaseURL}/blogpostsbycategory?blogCategoryName=${encodeURIComponent(categoryName)}`)
       .then(response => response.json())
       .then(data => {
         console.log('Fetched topics:', data);
@@ -55,16 +56,16 @@ function BlogPostDelete() {
   };
 
   const fetchPostByTopic = (topic) => {
-    fetch(`http://localhost:5000/blogpostsbytopic?topic=${encodeURIComponent(topic)}`)
+    fetch(`${backendBaseURL}/blogpostsbytopic?topic=${encodeURIComponent(topic)}`)
       .then(response => response.json())
       .then(data => {
         console.log('Fetched post:', data);
         setContent(data.content);
         setSelectedPost(data.blogPostId);
         // Convert image data to a Blob URL
-        if (data.profileImg) {
+        if (data.profileImgPath) {
           // const blob = new Blob([data.profileImg], { type: 'image/jpeg' }); // Assuming the image type is JPEG
-          setImage(data.profileImg);
+          setImage(`../../img/blog/${data.profileImgPath}`);
         } else {
           setImage(null); // Set to null if no image data is available
         }
@@ -76,7 +77,7 @@ function BlogPostDelete() {
     console.log(selectedPost)
     if (selectedPost) {
       // Send a DELETE request to the server to delete the selected post
-      fetch(`http://localhost:5000/blogposts/${selectedPost}`, { method: 'DELETE' })
+      fetch(`${backendBaseURL}/blogposts/${selectedPost}`, { method: 'DELETE' })
         .then(response => {
           if (response.ok) {
             alert('Post deleted successfully.');

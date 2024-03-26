@@ -9,7 +9,7 @@ import logo1 from "../img/logo1.png";
 import logo2 from "../img/logo2.png";
 import logo3 from "../img/logo3.png";
 import logo4 from "../img/logo4.png";
-import image1 from "../img/landing2.jpeg";
+import image1 from "../img/landing2.png";
 function Landing() {
    return (
     <div className="container-new">
@@ -37,7 +37,7 @@ function Landing() {
       </div>
 
       <div className='features'>
-      <img src={image1} alt="Image1" className="custom-image" />
+     
         <h2>What We Offer:</h2> 
 
         <div class="grid-container">
@@ -78,7 +78,7 @@ function Landing() {
   </div>
 </div>
 
-        
+<img src={image1} alt="Image1" className="custom-image" />
         </div>
         <div className='summary-text'>
         <h1>Join the InPower Community Today!</h1>
