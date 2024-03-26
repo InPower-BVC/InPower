@@ -1,3 +1,9 @@
+
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+
 @font-face {
   font-family: 'Gilroy';
   src: url('../fonts/Gilroy-Bold.ttf') format('truetype');
