@@ -68,7 +68,7 @@ function Blog() {
 
     // JSX for rendering the component
     return (
-        <>
+        <div className="blog-main">
           <BlogMenuBar categories={categories} />
           <div className="banner-container">
             <div><img src={`../../img/blog/${featuredPost.profileImgPath}`/*bannerImage*/} alt="Banner" className="banner-img" /></div>
@@ -107,7 +107,7 @@ function Blog() {
             })}
             <div className="blog-post-list-spacer"></div>
             </div>
-        </>
+        </div>
     );
     
 }
