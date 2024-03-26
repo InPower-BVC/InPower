@@ -78,7 +78,7 @@ function BlogCategory() {
     };
     
   return (
-    <div>
+    <div className="blog-main">
         <BlogMenuBar categories={categories} activeCategoryId={parseInt(id)} />
         <div className="banner-container">
         <div><img src={`../../img/blog/${featuredPost.profileImgPath}`/*bannerImage*/} alt="Banner" className="banner-img" /></div>

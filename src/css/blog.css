@@ -331,6 +331,10 @@
 /* Styles for medium screens (e.g., tablets) */
 @media only screen and (max-width: 1500px) {
   /* Adjust styles for medium screens */
+  .blog-main {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   .banner-img {
     height: 60vh;
   }
@@ -382,6 +386,10 @@
 /* Styles for small screens (e.g., mobile phones) */
 @media only screen and (max-width: 450px) {
   /* Adjust styles for small screens */
+  .blog-main {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   .blog-menu-bar {
     gap: 0;
   }
