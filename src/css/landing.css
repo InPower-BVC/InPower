@@ -1,3 +1,9 @@
+
+.container-new {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+
 @font-face {
   font-family: 'Gilroy';
   src: url('../fonts/Gilroy-Bold.ttf') format('truetype');
@@ -16,9 +22,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: url('../img/landing1.png');
+  background-image: url('../img/landing_12.png');
   background-position: center; /* Position the background image at the center */
   background-size: cover; 
+  
   
 }
 
