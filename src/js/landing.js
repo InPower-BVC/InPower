@@ -21,10 +21,11 @@ function Landing() {
           </h1>
           <p className="feature-content-p-new">Your Online Community for Healing and Empowerment</p>
           <Link to="/invite">
-            <div className="button-container-new">
-               <BubblyButton />
-             </div>
-           </Link>
+  <div className="button-container-new">
+    <BubblyButton>Join for Beta</BubblyButton>
+  </div>
+</Link>
+
          </div>
          <div>
            <img src={main} alt="Main Image" className="hero-img-new" />
