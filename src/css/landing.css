@@ -20,8 +20,7 @@
   font-family: 'Gilroy';
   src: url('../fonts/Gilroy-Medium.ttf') format('truetype');
   font-weight: 500; /* Set the font weight */
-  background-position: center; /* Position the background image at the center */
-  background-size: cover; 
+
 }
 
 
@@ -32,6 +31,8 @@
   flex-direction: column;
   justify-content: space-between;
   background-image: url('../img/landing_12.png');
+  background-position: center; /* Position the background image at the center */
+  background-size: cover; 
 
   
   
