@@ -20,6 +20,8 @@
   font-family: 'Gilroy';
   src: url('../fonts/Gilroy-Medium.ttf') format('truetype');
   font-weight: 500; /* Set the font weight */
+  background-position: center; /* Position the background image at the center */
+  background-size: cover; 
 }
 
 
@@ -30,39 +32,39 @@
   flex-direction: column;
   justify-content: space-between;
   background-image: url('../img/landing_12.png');
-  background-position: center; /* Position the background image at the center */
-  background-size: cover; 
+
   
   
 }
 
   
-  .hero-content-new {
-    display: flex;
-    flex-direction: row; /* Ensure text is on the left and image is on the right */
-    align-items: center;
-    width: 100%; /* Ensuring full width */
-    max-width: 1400px; /* Increased maximum width */
-    padding: 50px; /* Adding more padding to all sides */
-    box-sizing: border-box; /* Including padding in width calculation */
-     
-  }
+.hero-content-new {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  padding: 50px;
+  box-sizing: border-box;
+}
   
-  .hero-text-new {
-    flex: 1; /* Takes up remaining space */
-    padding: 80px; /* Adding more padding to all sides */
-    box-sizing:border-box; /* Including padding in width calculation */
-    font-size: larger;
-    margin-top: -130px;
-    
-  }
+.hero-text-new {
+  flex: 1 1;
+  padding: 40px;
+  box-sizing: border-box;
+  font-size: larger;
+  margin: -18px 0px 0px 12px;
+  text-align: center;
+}
   
-  .hero-img-new {
-    width: 80%; /* Increased width */
-    height: auto; /* Maintain aspect ratio */
-    padding: 0px;
-   ;
-  }
+.hero-img-new {
+  width: 80%;
+  height: auto;
+  padding: 0px;
+  margin: 0px 0px 12px 32px;
+}
  
   
   .typewriter-new {
@@ -108,15 +110,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  margin-top: 32px;
+  margin-top: 80px;
 }
-.summary h2{
-    font-size: 30px;
-    font-weight: 400;
-    font-family:Give You Glory,  sans-serif;
-   padding: 10px;
-   margin: 70px;
-   color: white;
+.summary h2 {
+  font-size: 30px;
+  font-weight: 400;
+  font-family: Give You Glory, sans-serif;
+  padding: 20px 10px 20px 10px;
+  margin: 70px 10px 70px 10px;
+  color: white;
 }
 .features {
     margin-top:-70px;
@@ -154,11 +156,10 @@
 }
 
 .content {
-  padding: 10px; /* Add some padding around the content */
-  text-align:left;
-  margin: 50px;
+  padding: 2px;
+  text-align: left;
+  margin: 0px 0px -85px -13px;
 }
-
 @media screen and (max-width: 768px) {
   .grid-container {
       grid-template-columns: 1fr; /* Switch to single column layout on smaller screens */
