@@ -10,7 +10,7 @@ const onClick = () => {
 const BubblyButton = () => {
   return (
     <ReactBubblyEffectButton
-      text="Join Now"      
+      text="Sign Up for our Beta!"      
       color='#fff'         
       bgColor='#7C0C24'    
       onClick={onClick}     // Event handler when the button is clicked
