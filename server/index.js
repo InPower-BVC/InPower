@@ -14,7 +14,7 @@ const saltRounds = 10; // You can adjust the number of salt rounds as needed
 // Middleware to parse JSON body and enable CORS
 app.use(express.json());
 app.use(cors());
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 // Configure Multer storage
 //const storage = multer.memoryStorage();
@@ -681,357 +681,357 @@ app.post("/admin/login", async (req, res) => {
 });
 
 
-//Magazine API
-//GET Magazine by Volume 
-
-// app.get("/magazine/:volumeNumber", async (req, res) => {
-//   const { volumeNumber } = req.params;
-
-//   let connection;
-//   try {
-//     // Connect to the database
-//     connection = await db.connect();
-
-//     // Execute the query to fetch cover page and content pages of the specified volume
-//     const result = await db.query`
-//       SELECT 
-//         mv.volume_number,
-//         mv.description AS volume_description,
-//         mv.coverpage_url,
-//         vi.image_id,
-//         vi.contentpage_url
-//       FROM 
-//         MagazineVolumes mv
-//       LEFT JOIN 
-//         VolumeImages vi 
-//       ON 
-//         mv.volume_id = vi.volume_id
-//       WHERE 
-//         mv.volume_number = ${volumeNumber}
-//     `;
-
-//     // Send the result as JSON response
-//     res.json(result.recordset);
-
-//     // Close the connection
-//     connection.close();
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
-
-
-// //POST Magazine by Volume
-// app.post("/magazine/:volumeNumber", upload.fields([{ name: 'coverpage', maxCount: 1 }, { name: 'contentpages', maxCount: 10 }]), async (req, res) => {
-//   const { volumeNumber, description } = req.body;
-
-//   // Get cover page URL from the uploaded file
-//   const coverpageUrl = req.files['coverpage'][0].path;
-
-//   // Get content page URLs from the uploaded files
-//   const contentpageUrls = req.files['contentpages'].map(file => file.path);
-
-//   let connection;
-//   try {
-//     // Connect to the database
-//     connection = await db.connect();
-
-//     // Begin transaction
-//     await db.beginTransaction();
-
-//     // Insert volume details into MagazineVolumes table
-//     const insertVolumeResult = await db.query`
-//       INSERT INTO MagazineVolumes (volume_number, description, coverpage_url)
-//       VALUES (${volumeNumber}, ${description}, ${coverpageUrl})
-//     `;
-
-//     // Get the volume_id of the newly inserted volume
-//     const volumeId = insertVolumeResult.recordset.insertId;
-
-//     // Insert content pages into VolumeImages table
-//     const insertContentPagesPromises = contentpageUrls.map(async (contentpageUrl) => {
-//       await db.query`
-//         INSERT INTO VolumeImages (volume_id, contentpage_url)
-//         VALUES (${volumeId}, ${contentpageUrl})
-//       `;
-//     });
-
-//     // Wait for all content page insertion queries to complete
-//     await Promise.all(insertContentPagesPromises);
-
-//     // Commit transaction
-//     await db.commit();
-
-//     // Send success response
-//     res.status(201).json({ message: "Volume created successfully" });
-
-//     // Close the connection
-//     connection.close();
-//   } catch (error) {
-//     // Rollback transaction if an error occurs
-//     await db.rollback();
-
-//     console.error("Error:", error);
-//     res.status(500).json({ error: "Internal server error" });
-
-//     // Close the connection
-//     if (connection) {
-//       connection.close();
-//     }
-//   }
-// });
-
+// Magazine API
+// GET Magazine by Volume 
+
+app.get("/magazine/:volumeNumber", async (req, res) => {
+  const { volumeNumber } = req.params;
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Execute the query to fetch cover page and content pages of the specified volume
+    const result = await db.query`
+      SELECT 
+        mv.volume_number,
+        mv.description AS volume_description,
+        mv.coverpage_url,
+        vi.image_id,
+        vi.contentpage_url
+      FROM 
+        MagazineVolumes mv
+      LEFT JOIN 
+        VolumeImages vi 
+      ON 
+        mv.volume_id = vi.volume_id
+      WHERE 
+        mv.volume_number = ${volumeNumber}
+    `;
+
+    // Send the result as JSON response
+    res.json(result.recordset);
+
+    // Close the connection
+    connection.close();
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+//POST Magazine by Volume
+app.post("/magazine/:volumeNumber", upload.fields([{ name: 'coverpage', maxCount: 1 }, { name: 'contentpages', maxCount: 10 }]), async (req, res) => {
+  const { volumeNumber, description } = req.body;
+
+  // Get cover page URL from the uploaded file
+  const coverpageUrl = req.files['coverpage'][0].path;
+
+  // Get content page URLs from the uploaded files
+  const contentpageUrls = req.files['contentpages'].map(file => file.path);
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Begin transaction
+    await db.beginTransaction();
+
+    // Insert volume details into MagazineVolumes table
+    const insertVolumeResult = await db.query`
+      INSERT INTO MagazineVolumes (volume_number, description, coverpage_url)
+      VALUES (${volumeNumber}, ${description}, ${coverpageUrl})
+    `;
+
+    // Get the volume_id of the newly inserted volume
+    const volumeId = insertVolumeResult.recordset.insertId;
+
+    // Insert content pages into VolumeImages table
+    const insertContentPagesPromises = contentpageUrls.map(async (contentpageUrl) => {
+      await db.query`
+        INSERT INTO VolumeImages (volume_id, contentpage_url)
+        VALUES (${volumeId}, ${contentpageUrl})
+      `;
+    });
+
+    // Wait for all content page insertion queries to complete
+    await Promise.all(insertContentPagesPromises);
+
+    // Commit transaction
+    await db.commit();
+
+    // Send success response
+    res.status(201).json({ message: "Volume created successfully" });
+
+    // Close the connection
+    connection.close();
+  } catch (error) {
+    // Rollback transaction if an error occurs
+    await db.rollback();
+
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+
+    // Close the connection
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
 
 
-// //DELETE Magazine by Volume Number
-// app.delete("/magazine/:volumeNumber", async (req, res) => {
-//   const { volumeNumber } = req.params;
-
-//   let connection;
-//   try {
-//     // Connect to the database
-//     connection = await db.connect();
-
-//     // Begin transaction
-//     await db.beginTransaction();
-
-//     // Get volume ID of the volume to delete
-//     const volumeResult = await db.query`
-//       SELECT volume_id FROM MagazineVolumes WHERE volume_number = ${volumeNumber}
-//     `;
-//     const volumeId = volumeResult.recordset[0].volume_id;
-
-//     if (!volumeId) {
-//       // If volume with the specified volume number doesn't exist, send 404 response
-//       return res.status(404).json({ error: "Volume not found" });
-//     }
-
-//     // Get cover page and content page URLs to delete
-//     const coverpageResult = await db.query`
-//       SELECT coverpage_url FROM MagazineVolumes WHERE volume_id = ${volumeId}
-//     `;
-//     const coverpageUrl = coverpageResult.recordset[0].coverpage_url;
-
-//     const contentpageResult = await db.query`
-//       SELECT contentpage_url FROM VolumeImages WHERE volume_id = ${volumeId}
-//     `;
-//     const contentpageUrls = contentpageResult.recordset.map(row => row.contentpage_url);
-
-//     // Delete volume from MagazineVolumes table
-//     await db.query`DELETE FROM MagazineVolumes WHERE volume_id = ${volumeId}`;
-
-//     // Delete cover page and content pages from filesystem
-//     if (coverpageUrl) {
-//       // Delete cover page
-//       // Implement your file deletion logic here (e.g., using fs.unlink)
-//     }
-//     if (contentpageUrls.length > 0) {
-//       // Delete content pages
-//       // Implement your file deletion logic here (e.g., using fs.unlink for each content page URL)
-//     }
-
-//     // Delete content pages from VolumeImages table
-//     await db.query`DELETE FROM VolumeImages WHERE volume_id = ${volumeId}`;
-
-//     // Commit transaction
-//     await db.commit();
-
-//     // Send success response
-//     res.status(200).json({ message: "Volume deleted successfully" });
-
-//     // Close the connection
-//     connection.close();
-//   } catch (error) {
-//     // Rollback transaction if an error occurs
-//     await db.rollback();
-
-//     console.error("Error:", error);
-//     res.status(500).json({ error: "Internal server error" });
-
-//     // Close the connection
-//     if (connection) {
-//       connection.close();
-//     }
-//   }
-// });
-
-
-
-// //GET Magazine content by page Number
-// app.get("/magazine/:volumeNumber/:pageNumber", async (req, res) => {
-//   const { pageNumber } = req.params;
-
-//   let connection;
-//   try {
-//     // Connect to the database
-//     connection = await db.connect();
-
-//     // Execute the query to fetch the magazine volume details based on the page number
-//     const result = await db.query`
-//       SELECT 
-//         mv.volume_number,
-//         mv.description AS volume_description,
-//         mv.coverpage_url,
-//         vi.image_id,
-//         vi.contentpage_url
-//       FROM 
-//         MagazineVolumes mv
-//       LEFT JOIN 
-//         VolumeImages vi 
-//       ON 
-//         mv.volume_id = vi.volume_id
-//       WHERE 
-//         vi.image_id = ${pageNumber} OR vi.contentpage_url = ${pageNumber}
-//     `;
-
-//     // Send the result as JSON response
-//     res.json(result.recordset);
-
-//     // Close the connection
-//     connection.close();
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res.status(500).json({ error: "Internal server error" });
-
-//     // Close the connection
-//     if (connection) {
-//       connection.close();
-//     }
-//   }
-// });
-
-
-
-// //POST Magazine content by page Number to specific volume
-// app.post("/magazine/:volumeNumber/:pageNumber", upload.single("page"), async (req, res) => {
-//   const { volumeNumber } = req.params;
-//   const { pageType } = req.body; // Assuming you have a field to specify page type (e.g., "cover" or "content")
-
-//   // Get the file path of the uploaded page
-//   const pageUrl = req.file.path;
-
-//   let connection;
-//   try {
-//     // Connect to the database
-//     connection = await db.connect();
-
-//     // Get the volume_id of the specified volume number
-//     const volumeResult = await db.query`
-//       SELECT volume_id
-//       FROM MagazineVolumes
-//       WHERE volume_number = ${volumeNumber}
-//     `;
-//     const volumeId = volumeResult.recordset[0].volume_id;
-
-//     // Insert the new page into the VolumeImages table
-//     await db.query`
-//       INSERT INTO VolumeImages (volume_id, ${pageType}_page_url)
-//       VALUES (${volumeId}, ${pageUrl})
-//     `;
-
-//     // Send success response
-//     res.status(201).json({ message: "Page added successfully" });
-
-//     // Close the connection
-//     connection.close();
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res.status(500).json({ error: "Internal server error" });
-
-//     // Close the connection
-//     if (connection) {
-//       connection.close();
-//     }
-//   }
-// });
-
-
-
-// //PUT Magazine content by page Number
-// app.put("/magazine/:volumeNumber/:pageNumber", upload.single("page"), async (req, res) => {
-//   const { volumeNumber, pageNumber } = req.params;
-//   const { pageType } = req.body; // Assuming you have a field to specify page type (e.g., "cover" or "content")
-
-//   // Get the file path of the uploaded page
-//   const pageUrl = req.file.path;
-
-//   let connection;
-//   try {
-//     // Connect to the database
-//     connection = await db.connect();
-
-//     // Get the volume_id of the specified volume number
-//     const volumeResult = await db.query`
-//       SELECT volume_id
-//       FROM MagazineVolumes
-//       WHERE volume_number = ${volumeNumber}
-//     `;
-//     const volumeId = volumeResult.recordset[0].volume_id;
-
-//     // Update the page URL in the VolumeImages table based on the page number and type
-//     await db.query`
-//       UPDATE VolumeImages
-//       SET ${pageType}_page_url = ${pageUrl}
-//       WHERE volume_id = ${volumeId} AND image_id = ${pageNumber}
-//     `;
-
-//     // Send success response
-//     res.status(200).json({ message: "Page updated successfully" });
-
-//     // Close the connection
-//     connection.close();
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res.status(500).json({ error: "Internal server error" });
-
-//     // Close the connection
-//     if (connection) {
-//       connection.close();
-//     }
-//   }
-// });
-
-
-
-// //DELETE Magazine content by page Number
-// app.delete("/magazine/:volumeNumber/:pageNumber", async (req, res) => {
-//   const { volumeNumber, pageNumber } = req.params;
-
-//   let connection;
-//   try {
-//     // Connect to the database
-//     connection = await db.connect();
-
-//     // Get the volume_id of the specified volume number
-//     const volumeResult = await db.query`
-//       SELECT volume_id
-//       FROM MagazineVolumes
-//       WHERE volume_number = ${volumeNumber}
-//     `;
-//     const volumeId = volumeResult.recordset[0].volume_id;
-
-//     // Delete the page from the VolumeImages table based on the page number
-//     await db.query`
-//       DELETE FROM VolumeImages
-//       WHERE volume_id = ${volumeId} AND image_id = ${pageNumber}
-//     `;
-
-//     // Send success response
-//     res.status(200).json({ message: "Page deleted successfully" });
-
-//     // Close the connection
-//     connection.close();
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res.status(500).json({ error: "Internal server error" });
-
-//     // Close the connection
-//     if (connection) {
-//       connection.close();
-//     }
-//   }
-// });
+//DELETE Magazine by Volume Number
+app.delete("/magazine/:volumeNumber", async (req, res) => {
+  const { volumeNumber } = req.params;
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Begin transaction
+    await db.beginTransaction();
+
+    // Get volume ID of the volume to delete
+    const volumeResult = await db.query`
+      SELECT volume_id FROM MagazineVolumes WHERE volume_number = ${volumeNumber}
+    `;
+    const volumeId = volumeResult.recordset[0].volume_id;
+
+    if (!volumeId) {
+      // If volume with the specified volume number doesn't exist, send 404 response
+      return res.status(404).json({ error: "Volume not found" });
+    }
+
+    // Get cover page and content page URLs to delete
+    const coverpageResult = await db.query`
+      SELECT coverpage_url FROM MagazineVolumes WHERE volume_id = ${volumeId}
+    `;
+    const coverpageUrl = coverpageResult.recordset[0].coverpage_url;
+
+    const contentpageResult = await db.query`
+      SELECT contentpage_url FROM VolumeImages WHERE volume_id = ${volumeId}
+    `;
+    const contentpageUrls = contentpageResult.recordset.map(row => row.contentpage_url);
+
+    // Delete volume from MagazineVolumes table
+    await db.query`DELETE FROM MagazineVolumes WHERE volume_id = ${volumeId}`;
+
+    // Delete cover page and content pages from filesystem
+    if (coverpageUrl) {
+      // Delete cover page
+      // Implement your file deletion logic here (e.g., using fs.unlink)
+    }
+    if (contentpageUrls.length > 0) {
+      // Delete content pages
+      // Implement your file deletion logic here (e.g., using fs.unlink for each content page URL)
+    }
+
+    // Delete content pages from VolumeImages table
+    await db.query`DELETE FROM VolumeImages WHERE volume_id = ${volumeId}`;
+
+    // Commit transaction
+    await db.commit();
+
+    // Send success response
+    res.status(200).json({ message: "Volume deleted successfully" });
+
+    // Close the connection
+    connection.close();
+  } catch (error) {
+    // Rollback transaction if an error occurs
+    await db.rollback();
+
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+
+    // Close the connection
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
+//GET Magazine content by page Number
+app.get("/magazine/:volumeNumber/:pageNumber", async (req, res) => {
+  const { pageNumber } = req.params;
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Execute the query to fetch the magazine volume details based on the page number
+    const result = await db.query`
+      SELECT 
+        mv.volume_number,
+        mv.description AS volume_description,
+        mv.coverpage_url,
+        vi.image_id,
+        vi.contentpage_url
+      FROM 
+        MagazineVolumes mv
+      LEFT JOIN 
+        VolumeImages vi 
+      ON 
+        mv.volume_id = vi.volume_id
+      WHERE 
+        vi.image_id = ${pageNumber} OR vi.contentpage_url = ${pageNumber}
+    `;
+
+    // Send the result as JSON response
+    res.json(result.recordset);
+
+    // Close the connection
+    connection.close();
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+
+    // Close the connection
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
+//POST Magazine content by page Number to specific volume
+app.post("/magazine/:volumeNumber/:pageNumber", upload.single("page"), async (req, res) => {
+  const { volumeNumber } = req.params;
+  const { pageType } = req.body; // Assuming you have a field to specify page type (e.g., "cover" or "content")
+
+  // Get the file path of the uploaded page
+  const pageUrl = req.file.path;
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Get the volume_id of the specified volume number
+    const volumeResult = await db.query`
+      SELECT volume_id
+      FROM MagazineVolumes
+      WHERE volume_number = ${volumeNumber}
+    `;
+    const volumeId = volumeResult.recordset[0].volume_id;
+
+    // Insert the new page into the VolumeImages table
+    await db.query`
+      INSERT INTO VolumeImages (volume_id, ${pageType}_page_url)
+      VALUES (${volumeId}, ${pageUrl})
+    `;
+
+    // Send success response
+    res.status(201).json({ message: "Page added successfully" });
+
+    // Close the connection
+    connection.close();
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+
+    // Close the connection
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
+//PUT Magazine content by page Number
+app.put("/magazine/:volumeNumber/:pageNumber", upload.single("page"), async (req, res) => {
+  const { volumeNumber, pageNumber } = req.params;
+  const { pageType } = req.body; // Assuming you have a field to specify page type (e.g., "cover" or "content")
+
+  // Get the file path of the uploaded page
+  const pageUrl = req.file.path;
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Get the volume_id of the specified volume number
+    const volumeResult = await db.query`
+      SELECT volume_id
+      FROM MagazineVolumes
+      WHERE volume_number = ${volumeNumber}
+    `;
+    const volumeId = volumeResult.recordset[0].volume_id;
+
+    // Update the page URL in the VolumeImages table based on the page number and type
+    await db.query`
+      UPDATE VolumeImages
+      SET ${pageType}_page_url = ${pageUrl}
+      WHERE volume_id = ${volumeId} AND image_id = ${pageNumber}
+    `;
+
+    // Send success response
+    res.status(200).json({ message: "Page updated successfully" });
+
+    // Close the connection
+    connection.close();
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+
+    // Close the connection
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
+//DELETE Magazine content by page Number
+app.delete("/magazine/:volumeNumber/:pageNumber", async (req, res) => {
+  const { volumeNumber, pageNumber } = req.params;
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Get the volume_id of the specified volume number
+    const volumeResult = await db.query`
+      SELECT volume_id
+      FROM MagazineVolumes
+      WHERE volume_number = ${volumeNumber}
+    `;
+    const volumeId = volumeResult.recordset[0].volume_id;
+
+    // Delete the page from the VolumeImages table based on the page number
+    await db.query`
+      DELETE FROM VolumeImages
+      WHERE volume_id = ${volumeId} AND image_id = ${pageNumber}
+    `;
+
+    // Send success response
+    res.status(200).json({ message: "Page deleted successfully" });
+
+    // Close the connection
+    connection.close();
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+
+    // Close the connection
+    if (connection) {
+      connection.close();
+    }
+  }
+});
 
 app.listen(5000, () => {
   console.log("Server is running on port 5000");

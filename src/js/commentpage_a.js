@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TypewriterEffect from '../js/typewriter';
-import BubblyButton from '../js/BubblyButton.js';
 import magazine1 from "../../src/img/magazine1.jpeg"
 import magazine2 from "../../src/img/magazineInformation2/magazine14.jpg"
 import magazine3 from "../../src/img/magazineInformation3/magazineInformation2/magazine20.jpg"                   
