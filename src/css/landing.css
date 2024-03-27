@@ -58,6 +58,7 @@
   font-size: larger;
   margin: -18px 0px 0px 12px;
   text-align: center;
+  align-self: flex-start;
 }
   
 .hero-img-new {
