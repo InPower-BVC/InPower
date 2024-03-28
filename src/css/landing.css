@@ -149,19 +149,30 @@
   justify-content: center; /* Center the grid items horizontally */
 }
 
+
 .grid-item {
   position: relative;
   text-align: left;
   margin: 40px;
 }
+.text {
+  font-size: 26px; /* Adjust font size as needed */
+  font-weight: bold; /* Adjust font weight as needed */
+  color: #333; /* Adjust text color as needed */
+}
+.grid-container h3{
 
+  font-size: 20px;
+}
 .circle-img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  font-size: 50px;
 }
 
 .content {
+  
   padding: 2px;
   text-align: left;
   margin: 0px 0px -85px -10px;

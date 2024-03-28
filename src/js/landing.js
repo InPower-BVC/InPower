@@ -49,32 +49,32 @@ function Landing() {
           <div class="content">
 
           <img src={logo1} alt="logo 1" className="circle-img" />
-          <h3>Community Support</h3>
-          Connect with like-minded individuals who understand and support you on your journey. Share your experiences, stories, and struggles in a supportive and nonjudgmental environment.
+          <span class="text">Community Support</span>
+         <h3> Connect with like-minded individuals who understand and support you on your journey. Share your experiences, stories, and struggles in a supportive and nonjudgmental environment.</h3>
           </div>
          </div>
           <div class="grid-item">
     
           <div class="content">
           <img src={logo2} alt="logo 2" className="circle-img" />
-          <h3>Personal Growth Resources</h3>
-           Access a wealth of resources, including articles, podcasts, workshops, and expert advice, to help you on your path to personal growth and healing. Learn practical strategies for overcoming challenges and developing a stronger sense of self
+          <span class="text"> Personal Growth Resources</span>
+          <h3> Access a wealth of resources, including articles, podcasts, workshops, and expert advice, to help you on your path to personal growth and healing. Learn practical strategies for overcoming challenges and developing a stronger sense of self.</h3>
           </div>
          </div>
           <div class="grid-item">
     
           <div class="content">
           <img src={logo3} alt="logo 3" className="circle-img" />
-          <h3>Mental Health Support</h3>
-          Take advantage of our mental health resources and tools designed to support your emotional well-being. From guided meditations to online counselling services, we're here to help you navigate life's ups and downs with resilience and strength.
+          <span class="text"> Mental Health SupportM</span>
+          <h3>Take advantage of our mental health resources and tools designed to support your emotional well-being. From guided meditations to online counselling services, we're here to help you navigate life's ups and downs with resilience and strength.</h3>
           </div>
           </div>
          <div class="grid-item">
   
          <div class="content">
           <img src={logo4} alt="logo 4" className="circle-img" />
-          <h3>Exclusive Member Perks</h3>
-         Enjoy special discounts, freebies, and exclusive offers from our partners and sponsors with the InPower membership card. Treat yourself to self-care products, wellness services, and more, all while supporting your fellow InPower members.
+          <span class="text">   Exclusive Member Perks </span>
+         <h3>Enjoy special discounts, freebies, and exclusive offers from our partners and sponsors with the InPower membership card. Treat yourself to self-care products, wellness services, and more, all while supporting your fellow InPower members.</h3>
           </div>
   </div>
 </div>
