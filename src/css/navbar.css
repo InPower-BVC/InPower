@@ -1,6 +1,6 @@
 .navbar {
   background-color: #ca4a51;
-  padding: 15px 0;
+  padding: 25px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,6 +29,7 @@
   padding: 10px;
   background-color: #fde9ea;
   display: none; /* Hide hamburger by default */
+  
 }
 
 .bar {
@@ -48,19 +49,10 @@ ul {
 
 .nav-list {
   display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 100%; /* Position the menu below the navbar */
-  left: 0;
-  width: 100%;
-  background-color: #a43b55;
-  z-index: 1;
-  display: none; /* Hide by default */
+  align-items: center;
 }
 
-.nav-list.open {
-  display: block; /* Show when hamburger is clicked */
-}
+
 
 .nav-list.open li {
   margin: 10px 0;
@@ -112,11 +104,18 @@ a:hover {
   }
 
   .nav-list {
-    position: static; /* Reset position */
     display: none; /* Hide by default */
   }
-
+  
   .nav-list.open {
-    display: block; /* Show when hamburger is clicked */
+    display: flex; /* Show when hamburger is clicked */
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Position the menu below the navbar */
+    left: 0;
+    width: 100%;
+    background-color: #a43b55;
+    z-index: 1;
   }
+  
 }

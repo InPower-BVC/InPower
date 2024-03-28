@@ -47,8 +47,9 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 1400px;
-  padding: 50px;
+  padding: 30px;
   box-sizing: border-box;
+  margin-left: 100px;
 }
   
 .hero-text-new {
@@ -67,6 +68,7 @@
   height: auto;
   padding: 0px;
   margin: 0px 0px 12px 32px;
+  margin-right: -80px;
 }
  
   
@@ -89,6 +91,10 @@
         font-size: 1.5rem; /* Adjusted font size for smaller screens */
         margin-bottom: 0.5rem; /* Adjusted margin for smaller screens */
         margin-top: 1.5rem; /* Adjusted margin for smaller screens */
+    }
+    .hero-content-new{
+      align-items: center;
+      margin-left: 10px;
     }
 }
 
