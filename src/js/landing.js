@@ -65,7 +65,7 @@ function Landing() {
     
           <div class="content">
           <img src={logo3} alt="logo 3" className="circle-img" />
-          <span class="text"> Mental Health SupportM</span>
+          <span class="text"> Mental Health Support</span>
           <h3>Take advantage of our mental health resources and tools designed to support your emotional well-being. From guided meditations to online counselling services, we're here to help you navigate life's ups and downs with resilience and strength.</h3>
           </div>
           </div>
