@@ -682,7 +682,45 @@ app.post("/admin/login", async (req, res) => {
 
 
 // Magazine API
+
+app.get("/magazine", async (req, res) => {
+  let connection;
+  try {
+    // Connect to the database
+    connection = await db.connect();
+
+    // Execute the query to fetch all volumes with their information
+    const result = await db.query`
+      SELECT 
+        volume_number,
+        description AS volume_description,
+        coverpage_url
+      FROM 
+        MagazineVolumes
+    `;
+
+    // Send the result as JSON response
+    res.json(result.recordset);
+
+    // Close the connection
+    connection.close();
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+
+    // Close the connection
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+
+
 // GET Magazine by Volume 
+
+
+
 
 app.get("/magazine/:volumeNumber", async (req, res) => {
   const { volumeNumber } = req.params;
