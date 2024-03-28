@@ -54,6 +54,7 @@
   margin: -18px 0px 0px 12px;
   text-align: center;
   align-self: flex-start;
+  margin-right: 15px;
 }
 
 .hero-img-new {
@@ -139,7 +140,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columns */
   grid-template-rows: repeat(2, 1fr); /* 2 rows */
-  grid-gap: 20px;
+  grid-gap: 2%;
   padding: 5px;
   margin-top: -90px;
   justify-content: center; /* Center the grid items horizontally */
@@ -160,7 +161,7 @@
 .content {
   padding: 2px;
   text-align: left;
-  margin: 0px 0px -85px -13px;
+  margin: 0px 0px -85px -10px;
 }
 
 @media screen and (max-width: 768px) {
