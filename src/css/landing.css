@@ -1,15 +1,17 @@
-*{
+* {
   padding: 0;
   margin: 0;
 }
-*:before,*:after {
+
+*:before,
+*:after {
   padding: 0;
-  margin: 0;}
+  margin: 0;
+}
 
 .container-new {
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
-
 
 @font-face {
   font-family: 'Gilroy';
@@ -20,11 +22,7 @@
   font-family: 'Gilroy';
   src: url('../fonts/Gilroy-Medium.ttf') format('truetype');
   font-weight: 500; /* Set the font weight */
-
 }
-
-
-
 
 .first_head {
   display: flex;
@@ -32,13 +30,9 @@
   justify-content: space-between;
   background-image: url('../img/landing_12.png');
   background-position: center; /* Position the background image at the center */
-  background-size: cover; 
-
-  
-  
+  background-size: cover;
 }
 
-  
 .hero-content-new {
   display: flex;
   flex-direction: row;
@@ -51,18 +45,17 @@
   box-sizing: border-box;
   margin-left: 100px;
 }
-  
+
 .hero-text-new {
   flex: 1 1;
   padding: 40px;
   box-sizing: border-box;
-  font-size:15px;
+  font-size: 15px;
   margin: -18px 0px 0px 12px;
   text-align: center;
   align-self: flex-start;
-
 }
-  
+
 .hero-img-new {
   width: 80%;
   height: auto;
@@ -70,57 +63,56 @@
   margin: 0px 0px 12px 32px;
   margin-right: -80px;
 }
- 
-  
-  .typewriter-new {
-    font-size: 3.5rem; /* Increased font size */
-    margin-bottom: 2rem; /* Increased margin */
-    font-family:'Gilroy-Bold', sans-serif;
-  }
-  
-  .feature-content-p-new {
-    font-size: 2rem; /* Increased font size */
-    margin-bottom: 1rem; /* Increased margin */
-    margin-top: 2rem;
-    font-family: 'Gilroy-Medium', sans-serif;
+
+.typewriter-new {
+  font-size: 3rem; /* Increased font size */
+  margin-bottom: 2rem; /* Increased margin */
+  font-family: 'Gilroy-Bold', sans-serif;
+}
+
+.feature-content-p-new {
+  font-size: 2rem; /* Increased font size */
+  margin-bottom: 1rem; /* Increased margin */
+  margin-top: 2rem;
+  font-family: 'Gilroy-Medium', sans-serif;
 }
 
 /* Responsive adjustments */
+@media screen and (max-width: 1400px) {
+  .hero-content-new {
+    margin-left: 12px;
+  }
+}
+
 @media screen and (max-width: 768px) {
-    .feature-content-p-new {
-        font-size: 1.5rem; /* Adjusted font size for smaller screens */
-        margin-bottom: 0.5rem; /* Adjusted margin for smaller screens */
-        margin-top: 1.5rem; /* Adjusted margin for smaller screens */
-    }
-    .hero-content-new{
-      align-items: center;
-      margin-left: 10px;
-    }
+  .feature-content-p-new {
+    font-size: 1.5rem; /* Adjusted font size for smaller screens */
+    margin-bottom: 0.5rem; /* Adjusted margin for smaller screens */
+    margin-top: 1.5rem; /* Adjusted margin for smaller screens */
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .feature-content-p-new {
-        font-size: 1.2rem; /* Further adjusted font size for even smaller screens */
-        margin-bottom: 0.3rem; /* Further adjusted margin for even smaller screens */
-        margin-top: 1rem; /* Further adjusted margin for even smaller screens */
-    }
+  .feature-content-p-new {
+    font-size: 1.2rem; /* Further adjusted font size for even smaller screens */
+    margin-bottom: 0.3rem; /* Further adjusted margin for even smaller screens */
+    margin-top: 1rem; /* Further adjusted margin for even smaller screens */
+  }
 }
 
-  
-.summary{
-    
-   margin-top: -80px; /* Add margin to top */
-   background-color: #df646a;
-   font-family:'Gilroy-Medium',  sans-serif;
-  
-   
+.summary {
+  margin-top: -80px; /* Add margin to top */
+  background-color: #df646a;
+  font-family: 'Gilroy-Medium', sans-serif;
 }
+
 .custom-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   margin-top: 80px;
 }
+
 .summary h2 {
   font-size: 30px;
   font-weight: 400;
@@ -129,11 +121,12 @@
   margin: 70px 10px 70px 10px;
   color: white;
 }
-.features {
-    margin-top:-70px;
-    font-family:'Gilroy-Bold',  sans-serif;
 
+.features {
+  margin-top: -70px;
+  font-family: 'Gilroy-Bold', sans-serif;
 }
+
 .features h2 {
   color: #df646a;
   text-align: left;
@@ -141,6 +134,7 @@
   margin: 120px 0px 80px 32px;
   font-family: 'Gilroy-Medium', sans-serif;
 }
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columns */
@@ -150,7 +144,6 @@
   margin-top: -90px;
   justify-content: center; /* Center the grid items horizontally */
 }
-
 
 .grid-item {
   position: relative;
@@ -169,9 +162,10 @@
   text-align: left;
   margin: 0px 0px -85px -13px;
 }
+
 @media screen and (max-width: 768px) {
   .grid-container {
-      grid-template-columns: 1fr; /* Switch to single column layout on smaller screens */
+    grid-template-columns: 1fr; /* Switch to single column layout on smaller screens */
   }
 }
 
@@ -184,15 +178,14 @@
 .summary-text h1 {
   font-size: 3rem; /* Adjusted font size */
   color: white;
-  font-family:'Gilroy-Bold',  sans-serif;
+  font-family: 'Gilroy-Bold', sans-serif;
 }
 
 .summary-text h3 {
   font-size: 1.5rem; /* Adjusted font size */
   font-weight: 400;
-  font-family:'Gilroy-Medium',  sans-serif;
+  font-family: 'Gilroy-Medium', sans-serif;
   margin: 20px auto; /* Adjusted margin */
-  
   color: white;
 }
 
@@ -203,28 +196,29 @@
 .button-form {
   font-size: 1.5rem; /* Adjusted font size */
   padding: 10px 20px; /* Adjusted padding */
-  font-family:Give You Glory,  sans-serif;
+  font-family: Give You Glory, sans-serif;
 }
+
 /* Media Query for smaller screens */
 @media screen and (max-width: 768px) {
   .summary-text {
-      padding: 30px; /* Adjusted padding */
+    padding: 30px; /* Adjusted padding */
   }
 
   .summary-text h1 {
-      font-size: 2.5rem; /* Adjusted font size */
+    font-size: 2.5rem; /* Adjusted font size */
   }
 
   .summary-text h3 {
-      font-size: 1.25rem; /* Adjusted font size */
+    font-size: 1.25rem; /* Adjusted font size */
   }
 
   .button-invite {
-      padding: 10px 0; /* Adjusted padding */
+    padding: 10px 0; /* Adjusted padding */
   }
 
   .button-form {
-      font-size: 1.25rem; /* Adjusted font size */
-      padding: 8px 16px; /* Adjusted padding */
+    font-size: 1.25rem; /* Adjusted font size */
+    padding: 8px 16px; /* Adjusted padding */
   }
 }
