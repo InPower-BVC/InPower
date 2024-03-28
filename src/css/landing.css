@@ -156,7 +156,7 @@
   margin: 40px;
 }
 .text {
-  font-size: 2.6vw; /* Adjust font size as needed */
+  font-size: 1.8vw; /* Adjust font size as needed */
   font-weight: bold; /* Adjust font weight as needed */
   color: #333; /* Adjust text color as needed */
 }
@@ -164,7 +164,7 @@
 /* Media Query for smaller screens */
 @media screen and (max-width: 600px) {
   .text {
-      font-size: 4vw; /* Adjust font size for smaller screens */
+      font-size: 4.5vw; /* Adjust font size for smaller screens */
   }
 }
 
