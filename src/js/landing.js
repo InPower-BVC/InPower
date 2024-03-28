@@ -21,7 +21,8 @@ function Landing() {
           </h1>
           <p className="feature-content-p-new">Your Online Community for Healing and Empowerment</p>
           <Link to="/invite">
-            <div style={{margin: "20px 0px 10px 0px"}} className="button-container-new">
+          <div className="button-container-new">
+
                <BubblyButton />
              </div>
            </Link>

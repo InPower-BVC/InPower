@@ -77,6 +77,9 @@
   margin-top: 2rem;
   font-family: 'Gilroy-Medium', sans-serif;
 }
+.button-container-new{
+  margin-bottom: -50px;
+}
 
 /* Responsive adjustments */
 @media screen and (max-width: 1400px) {
