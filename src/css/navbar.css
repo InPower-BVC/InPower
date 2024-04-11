@@ -29,7 +29,6 @@
   padding: 10px;
   background-color: #fde9ea;
   display: none; /* Hide hamburger by default */
-  
 }
 
 .bar {
@@ -53,11 +52,6 @@ ul {
 }
 
 
-
-.nav-list.open li {
-  margin: 10px 0;
-  text-align: center;
-}
 
 li {
   margin: 0 15px;
