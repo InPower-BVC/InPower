@@ -10,6 +10,9 @@
     border-radius: 12px; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+.hero-content{
+    padding:4px 8px;
+}
 
 /* Styling for a comment section grid layout */
 .comment-section {
@@ -160,6 +163,10 @@ strong {
     .comments-container {
         grid-template-columns: 1fr; 
     }
+    .hero-img {
+        height: fit-content;
+        max-width: 90%;
+    }
 }
 
 /* Responsive styling for screens between 768px and 1023px */
@@ -194,4 +201,24 @@ strong {
       width: 100%;
     }
   }
+
+  @media only screen and (max-width: 500px) {
+    /* Your CSS rules for screens up to 500px wide */
+    img{
+        width:280px;
+        height:140px;
+        margin:4px 0px;
+    }
+    .hero-content{
+        padding: 30px 5px;
+    }
+    .volume-1,.volume-2,.volume-3,.volume-4{
+        width:auto;
+    }
+    h2{
+        margin-top: 18px;
+    }
+
+    
+}
   
