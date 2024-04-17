@@ -19,13 +19,11 @@ const BlogPostListByCat = ({ posts }) => {
     }, [posts, startIndex]);
   
     const scrollLeft = () => {
-        //let nextStartIndex = Math.max((startIndex + posts.length - 1) % posts.length, 0);
         let nextStartIndex = (startIndex + posts.length - 1) % posts.length;
         setStartIndex(nextStartIndex);
     };
   
     const scrollRight = () => {
-        //let nextStartIndex = Math.max((startIndex + 1) % posts.length, 0);
         let nextStartIndex = (startIndex + 1) % posts.length;
         setStartIndex(nextStartIndex);
     };

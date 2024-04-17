@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import '../../css/blog.css';
 import BlogMenuBar from '../blog/blogMenuBar';
-//import bannerImage from '../../img/blog/img_blog_cat_banner.jfif';
 import BlogPostPreview from '../blog/blogPostPreview';
 import backendBaseURL from './blogConfig';
 
@@ -16,8 +15,6 @@ function BlogCategory() {
     useEffect(() => {
         const fetchCategoryData = async () => {
             try {
-                // For sample data
-                //const response = await fetch('/blog/blogCategory.json');
                 const response = await fetch(`${backendBaseURL}/blogcategories`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch category data');
@@ -34,8 +31,6 @@ function BlogCategory() {
         
         const fetchPostData = async () => {
             try {
-                // For sample data
-                //const response = await fetch('/blog/blogPost.json');
                 const response = await fetch(`${backendBaseURL}/blogposts`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch post data');
@@ -81,7 +76,7 @@ function BlogCategory() {
     <div className="blog-main">
         <BlogMenuBar categories={categories} activeCategoryId={parseInt(id)} />
         <div className="banner-container">
-        <div><img src={`../../img/blog/${featuredPost.profileImgPath}`/*bannerImage*/} alt="Banner" className="banner-img" /></div>
+        <div><img src={`../../img/blog/${featuredPost.profileImgPath}`} alt="Banner" className="banner-img" /></div>
         <div className="banner-overlay">
             <div className="overlay-content">
             <div className="blog-category">
