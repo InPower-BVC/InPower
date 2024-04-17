@@ -1,0 +1,135 @@
+/****** Object:  Database [InPowerDatabase]    Script Date: 2024-03-14 10:04:38 AM ******/
+CREATE DATABASE [InPowerDatabase]  (EDITION = 'GeneralPurpose', SERVICE_OBJECTIVE = 'GP_S_Gen5_1', MAXSIZE = 32 GB) WITH CATALOG_COLLATION = SQL_Latin1_General_CP1_CI_AS, LEDGER = OFF;
+GO
+ALTER DATABASE [InPowerDatabase] SET COMPATIBILITY_LEVEL = 150
+GO
+ALTER DATABASE [InPowerDatabase] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [InPowerDatabase] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [InPowerDatabase] SET ALLOW_SNAPSHOT_ISOLATION ON 
+GO
+ALTER DATABASE [InPowerDatabase] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [InPowerDatabase] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [InPowerDatabase] SET  MULTI_USER 
+GO
+ALTER DATABASE [InPowerDatabase] SET ENCRYPTION ON
+GO
+ALTER DATABASE [InPowerDatabase] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [InPowerDatabase] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 100, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+/*** The scripts of database scoped configurations in Azure should be executed inside the target database connection. ***/
+GO
+-- ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 8;
+GO
+/****** Object:  Table [dbo].[AdminCredentials]    Script Date: 2024-03-14 10:04:38 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AdminCredentials](
+	[adminId] [int] NOT NULL,
+	[username] [varchar](255) NOT NULL,
+	[password] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[adminId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[username] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BlogCategories]    Script Date: 2024-03-14 10:04:38 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BlogCategories](
+	[blogCategoryId] [int] NOT NULL,
+	[blogCategoryName] [varchar](255) NULL,
+	[blogCategoryPath] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[blogCategoryId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BlogPosts]    Script Date: 2024-03-14 10:04:38 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BlogPosts](
+	[blogPostId] [int] IDENTITY(1,1) NOT NULL,
+	[blogCategoryId] [int] NULL,
+	[blogCategoryName] [varchar](255) NULL,
+	[topic] [varchar](255) NULL,
+	[content] [text] NULL,
+	[createdDate] [date] NULL,
+	[profileImg] [varbinary](max) NULL,
+	[blogCategoryPath] [varchar](255) NULL,
+	[profileImgPath] [varchar](255) NULL,
+	[isFeatured] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[blogPostId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MenuItems]    Script Date: 2024-03-14 10:04:38 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MenuItems](
+	[MenuItemID] [int] NOT NULL,
+	[MenuItemName] [varchar](255) NOT NULL,
+	[RedirectURL] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[MenuItemID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Persons]    Script Date: 2024-03-14 10:04:38 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Persons](
+	[PersonID] [int] NULL,
+	[LastName] [varchar](255) NULL,
+	[FirstName] [varchar](255) NULL,
+	[Address] [varchar](255) NULL,
+	[City] [varchar](255) NULL
+) ON [PRIMARY]
+GO
+ALTER DATABASE [InPowerDatabase] SET  READ_WRITE 
+GO
