@@ -1033,6 +1033,6 @@ app.delete("/magazine/:volumeNumber/:pageNumber", async (req, res) => {
   }
 });
  
-app.listen(5009, () => {
+app.listen(5000, () => {
   console.log("Server is running on port 5000");
 });
