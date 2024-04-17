@@ -30,7 +30,10 @@
   justify-content: space-between;
   background-image: url('../img/landing_12.png');
   background-position: center; /* Position the background image at the center */
-  background-size: cover;
+  background-size: cover; 
+
+  
+  
 }
 
 .hero-content-new {
