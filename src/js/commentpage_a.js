@@ -57,7 +57,7 @@ function Magazine() {
       <div className='volume-1' style={{width: "507.54px"}}>
         <img style={{ width: "100%", maxWidth: "340px", height: "480.61px", boxShadow: "0.5px 2px 1.5px 1.8px" }} src={magazine1} alt="Volume 1" />
         <h2 style={{marginTop: "18px", color:"#ca4a51"}}>Volume 1</h2>
-        <p style={{ fontFamily: 'sans-serif', fontWeight: 'bold' }}>EMBRACING ONE'S DISTINCTIVENESS AND AUTHENTICITY</p>
+        <p style={{ fontFamily: 'sans-serif', fontWeight: 'bold' }}>EMBRACING ONE'S DISTINCTIVENESS</p>
       </div>
     </Link>
 
